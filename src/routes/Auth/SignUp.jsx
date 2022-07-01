@@ -1,19 +1,21 @@
 import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "./TextField";
 import { useNavigate } from "react-router-dom";
+import { AccountContext } from "../../components/AccountContext";
 
 export default function SignUp() {
-    const navigate = useNavigate()
+  const { setUser } = useContext(AccountContext);
+  const navigate = useNavigate();
 
   return (
     <Formik
       initialValues={{
         username: "",
         password: "",
-        passwordConfirmation: ""
+        passwordConfirmation: "",
       }}
       validationSchema={Yup.object({
         username: Yup.string()
@@ -24,31 +26,36 @@ export default function SignUp() {
           .required("Password required!")
           .min(8, "short password!"),
         passwordConfirmation: Yup.string()
-          .oneOf([Yup.ref('password'), null], "Password don't match")
-          .required("Password confirmation required!")
+          .oneOf([Yup.ref("password"), null], "Password don't match")
+          .required("Password confirmation required!"),
       })}
       onSubmit={(values, actions) => {
-        const vals = {...values}
+        const vals = { ...values };
         actions.resetForm();
 
-        fetch("http://localhost:4000/auth/register", {
-            method: "POST", 
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(vals)
-        }).catch(err => {
-            return;
-        }).then(res => {
-            if (!res || !res.ok || res.status >= 400) {
-                return;
-            }
-            return res.json()
-        }).then(data => {
-            if (!data) return
-            console.log(data)
+        fetch("http://localhost:4000/auth/signup", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(vals),
         })
+          .catch((err) => {
+            return;
+          })
+          .then((res) => {
+            if (!res || !res.ok || res.status >= 400) {
+              return;
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if (!data || !data.loggedIn) return;
+            console.log(data);
+            setUser({...data})
+            navigate("/home");
+          });
       }}
     >
       <VStack

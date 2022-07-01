@@ -1,12 +1,14 @@
 import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import React from "react";
+import React, { useContext } from "react";
 import TextField from "./TextField";
 import { useNavigate } from "react-router-dom";
+import { AccountContext } from "../../components/AccountContext";
 
 export default function Login() {
-    const navigate = useNavigate()
+  const { setUser } = useContext(AccountContext);
+  const navigate = useNavigate();
 
   return (
     <Formik
@@ -24,27 +26,32 @@ export default function Login() {
           .min(8, "short password!"),
       })}
       onSubmit={(values, actions) => {
-        const vals = {...values}
+        const vals = { ...values };
         actions.resetForm();
 
         fetch("http://localhost:4000/auth/login", {
-            method: "POST", 
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(vals)
-        }).catch(err => {
-            return;
-        }).then(res => {
-            if (!res || !res.ok || res.status >= 400) {
-                return;
-            }
-            return res.json()
-        }).then(data => {
-            if (!data) return
-            console.log(data)
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(vals),
         })
+          .catch((err) => {
+            return;
+          })
+          .then((res) => {
+            if (!res || !res.ok || res.status >= 400) {
+              return;
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if (!data || !data.loggedIn) return;
+            console.log(data);
+            setUser({...data})
+            navigate("/home");
+          });
       }}
     >
       <VStack
@@ -75,9 +82,7 @@ export default function Login() {
           <Button colorScheme="teal" type="submit">
             Log In
           </Button>
-          <Button onClick={() => navigate("/register")}>
-            Create Account
-          </Button>
+          <Button onClick={() => navigate("/register")}>Create Account</Button>
         </ButtonGroup>
       </VStack>
     </Formik>
