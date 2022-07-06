@@ -11,8 +11,9 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { nanoid } from "nanoid";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FriendContext } from "../../routes/Home";
 import socket from "../../socket";
 
@@ -35,6 +36,18 @@ const Sidebar = () => {
       setSuccess('')
     })
   }
+
+  useEffect(() => {
+    if (!friendList.length) {
+      setTimeout(async () => {
+        const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/friends/get`, { withCredentials: true })
+  
+        if (!res.data.error) {
+          setFriendList(res.data.friendList)
+        }
+      }, 1000)
+    }
+  }, [])
 
   return (
     <VStack py="1rem">
