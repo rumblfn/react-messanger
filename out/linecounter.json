@@ -1,0 +1,219 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "/Users/samilvaliahmetov/education/programming/local-github/react-messanger",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2022-07-05 12:52:43",
+            "filesum": 27,
+            "codesum": 32009,
+            "commentsum": 38,
+            "blanksum": 77,
+            "statistics": {
+                ".jsx": {
+                    "code": 431,
+                    "comment": 8,
+                    "blank": 43
+                },
+                ".js": {
+                    "code": 64,
+                    "comment": 0,
+                    "blank": 9
+                },
+                "": {
+                    "code": 19,
+                    "comment": 2,
+                    "blank": 5
+                },
+                ".json": {
+                    "code": 31450,
+                    "comment": 0,
+                    "blank": 5
+                },
+                ".html": {
+                    "code": 20,
+                    "comment": 23,
+                    "blank": 0
+                },
+                ".md": {
+                    "code": 22,
+                    "comment": 4,
+                    "blank": 15
+                },
+                ".txt": {
+                    "code": 3,
+                    "comment": 1,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 2,
+                    "code": 31379,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public/index.html"
+                },
+                {
+                    "filename": "public/logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public/logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 15,
+                    "code": 21,
+                    "comment": 4,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "README.old.md"
+                },
+                {
+                    "blank": 2,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "src/App.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "src/components/AccountContext/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "src/components/Chat/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "src/components/ColorModeToggler/index.jsx"
+                },
+                {
+                    "blank": 7,
+                    "code": 70,
+                    "comment": 8,
+                    "filename": "src/components/Sidebar/index.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "src/components/Views/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/hocs/PrivateRoutes.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/hooks/useSocketSetup.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src/index.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 91,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/Login.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 102,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/SignUp.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/TextField.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "src/routes/Home/index.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/socket.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src/theme.js"
+                }
+            ]
+        }
+    ]
+}

@@ -24,7 +24,6 @@ const UserContext = ({children}) => {
             return res.json()
         })
         .then(data => {
-            console.log(data)
             if (!data) {
                 setUser({loggedIn: false})
                 return

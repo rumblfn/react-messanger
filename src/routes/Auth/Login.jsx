@@ -1,12 +1,13 @@
-import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
+import { Button, ButtonGroup, Heading, Text, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import TextField from "./TextField";
 import { useNavigate } from "react-router-dom";
 import { AccountContext } from "../../components/AccountContext";
 
 export default function Login() {
+  const [error, setError] = useState('')
   const { setUser } = useContext(AccountContext);
   const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ export default function Login() {
         const vals = { ...values };
         actions.resetForm();
 
-        fetch("http://localhost:4000/auth/login", {
+        fetch(`${process.env.REACT_APP_HOST_URL}/auth/login`, {
           method: "POST",
           credentials: "include",
           headers: {
@@ -47,8 +48,10 @@ export default function Login() {
             return res.json();
           })
           .then((data) => {
-            if (!data || !data.loggedIn) return;
-            console.log(data);
+            if (!data || !data.loggedIn) {
+              setError(data.status)
+              return
+            };
             setUser({...data})
             navigate("/home");
           });
@@ -63,6 +66,9 @@ export default function Login() {
         spacing="1rem"
       >
         <Heading>Log In</Heading>
+        <Text as="p" color="red.500">
+          {error}
+        </Text>
 
         <TextField
           name="username"
