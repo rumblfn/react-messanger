@@ -1,4 +1,4 @@
-import { Button, Heading, Menu, MenuButton, TabPanel, TabPanels, Text, VStack } from "@chakra-ui/react";
+import { TabPanel, TabPanels, Text, VStack } from "@chakra-ui/react";
 import { useContext, useEffect, useRef } from "react";
 import { FriendContext, MessagesContext } from "../../routes/Home";
 import ChatBox from "./ChatBox";

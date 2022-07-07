@@ -7,23 +7,21 @@ import {
   Heading,
   HStack,
   Input,
-  Menu,
-  MenuButton,
   Spacer,
   Tab,
   TabList,
   Tabs,
   Text,
   VStack,
-  Wrap,
-  WrapItem,
 } from "@chakra-ui/react";
 import React, { useContext, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FriendContext } from "../../routes/Home";
 import socket from "../../socket";
 import { AccountContext } from "../AccountContext";
 
 const Sidebar = ({ setFriendIndex }) => {
+  const navigate = useNavigate()
   const { friendList, setFriendList } = useContext(FriendContext);
   const friendInputRef = useRef();
   const [success, setSuccess] = useState("");
@@ -58,13 +56,13 @@ const Sidebar = ({ setFriendIndex }) => {
           <Heading fontSize="md">{user.username}</Heading>
         </Box>
         <Spacer />
-        <Button colorScheme="teal">
+        <Button p={0} onClick={() => navigate('/dashboard')} colorScheme="teal">
           <SettingsIcon />
         </Button>
       </Box>
       <HStack w="100%" justify="space-evenly" pl="0.5rem" pr="0.5rem">
         <Input ref={friendInputRef} placeholder="Add friend" size="md" />
-        <Button onClick={() => getFriend(friendInputRef.current.value)}>
+        <Button p={0} onClick={() => getFriend(friendInputRef.current.value)}>
           <ChatIcon />
         </Button>
       </HStack>

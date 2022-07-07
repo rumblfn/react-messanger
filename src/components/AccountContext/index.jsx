@@ -10,7 +10,7 @@ const UserContext = ({children}) => {
     })
 
     useEffect(() => {
-        fetch("http://localhost:4000/auth/login", {
+        fetch(`${process.env.REACT_APP_HOST_URL}/auth/login`, {
             credentials: "include",
         }).catch(err => {
             setUser({loggedIn: false})

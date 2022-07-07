@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRoutes from "../../hocs/PrivateRoutes";
 import Login from "../../routes/Auth/Login";
 import SignUp from "../../routes/Auth/SignUp";
+import Dashboard from "../../routes/Dashboard";
 import Home from "../../routes/Home";
 import { AccountContext } from "../AccountContext";
 
@@ -17,6 +18,7 @@ export const Views = () => {
       <Route path="/register" element={<SignUp />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/home" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
       <Route path="*" element={<Login />} />
     </Routes>
