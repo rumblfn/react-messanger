@@ -22,7 +22,6 @@ export default function Home() {
         h="100vh"
         as={Tabs}
         index={friendIndex}
-        onChange={(index) => {console.log(index)}}
       >
         <GridItem colSpan="3" borderRight="1px solid gray">
           <Sidebar setFriendIndex={setFriendIndex} />
