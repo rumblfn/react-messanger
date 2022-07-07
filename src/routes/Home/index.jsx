@@ -4,23 +4,42 @@ import Chat from "../../components/Chat";
 import Sidebar from "../../components/Sidebar";
 import useSocketSetup from "../../hooks/useSocketSetup";
 
-export const FriendContext = createContext()
+export const FriendContext = createContext();
+export const MessagesContext = createContext();
 
 export default function Home() {
-  const [friendList, setFriendList] = useState([])
+  const [friendList, setFriendList] = useState([]);
+  const [messages, setMessages] = useState([]);
 
-  useSocketSetup(setFriendList)
+  const [friendIndex, setFriendIndex] = useState(0);
 
-  return <FriendContext.Provider
-    value={{ friendList, setFriendList }}
-  >
-    <Grid templateColumns="repeat(10, 1fr)" h="100vh" as={Tabs}>
-      <GridItem colSpan="3" borderRight="1px solid gray">
-        <Sidebar/>
-      </GridItem>
-      <GridItem colSpan="7">
-        <Chat />
-      </GridItem>
-    </Grid>
-  </FriendContext.Provider>;
+  useSocketSetup(setFriendList, setMessages);
+
+  return (
+    <FriendContext.Provider value={{ friendList, setFriendList }}>
+      <Grid
+        templateColumns="repeat(10, 1fr)"
+        h="100vh"
+        as={Tabs}
+        index={friendIndex}
+        onChange={(index) => {console.log(index)}}
+      >
+        <GridItem colSpan="3" borderRight="1px solid gray">
+          <Sidebar setFriendIndex={setFriendIndex} />
+        </GridItem>
+        <GridItem colSpan="7" maxH="100vh">
+          <MessagesContext.Provider 
+            value={{
+              messages,
+              setMessages
+            }}
+          >
+            <Chat
+              userid={friendList[friendIndex]?.userid}
+            />
+          </MessagesContext.Provider>
+        </GridItem>
+      </Grid>
+    </FriendContext.Provider>
+  );
 }

@@ -11,13 +11,11 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { nanoid } from "nanoid";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { FriendContext } from "../../routes/Home";
 import socket from "../../socket";
 
-const Sidebar = () => {
+const Sidebar = ({setFriendIndex}) => {
   const { friendList, setFriendList } = useContext(FriendContext);
   const friendInputRef = useRef()
   const [success, setSuccess] = useState('')
@@ -25,10 +23,10 @@ const Sidebar = () => {
 
   const getFriend = async (username) => {
     if(username.length < 5) return
-    socket.emit("add_friend", username, ({errorMsg, done}) => {
+    socket.emit("add_friend", username, ({errorMsg, done, friend}) => {
       if (done) {
         setSuccess(`${username} request sent`)
-        setFriendList(prev => [username, ...prev])
+        setFriendList(prev => [friend, ...prev])
         setErrorMsg('')
         return
       }
@@ -36,18 +34,6 @@ const Sidebar = () => {
       setSuccess('')
     })
   }
-
-  useEffect(() => {
-    if (!friendList.length) {
-      setTimeout(async () => {
-        const res = await axios.get(`${process.env.REACT_APP_HOST_URL}/friends/get`, { withCredentials: true })
-  
-        if (!res.data.error) {
-          setFriendList(res.data.friendList)
-        }
-      }, 1000)
-    }
-  }, [])
 
   return (
     <VStack py="1rem">
@@ -74,13 +60,13 @@ const Sidebar = () => {
         </Heading>
       }
       <Divider />
-      <Tabs variant="soft-rounded" w="100%">
+      <Tabs onChange={index => setFriendIndex(index)} variant="soft-rounded" w="100%">
         <VStack as={TabList} w="100%" p="0.5rem">
           {friendList.map((friend) => (
-            <HStack w="100%" key={friend}>
+            <HStack w="100%" key={friend.userid}>
               <Tab w="100%" bg={friend.connected ? "green.100" : ""}>
                 <Text align="start" w="100%">
-                  {friend}
+                  {friend.username}
                 </Text>
               </Tab>
             </HStack>
