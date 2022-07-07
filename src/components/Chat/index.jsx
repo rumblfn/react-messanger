@@ -14,7 +14,7 @@ const Chat = ({userid}) => {
 
   return friendList.length > 0 ? 
     <VStack pt="3rem" h="100%" justify="end">
-      <TabPanels overflowY="scroll">
+      <TabPanels h="100%" overflowY="scroll">
         {friendList.map(friend => 
           <VStack
             flexDirection="column-reverse"

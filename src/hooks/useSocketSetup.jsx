@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react";
 import { AccountContext } from "../components/AccountContext";
 import socket from "../socket";
 
+let lastMessageId = null
+
 const useSocketSetup = (setFriendList, setMessages) => {
   const { setUser } = useContext(AccountContext);
 
@@ -16,9 +18,11 @@ const useSocketSetup = (setFriendList, setMessages) => {
       setMessages(messages)
     })
 
-    socket.on("dm", message => {
-      console.log('dm')
-      setMessages(prevMsgs => [message, ...prevMsgs])
+    socket.on("dm", (message, id) => {
+      if (lastMessageId !== id) {
+        setMessages(prevMsgs => [message, ...prevMsgs])
+        lastMessageId = id
+      }
     })
 
     socket.on('connected', (status, username) => {

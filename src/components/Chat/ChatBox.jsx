@@ -1,5 +1,6 @@
 import { Button, HStack, Input } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
+import { nanoid } from "nanoid";
 import { useContext } from "react";
 import * as Yup from "yup";
 import { MessagesContext } from "../../routes/Home";
@@ -19,10 +20,10 @@ const ChatBox = ({userid}) => {
         const message = {
             to: userid,
             from: null,
-            content: values.message
+            content: values.message,
         }
 
-        socket.emit("dm", message)
+        socket.emit("dm", message, nanoid(8))
         setMessages(prevMsgs => [message, ...prevMsgs])
 
         actions.resetForm();
