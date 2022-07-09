@@ -1,9 +1,10 @@
-import { ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES } from "./actions"
+import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES } from "./actions"
 
 const initialState = {
     friendList: [],
     messages: [],
-    friendIndex: 0
+    friendIndex: 0,
+    confirmations: []
 }
 
 export const chatsReducer = (state = initialState, action) => {
@@ -43,6 +44,24 @@ export const chatsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 friendList
+            }
+        case SET_CONFIRMATIONS:
+            return {
+                ...state,
+                confirmations: action.payload
+            }
+        case ADD_CONFIRMATION:
+            return {
+                ...state,
+                confirmations: [action.payload, ...state.confirmations]
+            }
+        case REMOVE_CONFIRMATION:
+            const confirmations = state.confirmations.filter((confirmation) => {
+                return confirmation.username !== action.payload
+            });
+            return {
+                ...state,
+                confirmations
             }
         case CLEAR_CHATS:
             return initialState

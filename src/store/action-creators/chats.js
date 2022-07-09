@@ -1,4 +1,4 @@
-import { addFriendAction, addMessageAction, changeFriendStatusAction, clearChatsAction, setFriendIndexAction, setFriendListAction, setMessagesAction } from "../chats/actions"
+import { addConfirmationAction, addFriendAction, addMessageAction, changeFriendStatusAction, clearChatsAction, removeConfirmation, setConfirmationsAction, setFriendIndexAction, setFriendListAction, setMessagesAction } from "../chats/actions"
 
 export const setFriendList = (payload) => {
     return async (dispatch) => {
@@ -9,6 +9,7 @@ export const setFriendList = (payload) => {
 export const addFriend = (payload) => {
     return async (dispatch) => {
         dispatch(addFriendAction(payload))
+        dispatch(removeConfirmation(payload.username))
     }
 }
 
@@ -43,5 +44,23 @@ export const setFriendIndex = (payload) => {
 export const clearChats = () => {
     return async (dispatch) => {
         dispatch(clearChatsAction())
+    }
+}
+
+export const setConfirmations = (payload) => {
+    return async (dispatch) => {
+        dispatch(setConfirmationsAction(payload))
+    }
+}
+
+export const addConfirmation = (payload) => {
+    return async (dispatch) => {
+        dispatch(addConfirmationAction(payload))
+    }
+}
+
+export const removeConfirmationAfterDecline = (payload) => {
+    return async (dispatch) => {
+        dispatch(removeConfirmation(payload))
     }
 }

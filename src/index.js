@@ -6,10 +6,10 @@ import App from './App';
 import theme from './theme'
 import store from './store';
 import { Provider } from 'react-redux';
-import { persistStore } from 'redux-persist';
-import { PersistGate } from 'redux-persist/integration/react';
+// import { persistStore } from 'redux-persist';
+// import { PersistGate } from 'redux-persist/integration/react';
 
-let persistor = persistStore(store);
+// let persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,9 +18,9 @@ root.render(
       <ChakraProvider theme={theme}>
         <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
         <Provider store={store}>
-          <PersistGate persistor={persistor}>
+          {/* <PersistGate persistor={persistor}> */}
             <App />
-          </PersistGate>
+          {/* </PersistGate> */}
         </Provider>
       </ChakraProvider>
     </BrowserRouter>
