@@ -9,12 +9,15 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AccountContext } from "../../components/AccountContext";
 import ToggleColorMode from "../../components/ColorModeToggler";
+import { useActions } from "../../hooks/useActions";
 
 const Dashboard = () => {
     const navigate = useNavigate()
     const { setUser } = useContext(AccountContext);
+    const {clearChats} = useActions()
 
     const logout = () => {
+        clearChats()
         fetch(`${process.env.REACT_APP_HOST_URL}/auth/logout`, {
             credentials: "include",
         }).catch(err => {
@@ -30,6 +33,7 @@ const Dashboard = () => {
             if (!data) {
                 return
             } else {
+                document.location.reload()
                 setUser({loggedIn: false})
             }
         })

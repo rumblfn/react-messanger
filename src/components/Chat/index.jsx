@@ -1,16 +1,22 @@
 import { TabPanel, TabPanels, Text, VStack } from "@chakra-ui/react";
-import { useContext, useEffect, useRef } from "react";
-import { FriendContext, MessagesContext } from "../../routes/Home";
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { getFriendList, getMessages } from "../../store/chats/selectors";
 import ChatBox from "./ChatBox";
 
 const Chat = ({ userid }) => {
-  const { friendList } = useContext(FriendContext);
-  const { messages } = useContext(MessagesContext);
+  console.log(userid)
+  const friendList = useSelector(getFriendList)
+  const messages = useSelector(getMessages)
+
   const bottomDiv = useRef(null);
 
   useEffect(() => {
     bottomDiv.current?.scrollIntoView();
   });
+
+  console.log(messages)
+  console.log(friendList)
 
   return friendList.length > 0 ? (
     <VStack pt="0" h="100%" justify="end">
@@ -19,7 +25,7 @@ const Chat = ({ userid }) => {
           <VStack
             flexDirection="column-reverse"
             as={TabPanel}
-            key={`chat:${friend.username}`}
+            key={`chat:${friend.userid}`}
             w="100%"
           >
             <div ref={bottomDiv} />

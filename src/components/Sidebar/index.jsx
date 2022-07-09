@@ -15,14 +15,18 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React, { useContext, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FriendContext } from "../../routes/Home";
+import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
+import { getFriendIndex, getFriendList } from "../../store/chats/selectors";
 import { AccountContext } from "../AccountContext";
 
-const Sidebar = ({ setFriendIndex }) => {
+const Sidebar = () => {
   const navigate = useNavigate()
-  const { friendList, setFriendList } = useContext(FriendContext);
+  const { setFriendIndex, addFriend } = useActions()
+  const friendList = useSelector(getFriendList)
+  const friendIndex = useSelector(getFriendIndex)
   const friendInputRef = useRef();
   const [success, setSuccess] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -30,11 +34,12 @@ const Sidebar = ({ setFriendIndex }) => {
   const { user } = useContext(AccountContext);
 
   const getFriend = async (username) => {
-    if (!username && username.length < 5) return;
+    if (!username || username.length < 5) return;
+    
     socket.emit("add_friend", username, ({ errorMsg, done, friend }) => {
       if (done) {
         setSuccess(`${username} request sent`);
-        setFriendList((prev) => [friend, ...prev]);
+        addFriend(friend)
         setErrorMsg("");
         return;
       }
@@ -90,13 +95,14 @@ const Sidebar = ({ setFriendIndex }) => {
       )}
       <Divider />
       <Tabs
+        index={friendIndex}
         onChange={(index) => setFriendIndex(index)}
         variant="soft-rounded"
         w="100%"
       >
         <VStack as={TabList} w="100%" p="0.5rem">
           {friendList.map((friend) => (
-            <HStack w="100%" key={friend.userid}>
+            <HStack w="100%" key={friend.username}>
               <Tab w="100%" bg={friend.connected ? "green.100" : ""}>
                 <Text align="start" w="100%">
                   {friend.username}

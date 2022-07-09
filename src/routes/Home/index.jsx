@@ -1,44 +1,31 @@
 import { Grid, GridItem, Tabs } from "@chakra-ui/react";
-import React, { createContext, useState } from "react";
+import { useSelector } from "react-redux";
 import Chat from "../../components/Chat";
 import Sidebar from "../../components/Sidebar";
 import useSocketSetup from "../../hooks/useSocketSetup";
-
-export const FriendContext = createContext();
-export const MessagesContext = createContext();
+import { getFriendIndex, getFriendList } from "../../store/chats/selectors";
 
 export default function Home() {
-  const [friendList, setFriendList] = useState([]);
-  const [messages, setMessages] = useState([]);
+  const friendIndex = useSelector(getFriendIndex)
+  const friendList = useSelector(getFriendList)
 
-  const [friendIndex, setFriendIndex] = useState(0);
-
-  useSocketSetup(setFriendList, setMessages);
+  useSocketSetup(friendList);
 
   return (
-    <FriendContext.Provider value={{ friendList, setFriendList }}>
-      <Grid
-        templateColumns="repeat(10, 1fr)"
-        h="100vh"
-        as={Tabs}
-        index={friendIndex}
-      >
-        <GridItem colSpan="3" borderRight="1px solid gray">
-          <Sidebar setFriendIndex={setFriendIndex} />
-        </GridItem>
-        <GridItem colSpan="7" maxH="100vh">
-          <MessagesContext.Provider 
-            value={{
-              messages,
-              setMessages
-            }}
-          >
-            <Chat
-              userid={friendList[friendIndex]?.userid}
-            />
-          </MessagesContext.Provider>
-        </GridItem>
-      </Grid>
-    </FriendContext.Provider>
+    <Grid
+      templateColumns="repeat(10, 1fr)"
+      h="100vh"
+      as={Tabs}
+      index={friendIndex}
+    >
+      <GridItem colSpan="3" borderRight="1px solid gray">
+        <Sidebar />
+      </GridItem>
+      <GridItem colSpan="7" maxH="100vh">
+        <Chat
+          userid={friendList[friendIndex]?.userid}
+        />
+      </GridItem>
+    </Grid>
   );
 }

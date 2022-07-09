@@ -1,42 +1,36 @@
 import { useContext, useEffect } from "react";
 import { AccountContext } from "../components/AccountContext";
 import socket from "../socket";
+import { useActions } from "./useActions";
 
-let lastMessageId = null
+let lastMessageId = null;
 
-const useSocketSetup = (setFriendList, setMessages) => {
+const useSocketSetup = () => {
   const { setUser } = useContext(AccountContext);
+  const { setFriendList, setMessages, addMessage, changeFriendStatus } =
+    useActions();
 
   useEffect(() => {
     socket.connect();
 
-    socket.on("friends", friendList => {
-      setFriendList(friendList)
-    })
+    socket.on("friends", (friendList) => {
+      setFriendList(friendList);
+    });
 
-    socket.on("messages", messages => {
-      setMessages(messages)
-    })
+    socket.on("messages", (messages) => {
+      setMessages(messages);
+    });
 
     socket.on("dm", (message, id) => {
       if (lastMessageId !== id) {
-        setMessages(prevMsgs => [message, ...prevMsgs])
-        lastMessageId = id
+        addMessage(message);
+        lastMessageId = id;
       }
-    })
+    });
 
-    socket.on('connected', (status, username) => {
-      console.log(status, username)
-      setFriendList(prevFriends => {
-        const friends = [...prevFriends]
-        return friends.map(friend => {
-          if (friend.username === username) {
-            friend.connected = status
-          }
-          return friend
-        })
-      })
-    })
+    socket.on("connected", (status, username) => {
+      changeFriendStatus({status, username});
+    });
 
     socket.on("connect_error", () => {
       setUser({ loggedIn: false });
@@ -44,11 +38,11 @@ const useSocketSetup = (setFriendList, setMessages) => {
 
     return () => {
       socket.off("connect_error");
-      socket.off("connected")
-      socket.off("friends")
-      socket.off("messages")
+      socket.off("connected");
+      socket.off("friends");
+      socket.off("messages");
     };
-  }, [setUser, setFriendList, setMessages]);
+  }, [setMessages, setUser, addMessage, setFriendList, changeFriendStatus]); // remove subs
 };
 
 export default useSocketSetup;
