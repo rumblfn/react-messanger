@@ -214,6 +214,550 @@
                     "filename": "src/theme.js"
                 }
             ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2022-07-10 00:29:07",
+            "filesum": 37,
+            "codesum": 32876,
+            "commentsum": 41,
+            "blanksum": 132,
+            "statistics": {
+                ".js": {
+                    "code": 260,
+                    "comment": 10,
+                    "blank": 37
+                },
+                ".jsx": {
+                    "code": 800,
+                    "comment": 1,
+                    "blank": 70
+                },
+                ".json": {
+                    "code": 31752,
+                    "comment": 0,
+                    "blank": 5
+                },
+                "": {
+                    "code": 19,
+                    "comment": 2,
+                    "blank": 5
+                },
+                ".md": {
+                    "code": 22,
+                    "comment": 4,
+                    "blank": 15
+                },
+                ".txt": {
+                    "code": 3,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".html": {
+                    "code": 20,
+                    "comment": 23,
+                    "blank": 0
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 2,
+                    "code": 31675,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public/index.html"
+                },
+                {
+                    "filename": "public/logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public/logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 15,
+                    "code": 21,
+                    "comment": 4,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "README.old.md"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/App.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src/components/AccountContext/index.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src/components/Chat/ChatBox.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "src/components/Chat/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/components/ColorModeToggler/index.jsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 252,
+                    "comment": 0,
+                    "filename": "src/components/Sidebar/index.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/components/Views/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/hocs/PrivateRoutes.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src/hooks/useActions.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 58,
+                    "comment": 1,
+                    "filename": "src/hooks/useSocketSetup.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 3,
+                    "filename": "src/index.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 91,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/Login.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 102,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/SignUp.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/TextField.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src/routes/Dashboard/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "src/routes/Home/index.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/socket.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "src/store/action-creators/chats.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src/store/action-creators/index.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/store/chats/actions.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/store/chats/index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "src/store/chats/reducer.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/store/chats/selectors.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 14,
+                    "comment": 7,
+                    "filename": "src/store/index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src/theme.js"
+                }
+            ]
+        },
+        {
+            "version": "0.2.7",
+            "counttime": "2022-07-10 02:50:30",
+            "filesum": 37,
+            "codesum": 32884,
+            "commentsum": 41,
+            "blanksum": 134,
+            "statistics": {
+                ".js": {
+                    "code": 260,
+                    "comment": 10,
+                    "blank": 37
+                },
+                ".jsx": {
+                    "code": 808,
+                    "comment": 1,
+                    "blank": 72
+                },
+                "": {
+                    "code": 19,
+                    "comment": 2,
+                    "blank": 5
+                },
+                ".json": {
+                    "code": 31752,
+                    "comment": 0,
+                    "blank": 5
+                },
+                ".txt": {
+                    "code": 3,
+                    "comment": 1,
+                    "blank": 0
+                },
+                ".html": {
+                    "code": 20,
+                    "comment": 23,
+                    "blank": 0
+                },
+                ".md": {
+                    "code": 22,
+                    "comment": 4,
+                    "blank": 15
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": ".env"
+                },
+                {
+                    "blank": 5,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 2,
+                    "code": 31675,
+                    "comment": 0,
+                    "filename": "package-lock.json"
+                },
+                {
+                    "blank": 3,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "package.json"
+                },
+                {
+                    "filename": "public/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 20,
+                    "comment": 23,
+                    "filename": "public/index.html"
+                },
+                {
+                    "filename": "public/logo192.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "public/logo512.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "public/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "public/robots.txt"
+                },
+                {
+                    "blank": 15,
+                    "code": 21,
+                    "comment": 4,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "README.old.md"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src/App.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "src/components/AccountContext/index.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src/components/Chat/ChatBox.jsx"
+                },
+                {
+                    "blank": 6,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "src/components/Chat/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src/components/ColorModeToggler/index.jsx"
+                },
+                {
+                    "blank": 13,
+                    "code": 252,
+                    "comment": 0,
+                    "filename": "src/components/Sidebar/index.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "src/components/Views/index.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src/hocs/PrivateRoutes.jsx"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "src/hooks/useActions.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 58,
+                    "comment": 1,
+                    "filename": "src/hooks/useSocketSetup.jsx"
+                },
+                {
+                    "blank": 3,
+                    "code": 23,
+                    "comment": 3,
+                    "filename": "src/index.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 91,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/Login.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 102,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/SignUp.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "src/routes/Auth/TextField.jsx"
+                },
+                {
+                    "blank": 4,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "src/routes/Dashboard/index.jsx"
+                },
+                {
+                    "blank": 5,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "src/routes/Home/index.jsx"
+                },
+                {
+                    "blank": 2,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src/socket.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "src/store/action-creators/chats.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "src/store/action-creators/index.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src/store/chats/actions.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src/store/chats/index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "src/store/chats/reducer.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "src/store/chats/selectors.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 14,
+                    "comment": 7,
+                    "filename": "src/store/index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 27,
+                    "comment": 0,
+                    "filename": "src/theme.js"
+                }
+            ]
         }
     ]
 }

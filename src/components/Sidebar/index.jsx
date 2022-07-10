@@ -12,11 +12,19 @@ import {
   Heading,
   HStack,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Spacer,
   Tab,
   TabList,
   Tabs,
   Text,
+  useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -33,19 +41,27 @@ import { AccountContext } from "../AccountContext";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { setFriendIndex, addFriend, addConfirmation, removeConfirmationAfterDecline } = useActions();
+  const {
+    setFriendIndex,
+    addFriend,
+    addConfirmation,
+    removeConfirmationAfterDecline,
+  } = useActions();
   const friendList = useSelector(getFriendList);
   const friendIndex = useSelector(getFriendIndex);
   const friendInputRef = useRef();
   const [success, setSuccess] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useContext(AccountContext);
 
+  const [friend, setFriend] = useState(null);
+
   const cleanMessages = () => {
-    setSuccess('')
-    setErrorMsg('')
-  }
+    setSuccess("");
+    setErrorMsg("");
+  };
 
   const getFriend = async (username) => {
     if (!username || username.length < 5) return;
@@ -72,8 +88,8 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => cleanMessages(), 3000)
-  }, [errorMsg, success])
+    setTimeout(() => cleanMessages(), 3000);
+  }, [errorMsg, success]);
 
   const awaitingConfirmation = useSelector(getConfirmations);
 
@@ -83,7 +99,7 @@ const Sidebar = () => {
 
   const declineConfirmation = (user) => {
     socket.emit("decline_confirmation", user);
-    removeConfirmationAfterDecline(user.username)
+    removeConfirmationAfterDecline(user.username);
   };
 
   return (
@@ -98,7 +114,7 @@ const Sidebar = () => {
       >
         <Box display="flex" alignItems="center" gap={2}>
           <Avatar name={user.username} src="https://bit.ly/dan-abramov" />
-          <Heading fontSize="md">{user.username}</Heading>
+          <Heading fontSize="md" wordBreak="break-all">{user.username}</Heading>
         </Box>
         <Spacer />
         <Button p={0} onClick={() => navigate("/dashboard")} colorScheme="teal">
@@ -145,9 +161,16 @@ const Sidebar = () => {
           </h2>
           {awaitingConfirmation.length ? (
             awaitingConfirmation.map((user) => (
-              <AccordionPanel key={user.userid} pb={2}>
+              <AccordionPanel
+                onClick={() => {
+                  setFriend(user);
+                  onOpen();
+                }}
+                key={user.userid}
+                pb={2}
+              >
                 <Box display="flex" alignItems="center" gap={2}>
-                  <Text fontSize="md" fontWeight={500}>
+                  <Text wordBreak="break-all" fontSize="md" fontWeight={500}>
                     {user.username}
                   </Text>
                   <Text fontSize="sm">{user.type}</Text>
@@ -156,7 +179,10 @@ const Sidebar = () => {
                     <Button
                       size="sm"
                       p={0}
-                      onClick={() => acceptConfirmation(user)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        acceptConfirmation(user);
+                      }}
                     >
                       <CheckIcon />
                     </Button>
@@ -164,7 +190,10 @@ const Sidebar = () => {
                   <Button
                     size="sm"
                     p={0}
-                    onClick={() => declineConfirmation(user)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      declineConfirmation(user);
+                    }}
                   >
                     <CloseIcon />
                   </Button>
@@ -198,6 +227,37 @@ const Sidebar = () => {
           ))}
         </VStack>
       </Tabs>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Confirmation</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {friend?.username} - {friend?.type} request
+          </ModalBody>
+
+          <ModalFooter>
+            {friend?.type === "outgoing" && (
+              <Button
+                onClick={() => {
+                  acceptConfirmation(friend)
+                  onClose()
+                }}
+                colorScheme="teal"
+                mr={3}
+              >
+                Add to friends
+              </Button>
+            )}
+            <Button onClick={() => {
+              declineConfirmation(friend)
+              onClose()
+            }} variant="ghost">
+              Remove
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </VStack>
   );
 };

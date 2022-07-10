@@ -48,3 +48,123 @@ src/routes/Home/index.jsx, code is 25, comment is 0, blank is 4.
 src/socket.js, code is 6, comment is 0, blank is 2.
 src/theme.js, code is 27, comment is 0, blank is 3.
 ===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2022-07-10 00:29:07
+count workspace : /Users/samilvaliahmetov/education/programming/local-github/react-messanger
+total files : 37
+total code lines : 32876
+total comment lines : 41
+total blank lines : 132
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|            260|             10|             37|   0.79|
+   |           .jsx|            800|              1|             70|    2.4|
+   |          .json|          31752|              0|              5|     97|
+   |               |             19|              2|              5|  0.058|
+   |            .md|             22|              4|             15|  0.067|
+   |           .txt|              3|              1|              0| 0.0091|
+   |          .html|             20|             23|              0|  0.061|
+   -------------------------------------------------------------------------
+.env, code is 1, comment is 1, blank is 0.
+.gitignore, code is 18, comment is 1, blank is 5.
+package-lock.json, code is 31675, comment is 0, blank is 2.
+package.json, code is 52, comment is 0, blank is 3.
+public/favicon.ico, it is a binary file.
+public/index.html, code is 20, comment is 23, blank is 0.
+public/logo192.png, it is a binary file.
+public/logo512.png, it is a binary file.
+public/manifest.json, code is 25, comment is 0, blank is 0.
+public/robots.txt, code is 3, comment is 1, blank is 0.
+README.md, code is 21, comment is 4, blank is 15.
+README.old.md, code is 1, comment is 0, blank is 0.
+src/App.js, code is 10, comment is 0, blank is 2.
+src/components/AccountContext/index.jsx, code is 37, comment is 0, blank is 5.
+src/components/Chat/ChatBox.jsx, code is 41, comment is 0, blank is 5.
+src/components/Chat/index.jsx, code is 70, comment is 0, blank is 6.
+src/components/ColorModeToggler/index.jsx, code is 13, comment is 0, blank is 3.
+src/components/Sidebar/index.jsx, code is 252, comment is 0, blank is 13.
+src/components/Views/index.jsx, code is 26, comment is 0, blank is 2.
+src/hocs/PrivateRoutes.jsx, code is 12, comment is 0, blank is 3.
+src/hooks/useActions.js, code is 7, comment is 0, blank is 1.
+src/hooks/useSocketSetup.jsx, code is 58, comment is 1, blank is 14.
+src/index.js, code is 23, comment is 3, blank is 3.
+src/routes/Auth/Login.jsx, code is 91, comment is 0, blank is 5.
+src/routes/Auth/SignUp.jsx, code is 102, comment is 0, blank is 5.
+src/routes/Auth/TextField.jsx, code is 16, comment is 0, blank is 2.
+src/routes/Dashboard/index.jsx, code is 54, comment is 0, blank is 4.
+src/routes/Home/index.jsx, code is 28, comment is 0, blank is 3.
+src/socket.js, code is 6, comment is 0, blank is 2.
+src/store/action-creators/chats.js, code is 56, comment is 0, blank is 10.
+src/store/action-creators/index.js, code is 1, comment is 0, blank is 0.
+src/store/chats/actions.js, code is 40, comment is 0, blank is 10.
+src/store/chats/index.js, code is 3, comment is 0, blank is 0.
+src/store/chats/reducer.js, code is 69, comment is 0, blank is 2.
+src/store/chats/selectors.js, code is 4, comment is 0, blank is 0.
+src/store/index.js, code is 14, comment is 7, blank is 4.
+src/theme.js, code is 27, comment is 0, blank is 3.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2022-07-10 02:50:30
+count workspace : /Users/samilvaliahmetov/education/programming/local-github/react-messanger
+total files : 37
+total code lines : 32884
+total comment lines : 41
+total blank lines : 134
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|            260|             10|             37|   0.79|
+   |           .jsx|            808|              1|             72|    2.5|
+   |               |             19|              2|              5|  0.058|
+   |          .json|          31752|              0|              5|     97|
+   |           .txt|              3|              1|              0| 0.0091|
+   |          .html|             20|             23|              0|  0.061|
+   |            .md|             22|              4|             15|  0.067|
+   -------------------------------------------------------------------------
+.env, code is 1, comment is 1, blank is 0.
+.gitignore, code is 18, comment is 1, blank is 5.
+package-lock.json, code is 31675, comment is 0, blank is 2.
+package.json, code is 52, comment is 0, blank is 3.
+public/favicon.ico, it is a binary file.
+public/index.html, code is 20, comment is 23, blank is 0.
+public/logo192.png, it is a binary file.
+public/logo512.png, it is a binary file.
+public/manifest.json, code is 25, comment is 0, blank is 0.
+public/robots.txt, code is 3, comment is 1, blank is 0.
+README.md, code is 21, comment is 4, blank is 15.
+README.old.md, code is 1, comment is 0, blank is 0.
+src/App.js, code is 10, comment is 0, blank is 2.
+src/components/AccountContext/index.jsx, code is 37, comment is 0, blank is 5.
+src/components/Chat/ChatBox.jsx, code is 41, comment is 0, blank is 5.
+src/components/Chat/index.jsx, code is 70, comment is 0, blank is 6.
+src/components/ColorModeToggler/index.jsx, code is 13, comment is 0, blank is 3.
+src/components/Sidebar/index.jsx, code is 252, comment is 0, blank is 13.
+src/components/Views/index.jsx, code is 26, comment is 0, blank is 2.
+src/hocs/PrivateRoutes.jsx, code is 12, comment is 0, blank is 3.
+src/hooks/useActions.js, code is 7, comment is 0, blank is 1.
+src/hooks/useSocketSetup.jsx, code is 58, comment is 1, blank is 14.
+src/index.js, code is 23, comment is 3, blank is 3.
+src/routes/Auth/Login.jsx, code is 91, comment is 0, blank is 5.
+src/routes/Auth/SignUp.jsx, code is 102, comment is 0, blank is 5.
+src/routes/Auth/TextField.jsx, code is 16, comment is 0, blank is 2.
+src/routes/Dashboard/index.jsx, code is 54, comment is 0, blank is 4.
+src/routes/Home/index.jsx, code is 36, comment is 0, blank is 5.
+src/socket.js, code is 6, comment is 0, blank is 2.
+src/store/action-creators/chats.js, code is 56, comment is 0, blank is 10.
+src/store/action-creators/index.js, code is 1, comment is 0, blank is 0.
+src/store/chats/actions.js, code is 40, comment is 0, blank is 10.
+src/store/chats/index.js, code is 3, comment is 0, blank is 0.
+src/store/chats/reducer.js, code is 69, comment is 0, blank is 2.
+src/store/chats/selectors.js, code is 4, comment is 0, blank is 0.
+src/store/index.js, code is 14, comment is 7, blank is 4.
+src/theme.js, code is 27, comment is 0, blank is 3.
+===============================================================================
