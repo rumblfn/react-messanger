@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "formik": "^2.2.9",
     "framer-motion": "^6.3.16",
+    "howler": "^2.2.3",
     "js-cookie": "^3.0.1",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
@@ -25,6 +26,7 @@
     "redux-persist": "^6.0.0",
     "socket.io-client": "^4.5.1",
     "use-debounce": "^8.0.1",
+    "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

@@ -1,11 +1,12 @@
 import { TabPanel, TabPanels, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useActions } from "../../hooks/useActions";
 import { getFriendList, getMessages } from "../../store/chats/selectors";
 import ChatBox from "./ChatBox";
 
 const Chat = ({ userid }) => {
-  console.log(userid)
+  const {readMessages} = useActions()
   const friendList = useSelector(getFriendList)
   const messages = useSelector(getMessages)
 
@@ -15,8 +16,9 @@ const Chat = ({ userid }) => {
     bottomDiv.current?.scrollIntoView();
   });
 
-  console.log(messages)
-  console.log(friendList)
+  useEffect(() => {
+    readMessages(userid)
+  }, [messages, userid, readMessages])
 
   return friendList.length > 0 ? (
     <VStack pt="0" h="100%" justify="end">

@@ -5,8 +5,13 @@ import Sidebar from "../../components/Sidebar";
 import useSocketSetup from "../../hooks/useSocketSetup";
 import { getFriendIndex, getFriendList } from "../../store/chats/selectors";
 import { useMediaQuery } from "@chakra-ui/react";
+import { Howl } from "howler";
 
 export default function Home() {
+  let messageSound = new Howl({
+    src: ['/sounds/message-sound.mp3']
+  })
+
   const friendIndex = useSelector(getFriendIndex);
   const friendList = useSelector(getFriendList);
 
@@ -15,7 +20,7 @@ export default function Home() {
   const colSpanSidebar = small ? '5' : tablet ? "4" : "3";
   const colSpanChat = small ? '5' : tablet ? "6" : "7";
 
-  useSocketSetup(friendList);
+  useSocketSetup(messageSound);
 
   return (
     <div>

@@ -5,12 +5,20 @@ import { useActions } from "./useActions";
 
 let lastMessageId = null;
 let lastAddedChat = null;
-let lastConfirmationAdded = null
+let lastConfirmationAdded = null;
 
-const useSocketSetup = () => {
+const useSocketSetup = (playMessageSound) => {
   const { setUser } = useContext(AccountContext);
-  const { setFriendList, setMessages, addMessage, changeFriendStatus, addFriend, setConfirmations, addConfirmation, removeConfirmationAfterDecline } =
-    useActions();
+  const {
+    setFriendList,
+    setMessages,
+    addMessage,
+    changeFriendStatus,
+    addFriend,
+    setConfirmations,
+    addConfirmation,
+    removeConfirmationAfterDecline,
+  } = useActions();
 
   useEffect(() => {
     socket.connect();
@@ -20,26 +28,26 @@ const useSocketSetup = () => {
     });
 
     socket.on("confirmations", (confirmations) => {
-      setConfirmations(confirmations)
-    })
+      setConfirmations(confirmations);
+    });
 
     socket.on("add_confirmation", (confirmation) => {
       if (lastConfirmationAdded !== confirmation.userid) {
-        addConfirmation(confirmation)
-        lastConfirmationAdded = confirmation.userid
+        addConfirmation(confirmation);
+        lastConfirmationAdded = confirmation.userid;
       }
-    })
+    });
 
-    socket.on('remove_confirmation', username => {
-      removeConfirmationAfterDecline(username)
-    })
+    socket.on("remove_confirmation", (username) => {
+      removeConfirmationAfterDecline(username);
+    });
 
-    socket.on("add_chat", friend => {
+    socket.on("add_chat", (friend) => {
       if (lastAddedChat !== friend.userid) {
-        lastAddedChat = friend.userid
-        addFriend(friend)
+        lastAddedChat = friend.userid;
+        addFriend(friend);
       }
-    })
+    });
 
     socket.on("messages", (messages) => {
       setMessages(messages);
@@ -47,13 +55,14 @@ const useSocketSetup = () => {
 
     socket.on("dm", (message, id) => {
       if (lastMessageId !== id) {
-        addMessage(message);
         lastMessageId = id;
+        playMessageSound.play();
+        addMessage(message);
       }
     });
 
     socket.on("connected", (status, username) => {
-      changeFriendStatus({status, username});
+      changeFriendStatus({ status, username });
     });
 
     socket.on("connect_error", () => {
@@ -66,7 +75,18 @@ const useSocketSetup = () => {
       socket.off("friends");
       socket.off("messages");
     };
-  }, [setMessages, setUser, addMessage, setFriendList, changeFriendStatus, addFriend]); // remove subs
+  }, [
+    setMessages,
+    setUser,
+    addMessage,
+    setFriendList,
+    changeFriendStatus,
+    addFriend,
+    playMessageSound,
+    addConfirmation,
+    removeConfirmationAfterDecline,
+    setConfirmations,
+  ]); // remove subs
 };
 
 export default useSocketSetup;

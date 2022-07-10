@@ -1,10 +1,11 @@
-import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES } from "./actions"
+import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, READ_CHANNEL_MESSAGES, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES } from "./actions"
 
 const initialState = {
     friendList: [],
     messages: [],
     friendIndex: 0,
-    confirmations: []
+    confirmations: [],
+    unreadMessages: {}
 }
 
 export const chatsReducer = (state = initialState, action) => {
@@ -32,7 +33,19 @@ export const chatsReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [action.payload, ...state.messages]
+                messages: [action.payload, ...state.messages],
+                unreadMessages: {
+                    ...state.unreadMessages,
+                    [action.payload.from]: (state.unreadMessages[action.payload.from] || 0) + 1
+                }
+            }
+        case READ_CHANNEL_MESSAGES:
+            return {
+                ...state,
+                unreadMessages: {
+                    ...state.unreadMessages,
+                    [action.payload]: null
+                }
             }
         case CHANGE_FRIENDS_STATUS:
             const friendList = JSON.parse(JSON.stringify(state.friendList)).map((friend) => {

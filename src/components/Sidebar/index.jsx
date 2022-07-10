@@ -36,6 +36,7 @@ import {
   getConfirmations,
   getFriendIndex,
   getFriendList,
+  getUnreadMessages,
 } from "../../store/chats/selectors";
 import { AccountContext } from "../AccountContext";
 
@@ -49,6 +50,8 @@ const Sidebar = () => {
   } = useActions();
   const friendList = useSelector(getFriendList);
   const friendIndex = useSelector(getFriendIndex);
+  const unreadMessages = useSelector(getUnreadMessages)
+
   const friendInputRef = useRef();
   const [success, setSuccess] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -222,6 +225,8 @@ const Sidebar = () => {
                 <Text align="start" w="100%">
                   {friend.username}
                 </Text>
+                <Spacer />
+                <Text>{unreadMessages[friend.userid]}</Text>
               </Tab>
             </HStack>
           ))}
