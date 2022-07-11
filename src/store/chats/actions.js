@@ -9,6 +9,7 @@ export const SET_CONFIRMATIONS = 'SET_CONFIRMATIONS'
 export const ADD_CONFIRMATION = 'ADD_CONFIRMATION'
 export const REMOVE_CONFIRMATION = 'REMOVE_CONFIRMATION'
 export const READ_CHANNEL_MESSAGES = 'READ_CHANNEL_MESSAGES'
+export const SET_UNREAD_MESSAGES = 'SET_UNREAD_MESSAGES'
 
 export const setFriendListAction = (payload) => ({
     type: SET_FRIEND_LIST, payload
@@ -52,4 +53,8 @@ export const removeConfirmation = (payload) => ({
 
 export const readMessagesAction = (payload) => ({
     type: READ_CHANNEL_MESSAGES, payload
+})
+
+export const setUnreadMessagesAction = (payload) => ({
+    type: SET_UNREAD_MESSAGES, payload
 })

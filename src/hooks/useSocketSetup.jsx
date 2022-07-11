@@ -18,6 +18,7 @@ const useSocketSetup = (playMessageSound) => {
     setConfirmations,
     addConfirmation,
     removeConfirmationAfterDecline,
+    setUnreadMessages
   } = useActions();
 
   useEffect(() => {
@@ -37,6 +38,8 @@ const useSocketSetup = (playMessageSound) => {
         lastConfirmationAdded = confirmation.userid;
       }
     });
+
+    socket.on("unreadMessages", (unreadMessages) => setUnreadMessages(unreadMessages))
 
     socket.on("remove_confirmation", (username) => {
       removeConfirmationAfterDecline(username);
@@ -86,7 +89,8 @@ const useSocketSetup = (playMessageSound) => {
     addConfirmation,
     removeConfirmationAfterDecline,
     setConfirmations,
-  ]); // remove subs
+    setUnreadMessages
+  ]); // remove subs, make clearly
 };
 
 export default useSocketSetup;

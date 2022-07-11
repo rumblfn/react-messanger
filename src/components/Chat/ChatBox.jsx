@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
 
-const ChatBox = ({userid}) => {
+const ChatBox = ({user}) => {
     const {addMessage} = useActions()
 
   return (
@@ -16,7 +16,9 @@ const ChatBox = ({userid}) => {
       })}
       onSubmit={(values, actions) => {
         const message = {
-            to: userid,
+            username: user.username,
+            connected: user?.connected,
+            to: user?.userid,
             from: null,
             content: values.message,
         }

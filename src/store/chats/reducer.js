@@ -1,9 +1,9 @@
-import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, READ_CHANNEL_MESSAGES, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES } from "./actions"
+import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, READ_CHANNEL_MESSAGES, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES, SET_UNREAD_MESSAGES } from "./actions"
 
 const initialState = {
     friendList: [],
     messages: [],
-    friendIndex: 0,
+    friendIndex: -1,
     confirmations: [],
     unreadMessages: {}
 }
@@ -37,6 +37,13 @@ export const chatsReducer = (state = initialState, action) => {
                 unreadMessages: {
                     ...state.unreadMessages,
                     [action.payload.from]: (state.unreadMessages[action.payload.from] || 0) + 1
+                }
+            }
+        case SET_UNREAD_MESSAGES:
+            return {
+                ...state,
+                unreadMessages: {
+                    ...action.payload
                 }
             }
         case READ_CHANNEL_MESSAGES:

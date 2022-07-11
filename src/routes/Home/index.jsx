@@ -34,7 +34,7 @@ export default function Home() {
           <Sidebar />
         </GridItem>
         <GridItem colSpan={colSpanChat} maxH="100vh">
-          <Chat userid={friendList[friendIndex]?.userid} />
+          <Chat user={friendList[friendIndex]} />
         </GridItem>
       </Grid>
     </div>

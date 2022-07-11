@@ -157,7 +157,7 @@ const Sidebar = () => {
           <h2>
             <AccordionButton>
               <Box flex="1" textAlign="left" fontWeight={600}>
-                Awaiting confirmations
+                Awaiting confirmations {awaitingConfirmation.length ? ` - ${awaitingConfirmation.length}` : ''}
               </Box>
               <AccordionIcon />
             </AccordionButton>

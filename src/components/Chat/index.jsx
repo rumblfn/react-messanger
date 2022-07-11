@@ -5,7 +5,9 @@ import { useActions } from "../../hooks/useActions";
 import { getFriendList, getMessages } from "../../store/chats/selectors";
 import ChatBox from "./ChatBox";
 
-const Chat = ({ userid }) => {
+const Chat = ({ user }) => {
+  const userid = user?.userid
+
   const {readMessages} = useActions()
   const friendList = useSelector(getFriendList)
   const messages = useSelector(getMessages)
@@ -56,7 +58,7 @@ const Chat = ({ userid }) => {
           </VStack>
         ))}
       </TabPanels>
-      <ChatBox userid={userid} />
+      {user?.userid && <ChatBox user={user} />}
     </VStack>
   ) : (
     <VStack
