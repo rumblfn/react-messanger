@@ -77,6 +77,12 @@ const useSocketSetup = (playMessageSound) => {
       socket.off("connected");
       socket.off("friends");
       socket.off("messages");
+      socket.off("dm");
+      socket.off("add_chat");
+      socket.off("remove_confirmation");
+      socket.off("unreadMessages");
+      socket.off("add_confirmation");
+      socket.off("confirmations");
     };
   }, [
     setMessages,

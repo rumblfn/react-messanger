@@ -21,6 +21,7 @@ const ChatBox = ({user}) => {
             to: user?.userid,
             from: null,
             content: values.message,
+            timestamp: new Date().getTime()
         }
 
         socket.emit("dm", message, nanoid(8))

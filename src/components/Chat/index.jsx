@@ -2,6 +2,7 @@ import { TabPanel, TabPanels, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useActions";
+import socket from "../../socket";
 import { getFriendList, getMessages } from "../../store/chats/selectors";
 import ChatBox from "./ChatBox";
 
@@ -20,6 +21,8 @@ const Chat = ({ user }) => {
 
   useEffect(() => {
     readMessages(userid)
+    console.log(userid)
+    socket.emit('readMessages', userid)
   }, [messages, userid, readMessages])
 
   return friendList.length > 0 ? (
