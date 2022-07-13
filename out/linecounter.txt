@@ -168,3 +168,74 @@ src/store/chats/selectors.js, code is 4, comment is 0, blank is 0.
 src/store/index.js, code is 14, comment is 7, blank is 4.
 src/theme.js, code is 27, comment is 0, blank is 3.
 ===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2022-07-13 10:49:58
+count workspace : /Users/samilvaliahmetov/education/programming/local-github/react-messanger
+total files : 48
+total code lines : 33124
+total comment lines : 42
+total blank lines : 155
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .md|             22|              4|             15|  0.066|
+   |          .json|          31785|              0|              5|     96|
+   |           .txt|              3|              1|              0| 0.0091|
+   |               |             19|              2|              5|  0.057|
+   |          .html|             20|             23|              0|  0.060|
+   |            .js|            312|             10|             42|   0.94|
+   |           .jsx|            963|              2|             88|    2.9|
+   -------------------------------------------------------------------------
+.env, code is 1, comment is 1, blank is 0.
+.gitignore, code is 18, comment is 1, blank is 5.
+package-lock.json, code is 31706, comment is 0, blank is 2.
+package.json, code is 54, comment is 0, blank is 3.
+public/favicon.ico, it is a binary file.
+public/index.html, code is 20, comment is 23, blank is 0.
+public/logo192.png, it is a binary file.
+public/logo512.png, it is a binary file.
+public/manifest.json, code is 25, comment is 0, blank is 0.
+public/robots.txt, code is 3, comment is 1, blank is 0.
+public/sounds/message-sound.mp3, it is a binary file.
+public/sounds/mixkit-gaming-lock-2848.wav, it is a binary file.
+README.md, code is 21, comment is 4, blank is 15.
+README.old.md, code is 1, comment is 0, blank is 0.
+src/App.js, code is 10, comment is 0, blank is 2.
+src/components/AccountContext/index.jsx, code is 37, comment is 0, blank is 5.
+src/components/Chat/ChatBox.jsx, code is 44, comment is 0, blank is 5.
+src/components/Chat/EmptyChat.jsx, code is 18, comment is 0, blank is 1.
+src/components/Chat/index.jsx, code is 50, comment is 0, blank is 7.
+src/components/Chat/OneMessage.jsx, code is 21, comment is 0, blank is 1.
+src/components/ColorModeToggler/index.jsx, code is 11, comment is 0, blank is 3.
+src/components/Sidebar/confirmations.jsx, code is 87, comment is 0, blank is 2.
+src/components/Sidebar/FriendList.jsx, code is 44, comment is 0, blank is 2.
+src/components/Sidebar/index.jsx, code is 56, comment is 0, blank is 10.
+src/components/Sidebar/Modal.jsx, code is 53, comment is 0, blank is 2.
+src/components/Sidebar/profileTopPreview.jsx, code is 32, comment is 1, blank is 2.
+src/components/Sidebar/searchInput.jsx, code is 39, comment is 0, blank is 5.
+src/components/Sidebar/StatusField.jsx, code is 29, comment is 0, blank is 1.
+src/components/Views/index.jsx, code is 27, comment is 0, blank is 2.
+src/components/Views/LoadingPage.jsx, code is 16, comment is 0, blank is 1.
+src/hocs/PrivateRoutes.jsx, code is 12, comment is 0, blank is 3.
+src/hooks/useActions.js, code is 7, comment is 0, blank is 1.
+src/hooks/useSocketSetup.jsx, code is 87, comment is 1, blank is 15.
+src/index.js, code is 23, comment is 3, blank is 3.
+src/routes/Auth/Login.jsx, code is 91, comment is 0, blank is 5.
+src/routes/Auth/SignUp.jsx, code is 102, comment is 0, blank is 5.
+src/routes/Auth/TextField.jsx, code is 16, comment is 0, blank is 2.
+src/routes/Dashboard/index.jsx, code is 54, comment is 0, blank is 4.
+src/routes/Home/index.jsx, code is 37, comment is 0, blank is 5.
+src/socket.js, code is 6, comment is 0, blank is 2.
+src/store/action-creators/chats.js, code is 79, comment is 0, blank is 13.
+src/store/action-creators/index.js, code is 1, comment is 0, blank is 0.
+src/store/chats/actions.js, code is 48, comment is 0, blank is 12.
+src/store/chats/index.js, code is 3, comment is 0, blank is 0.
+src/store/chats/reducer.js, code is 89, comment is 0, blank is 2.
+src/store/chats/selectors.js, code is 5, comment is 0, blank is 0.
+src/store/index.js, code is 14, comment is 7, blank is 4.
+src/theme.js, code is 27, comment is 0, blank is 3.
+===============================================================================

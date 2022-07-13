@@ -1,0 +1,9 @@
+.message-time {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.22s;
+}
+
+.message:hover .message-time {
+    opacity: 1;
+}

@@ -28,7 +28,37 @@ export const addFriend = (payload) => {
 
 export const setMessages = (payload) => {
     return async (dispatch) => {
-        dispatch(setMessagesAction(payload))
+        const messages = []
+        let lastDay = new Date(0)
+
+        for (let message of payload) {
+            const date = new Date(+message.timestamp)
+            let today = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+
+            if (today > lastDay) {
+                lastDay = today
+
+                let day = "0" + today.getDate();
+                let month = "0" + (today.getMonth() + 1);
+                let year = today.getFullYear();
+
+                const dateStr = `${day.substr(-2)}.${month.substr(-2)}.${year}`;
+
+                messages.unshift({
+                    type: 'time',
+                    time: dateStr
+                })
+            }
+
+            let hours = date.getHours();
+            let minutes = "0" + date.getMinutes();
+
+            let formattedTime = hours + ":" + minutes.substr(-2);
+
+            message.formattedTime = formattedTime
+            messages.unshift(message)
+        }
+        dispatch(setMessagesAction(messages))
     }
 }
 

@@ -39,10 +39,14 @@ const Chat = ({ user }) => {
             <div ref={bottomDiv} />
             {messages
               .filter(
-                (msg) => msg.to === friend.userid || msg.from === friend.userid
+                (msg) => msg.to === friend.userid || msg.from === friend.userid || msg.type === 'time'
               )
               .map((message, idx) => (
-                <OneMessage friend={friend} message={message} idx={idx} />
+                <OneMessage
+                  friend={friend}
+                  message={message}
+                  key={`msg:${friend.userid}.${idx}`}
+                />
               ))}
           </VStack>
         ))}
