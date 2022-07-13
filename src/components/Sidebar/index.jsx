@@ -41,7 +41,7 @@ const Sidebar = () => {
   };
 
   return (
-    <VStack py="1rem">
+    <VStack py="0.5rem">
       <ProfileTopPreview />
       <SearchInput setSuccess={setSuccess} setErrorMsg={setErrorMsg} />
       <StatusMsg success={success} errorMsg={errorMsg} />

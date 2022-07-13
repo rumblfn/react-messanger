@@ -1,4 +1,14 @@
-import { TabPanel, TabPanels, VStack } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Divider,
+  Heading,
+  HStack,
+  TabPanel,
+  TabPanels,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useActions";
@@ -23,9 +33,9 @@ const Chat = ({ user }) => {
 
   useEffect(() => {
     if (!chat?.firstLoading) {
-      socket.emit("chatMessages", userid)
+      socket.emit("chatMessages", userid);
     }
-  }, [userid])
+  }, [userid]);
 
   useEffect(() => {
     readMessages(userid);
@@ -34,6 +44,28 @@ const Chat = ({ user }) => {
 
   return friendList.length > 0 ? (
     <VStack pt="0" h="100%" justify="end">
+      {user && (
+        <VStack w="100%" p="0.5rem 1rem 0">
+          <HStack alignItems="center" w="100%">
+            <Avatar
+              size="xs"
+              name={user?.username || ""}
+              // src="https://bit.ly/dan-abramov"
+            />
+            <Heading fontSize="md" wordBreak="break-all">
+              {user?.username || ""}
+            </Heading>
+          </HStack>
+          {user.connected ? (
+            <Text fontSize="xs" pl="0.15rem" color="green.500" w="100%">Online</Text>
+          ) : (
+            <Text fontSize="xs" color="gray.500" w="100%">
+              last seen {user.lastActiveDay} at {user.formattedTime}
+            </Text>
+          )}
+        </VStack>
+      )}
+      <Divider p={0} />
       <TabPanels h="100%" overflowY="scroll">
         {friendList.map((friend) => (
           <VStack
@@ -43,13 +75,15 @@ const Chat = ({ user }) => {
             w="100%"
           >
             <div ref={bottomDiv} />
-            {chat && chat.messages && chat.messages.map((message, idx) => (
-              <OneMessage
-                friend={friend}
-                message={message}
-                key={`msg:${friend.userid}.${idx}`}
-              />
-            ))}
+            {chat &&
+              chat.messages &&
+              chat.messages.map((message, idx) => (
+                <OneMessage
+                  friend={friend}
+                  message={message}
+                  key={`msg:${friend.userid}.${idx}`}
+                />
+              ))}
           </VStack>
         ))}
       </TabPanels>

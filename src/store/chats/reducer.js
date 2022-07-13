@@ -70,9 +70,25 @@ export const chatsReducer = (state = initialState, action) => {
             const friendList = JSON.parse(JSON.stringify(state.friendList)).map((friend) => {
                 if (friend.username === action.payload.username) {
                     friend.connected = action.payload.status;
-                }
+
+                    if (!action.payload.status) {
+                        const date = new Date()
+
+                        let day = "0" + date.getDate();
+                        let month = "0" + (date.getMonth() + 1);
+                        let year = date.getFullYear();
+
+                        const dateStr = `${day.substr(-2)}.${month.substr(-2)}.${year}`;
+
+                        let hours = date.getHours();
+                        let minutes = "0" + date.getMinutes();
+                        let formattedTime = hours + ":" + minutes.substr(-2);
+
+                        friend.formattedTime = formattedTime
+                        friend.lastActiveDay = dateStr
+                    }
                 return friend;
-              });
+            }})
             return {
                 ...state,
                 friendList
