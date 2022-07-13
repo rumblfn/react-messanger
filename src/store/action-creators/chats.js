@@ -31,7 +31,7 @@ export const setMessages = (payload) => {
         const messages = []
         let lastDay = new Date(0)
 
-        for (let message of payload) {
+        for (let message of payload.messages) {
             const date = new Date(+message.timestamp)
             let today = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
@@ -58,13 +58,24 @@ export const setMessages = (payload) => {
             message.formattedTime = formattedTime
             messages.unshift(message)
         }
-        dispatch(setMessagesAction(messages))
+        dispatch(setMessagesAction({messages, userid: payload.userid}))
     }
 }
 
 export const addMessage = (payload) => {
     return async (dispatch) => {
-        dispatch(addMessageAction(payload))
+        const message = payload.message
+
+        const date = new Date(+message.timestamp)
+
+        let hours = date.getHours();
+        let minutes = "0" + date.getMinutes();
+
+        let formattedTime = hours + ":" + minutes.substr(-2);
+
+        message.formattedTime = formattedTime
+
+        dispatch(addMessageAction({message, userid: payload.userid}))
     }
 }
 

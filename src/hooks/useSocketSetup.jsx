@@ -52,17 +52,17 @@ const useSocketSetup = (playMessageSound) => {
       }
     });
 
-    socket.on("messages", (messages) => {
-      setMessages(messages);
-    });
-
     socket.on("dm", (message, id) => {
       if (lastMessageId !== id) {
         lastMessageId = id;
         playMessageSound.play();
-        addMessage(message);
+        addMessage({message, userid: message.from});
       }
     });
+
+    socket.on("chatMessages", (userid, messages) => {
+      setMessages({userid, messages})
+    })
 
     socket.on("connected", (status, username) => {
       changeFriendStatus({ status, username });
@@ -76,7 +76,7 @@ const useSocketSetup = (playMessageSound) => {
       socket.off("connect_error");
       socket.off("connected");
       socket.off("friends");
-      socket.off("messages");
+      socket.off("chatMessages");
       socket.off("dm");
       socket.off("add_chat");
       socket.off("remove_confirmation");

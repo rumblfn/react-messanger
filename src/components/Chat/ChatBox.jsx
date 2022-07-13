@@ -12,7 +12,7 @@ const ChatBox = ({user}) => {
     <Formik
       initialValues={{ message: "" }}
       validationSchema={Yup.object({
-        message: Yup.string().min(1).max(255),
+        message: Yup.string().min(1),
       })}
       onSubmit={(values, actions) => {
         const message = {
@@ -25,7 +25,7 @@ const ChatBox = ({user}) => {
         }
 
         socket.emit("dm", message, nanoid(8))
-        addMessage(message)
+        addMessage({message, userid: message.to})
 
         actions.resetForm();
       }}

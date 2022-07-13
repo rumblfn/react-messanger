@@ -13,7 +13,7 @@ const Chat = ({ user }) => {
 
   const { readMessages } = useActions();
   const friendList = useSelector(getFriendList);
-  const messages = useSelector(getMessages);
+  const chat = useSelector(getMessages)[userid];
 
   const bottomDiv = useRef(null);
 
@@ -22,9 +22,15 @@ const Chat = ({ user }) => {
   });
 
   useEffect(() => {
+    if (!chat?.firstLoading) {
+      socket.emit("chatMessages", userid)
+    }
+  }, [userid])
+
+  useEffect(() => {
     readMessages(userid);
     socket.emit("readMessages", userid);
-  }, [messages, userid, readMessages]);
+  }, [chat?.messages, userid, readMessages]);
 
   return friendList.length > 0 ? (
     <VStack pt="0" h="100%" justify="end">
@@ -37,17 +43,13 @@ const Chat = ({ user }) => {
             w="100%"
           >
             <div ref={bottomDiv} />
-            {messages
-              .filter(
-                (msg) => msg.to === friend.userid || msg.from === friend.userid || msg.type === 'time'
-              )
-              .map((message, idx) => (
-                <OneMessage
-                  friend={friend}
-                  message={message}
-                  key={`msg:${friend.userid}.${idx}`}
-                />
-              ))}
+            {chat && chat.messages && chat.messages.map((message, idx) => (
+              <OneMessage
+                friend={friend}
+                message={message}
+                key={`msg:${friend.userid}.${idx}`}
+              />
+            ))}
           </VStack>
         ))}
       </TabPanels>

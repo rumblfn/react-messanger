@@ -1,6 +1,7 @@
 .message-time {
     position: absolute;
     opacity: 0;
+    font-size: 18px;
     transition: opacity 0.22s;
 }
 

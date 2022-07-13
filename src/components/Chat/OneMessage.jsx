@@ -20,9 +20,9 @@ export const OneMessage = ({ message, friend }) => {
 
   return (
     <Text
-        className={styles.message}
+      className={styles.message}
       pos="relative"
-      maxW="60%"
+      maxW="70%"
       m={
         message.to === friend.userid
           ? "1rem 0 0 auto !important"
@@ -38,8 +38,9 @@ export const OneMessage = ({ message, friend }) => {
       <span
         className={styles["message-time"]}
         style={{
-          left: message.to === friend.userid ? "-70px" : "",
-          right: message.to === friend.userid ? "" : "-70px",
+          left: message.to === friend.userid ? "-60px" : "",
+          right: message.to === friend.userid ? "" : "-60px",
+          top: -2
         }}
       >
         {message.formattedTime}

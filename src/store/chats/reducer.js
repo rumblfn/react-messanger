@@ -2,7 +2,7 @@ import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR
 
 const initialState = {
     friendList: [],
-    messages: [],
+    messages: {},
     friendIndex: -1,
     confirmations: [],
     unreadMessages: {}
@@ -28,15 +28,27 @@ export const chatsReducer = (state = initialState, action) => {
         case SET_MESSAGES:
             return {
                 ...state,
-                messages: action.payload
+                messages: {
+                    ...state.messages,
+                    [action.payload.userid]: {
+                        firstLoading: true,
+                        messages: action.payload.messages
+                    }
+                }
             }
         case ADD_MESSAGE:
             return {
                 ...state,
-                messages: [action.payload, ...state.messages],
+                messages: {
+                    ...state.messages,
+                    [action.payload.userid]: {
+                        firstLoading: state.messages[action.payload.userid]?.firstLoading || false,
+                        messages: [action.payload.message, ...(state.messages[action.payload.userid]?.messages || [])]
+                    }
+                },
                 unreadMessages: {
                     ...state.unreadMessages,
-                    [action.payload.from]: (state.unreadMessages[action.payload.from] || 0) + 1
+                    [action.payload.message.from]: (state.unreadMessages[action.payload.message.from] || 0) + 1
                 }
             }
         case SET_UNREAD_MESSAGES:
