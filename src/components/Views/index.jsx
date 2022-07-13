@@ -7,11 +7,12 @@ import SignUp from "../../routes/Auth/SignUp";
 import Dashboard from "../../routes/Dashboard";
 import Home from "../../routes/Home";
 import { AccountContext } from "../AccountContext";
+import { LoadingPage } from "./LoadingPage";
 
 export const Views = () => {
   const { user } = useContext(AccountContext);
   return user.loggedIn === null ? (
-    <Text>Loading...</Text>
+    <LoadingPage />
   ) : (
     <Routes>
       <Route path="/" element={<Login />} />

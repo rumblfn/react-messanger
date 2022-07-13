@@ -1,17 +1,19 @@
-import { TabPanel, TabPanels, Text, VStack } from "@chakra-ui/react";
+import { TabPanel, TabPanels, VStack } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
 import { getFriendList, getMessages } from "../../store/chats/selectors";
 import ChatBox from "./ChatBox";
+import { EmptyChat } from "./EmptyChat";
+import { OneMessage } from "./OneMessage";
 
 const Chat = ({ user }) => {
-  const userid = user?.userid
+  const userid = user?.userid;
 
-  const {readMessages} = useActions()
-  const friendList = useSelector(getFriendList)
-  const messages = useSelector(getMessages)
+  const { readMessages } = useActions();
+  const friendList = useSelector(getFriendList);
+  const messages = useSelector(getMessages);
 
   const bottomDiv = useRef(null);
 
@@ -20,10 +22,9 @@ const Chat = ({ user }) => {
   });
 
   useEffect(() => {
-    readMessages(userid)
-    console.log(userid)
-    socket.emit('readMessages', userid)
-  }, [messages, userid, readMessages])
+    readMessages(userid);
+    socket.emit("readMessages", userid);
+  }, [messages, userid, readMessages]);
 
   return friendList.length > 0 ? (
     <VStack pt="0" h="100%" justify="end">
@@ -41,22 +42,7 @@ const Chat = ({ user }) => {
                 (msg) => msg.to === friend.userid || msg.from === friend.userid
               )
               .map((message, idx) => (
-                <Text
-                  maxW="60%"
-                  m={
-                    message.to === friend.userid
-                      ? "1rem 0 0 auto !important"
-                      : "1rem auto 0 0 !important"
-                  }
-                  fontSize="lg"
-                  key={`msg:${friend.userid}.${idx}`}
-                  bg={message.to === friend.userid ? "blue.100" : "gray.100"}
-                  color="gray.900"
-                  borderRadius="10px"
-                  p="0.5rem 1rem"
-                >
-                  {message.content}
-                </Text>
+                <OneMessage friend={friend} message={message} idx={idx} />
               ))}
           </VStack>
         ))}
@@ -64,19 +50,7 @@ const Chat = ({ user }) => {
       {user?.userid && <ChatBox user={user} />}
     </VStack>
   ) : (
-    <VStack
-      justify="center"
-      pt="5rem"
-      w="100%"
-      textAlign="center"
-      fontSize="lg"
-    >
-      <TabPanels>
-        <TabPanel>
-          <Text>Add friend to start chatting</Text>
-        </TabPanel>
-      </TabPanels>
-    </VStack>
+    <EmptyChat />
   );
 };
 
