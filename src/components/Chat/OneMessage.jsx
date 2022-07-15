@@ -1,19 +1,24 @@
-import { Text } from "@chakra-ui/react";
+import { Text, useColorMode } from "@chakra-ui/react";
+import { useTimeToDay } from "../../hooks/useTimeToDay";
 import styles from "./style.module.css";
 
 export const OneMessage = ({ message, friend }) => {
+  const { colorMode } = useColorMode()
+  const formattedDate = useTimeToDay(message.time)
+
   if (message.type === "time") {
+
     return (
       <Text
         m={2}
         fontSize="xs"
-        bg="gray.50"
+        bg="blue.50"
         color="gray.900"
         borderRadius="10px"
-        p={1}
+        p="0.25rem 0.5rem"
         textAlign="center"
       >
-        {message.time || '00.00.1970'}
+        {formattedDate}
       </Text>
     );
   }
@@ -38,6 +43,7 @@ export const OneMessage = ({ message, friend }) => {
       <span
         className={styles["message-time"]}
         style={{
+          color: colorMode === 'light' ? 'gray.700' : 'white',
           left: message.to === friend.userid ? "-60px" : "",
           right: message.to === friend.userid ? "" : "-60px",
           top: -2

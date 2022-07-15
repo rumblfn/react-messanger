@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
 // import storage from "redux-persist/lib/storage";
 import { chatsReducer } from "./chats";
+import { dashboardReducer } from "./dashboard";
 
 // const persistConfig = {
 //   key: "root",
@@ -10,7 +11,8 @@ import { chatsReducer } from "./chats";
 // };
 
 const rootReducer = combineReducers({ 
-    chats: chatsReducer
+    chats: chatsReducer,
+    dashboard: dashboardReducer
 });
 // const persistedReducer = persistReducer(persistConfig, rootReducer);
 
