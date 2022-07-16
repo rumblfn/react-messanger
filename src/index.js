@@ -6,6 +6,8 @@ import App from './App';
 import theme from './theme'
 import store from './store';
 import { Provider } from 'react-redux';
+import UserContext from './components/AccountContext';
+import VoiceChannelContext from "./VoiceContext";
 // import { persistStore } from 'redux-persist';
 // import { PersistGate } from 'redux-persist/integration/react';
 
@@ -19,7 +21,11 @@ root.render(
         <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
         <Provider store={store}>
           {/* <PersistGate persistor={persistor}> */}
-            <App />
+            <UserContext>
+              <VoiceChannelContext>
+                <App />
+              </VoiceChannelContext>
+            </UserContext>
           {/* </PersistGate> */}
         </Provider>
       </ChakraProvider>

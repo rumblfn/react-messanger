@@ -8,12 +8,13 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { useTimeToDay } from "../../hooks/useTimeToDay";
+import { VoiceContext } from "../../VoiceContext";
 
 export const UserDescTop = ({ user }) => {
   const formattedDate = useTimeToDay(user.lastActiveDay);
-  const navigate = useNavigate()
+  const {calUser} = useContext(VoiceContext)
 
   return (
     <HStack w="100%" p="0.5rem 1rem 0">
@@ -39,7 +40,7 @@ export const UserDescTop = ({ user }) => {
         )}
       </VStack>
       <Box>
-        {<Button onClick={() => navigate('voice')}>
+        {<Button onClick={() => calUser(user)}>
             <PhoneIcon fontSize="md" />
         </Button>}
       </Box>
