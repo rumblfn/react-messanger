@@ -87,8 +87,9 @@ export const chatsReducer = (state = initialState, action) => {
                         friend.formattedTime = formattedTime
                         friend.lastActiveDay = dateStr
                     }
+                }
                 return friend;
-            }})
+            })
             return {
                 ...state,
                 friendList

@@ -30,13 +30,13 @@ export const FriendList = () => {
     >
       <VStack as={TabList} w="100%" p="0.5rem">
         {friendList.map((friend) => (
-          <HStack w="100%" key={friend.username}>
-            <Tab w="100%" bg={friend.connected ? "green.100" : ""}>
+          <HStack w="100%" key={friend?.username}>
+            <Tab w="100%" bg={friend?.connected ? "green.100" : ""}>
               <Text align="start" w="100%">
-                {friend.username}
+                {friend?.username}
               </Text>
               <Spacer />
-              <Text>{unreadMessages[friend.userid]}</Text>
+              <Text>{unreadMessages[friend?.userid]}</Text>
             </Tab>
           </HStack>
         ))}

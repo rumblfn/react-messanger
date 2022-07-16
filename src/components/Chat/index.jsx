@@ -1,12 +1,7 @@
 import {
-  Avatar,
-  Box,
   Divider,
-  Heading,
-  HStack,
   TabPanel,
   TabPanels,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
@@ -52,7 +47,7 @@ const Chat = ({ user }) => {
           <VStack
             flexDirection="column-reverse"
             as={TabPanel}
-            key={`chat:${friend.userid}`}
+            key={`chat:${friend?.userid}`}
             w="100%"
           >
             <div ref={bottomDiv} />

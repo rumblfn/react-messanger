@@ -1,4 +1,3 @@
-import { Text } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoutes from "../../hocs/PrivateRoutes";
@@ -18,7 +17,7 @@ export const Views = () => {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<SignUp />} />
       <Route element={<PrivateRoutes />}>
-        <Route path="/home" element={<Home />} />
+        <Route path="/home/*" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>
       <Route path="*" element={<Login />} />

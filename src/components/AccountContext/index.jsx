@@ -28,7 +28,6 @@ const UserContext = ({children}) => {
                 setUser({loggedIn: false})
                 return
             } else {
-                console.log(data)
                 setUser({ ...data })
                 navigate("/home")
             }
