@@ -11,6 +11,7 @@ const VoiceChannelContext = ({ children }) => {
   const [awaitingAnswer, setAwaitingAnswer] = useState(false);
   const [user, setUser] = useState(null);
   const [roomId, setRoomId] = useState(null)
+  const [userPeer, setUserPeer] = useState(null)
   const navigate = useNavigate()
 
   const calUser = (user) => {
@@ -35,6 +36,9 @@ const VoiceChannelContext = ({ children }) => {
 
   const acceptCalling = () => {
     navigate(`room/${roomId}`)
+    setTryingToCall(false);
+    setAwaitingAnswer(false);
+    socket.emit('call accepted', user.userid)
   };
 
   useEffect(() => {
@@ -44,6 +48,10 @@ const VoiceChannelContext = ({ children }) => {
       setUser(user);
     });
 
+    socket.on('user peer id', data => {
+      setUserPeer(data)
+    })
+
     socket.on("cancelUserCall", (user) => {
       setAwaitingAnswer(false);
     });
@@ -51,6 +59,11 @@ const VoiceChannelContext = ({ children }) => {
     socket.on("cancelAwaitingCall", (user) => {
       setTryingToCall(false);
     });
+
+    socket.on('call accepted', () => {
+        setTryingToCall(false);
+        setAwaitingAnswer(false);
+    })
   }, []);
 
   return (
@@ -62,6 +75,7 @@ const VoiceChannelContext = ({ children }) => {
         user,
         cancelCalling,
         acceptCalling,
+        userPeer
       }}
     >
       {children}

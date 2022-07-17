@@ -42,7 +42,6 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    console.log(dashboardInformation);
   }, []);
 
   return (

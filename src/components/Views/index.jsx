@@ -20,7 +20,7 @@ export const Views = () => {
       <Route element={<PrivateRoutes />}>
         <Route path="/home/*" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/room/:roomID" component={<Room/>} />
+        <Route path="/room/:roomID" element={<Room/>} />
       </Route>
       <Route path="*" element={<Login />} />
     </Routes>

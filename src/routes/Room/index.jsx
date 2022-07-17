@@ -1,124 +1,97 @@
-import React, { useEffect, useRef, useState } from "react";
-import io from "socket.io-client";
-import Peer from "simple-peer";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ProfileTopPreview } from "../../components/Sidebar/profileTopPreview";
+import { Box, Button, Container, HStack, Text, VStack } from "@chakra-ui/react";
+import { useEffect } from "react";
+import Peer from "peerjs";
+import socket from "../../socket";
+import { useContext } from "react";
+import { VoiceContext } from "../../VoiceContext";
+import { useRef } from "react";
 
-const Container = styled.div`
-    padding: 20px;
-    display: flex;
-    height: 100vh;
-    width: 90%;
-    margin: auto;
-    flex-wrap: wrap;
-`;
+const Room = () => {
+  const navigate = useNavigate();
+  const { roomID } = useParams();
+  const { userPeer: userPeerId } = useContext(VoiceContext);
 
-const StyledVideo = styled.video`
-    height: 40%;
-    width: 50%;
-`;
+  let peerRef = useRef();
+  const connRef = useRef();
 
-const Video = (props) => {
-    const ref = useRef();
+  const myVideo = useRef();
+  const userVideo = useRef();
 
-    useEffect(() => {
-        props.peer.on("stream", stream => {
-            ref.current.srcObject = stream;
-        })
-    }, []);
+  const [stream, setStream] = useState();
 
-    return (
-        <StyledVideo playsInline autoPlay ref={ref} />
-    );
-}
+  const [callEnded, setCallEnded] = useState(false);
 
+  useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true, audio: true })
+      .then((stream) => {
+        setStream(stream);
+        try {
+          myVideo.current.srcObject = stream;
+        } catch {}
+      });
 
-const videoConstraints = {
-    height: window.innerHeight / 2,
-    width: window.innerWidth / 2
-};
+    peerRef.current = new Peer();
 
-const Room = (props) => {
-    const [peers, setPeers] = useState([]);
-    const socketRef = useRef();
-    const userVideo = useRef();
-    const peersRef = useRef([]);
-    const roomID = props.match.params.roomID;
+    peerRef.current.on("open", (id) => {
+      socket.emit("send peer id", { roomID, id });
+    });
 
-    useEffect(() => {
-        socketRef.current = io.connect("/");
-        navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true }).then(stream => {
-            userVideo.current.srcObject = stream;
-            socketRef.current.emit("join room", roomID);
-            socketRef.current.on("all users", users => {
-                const peers = [];
-                users.forEach(userID => {
-                    const peer = createPeer(userID, socketRef.current.id, stream);
-                    peersRef.current.push({
-                        peerID: userID,
-                        peer,
-                    })
-                    peers.push(peer);
-                })
-                setPeers(peers);
-            })
+    peerRef.current.on("call", (call) => {
+      call.answer(stream);
+    });
+  }, []);
 
-            socketRef.current.on("user joined", payload => {
-                const peer = addPeer(payload.signal, payload.callerID, stream);
-                peersRef.current.push({
-                    peerID: payload.callerID,
-                    peer,
-                })
+  useEffect(() => {
+    if (peerRef.current && userPeerId && stream) {
+      connRef.current = peerRef.current.connect(userPeerId);
+      var call = peerRef.current.call(userPeerId, stream);
 
-                setPeers(users => [...users, peer]);
-            });
-
-            socketRef.current.on("receiving returned signal", payload => {
-                const item = peersRef.current.find(p => p.peerID === payload.id);
-                item.peer.signal(payload.signal);
-            });
-        })
-    }, []);
-
-    function createPeer(userToSignal, callerID, stream) {
-        const peer = new Peer({
-            initiator: true,
-            trickle: false,
-            stream,
-        });
-
-        peer.on("signal", signal => {
-            socketRef.current.emit("sending signal", { userToSignal, callerID, signal })
-        })
-
-        return peer;
+      call.on("stream", (stream) => {
+        userVideo.current.srcObject = stream;
+      });
     }
+  }, [userPeerId, stream]);
 
-    function addPeer(incomingSignal, callerID, stream) {
-        const peer = new Peer({
-            initiator: false,
-            trickle: false,
-            stream,
-        })
-
-        peer.on("signal", signal => {
-            socketRef.current.emit("returning signal", { signal, callerID })
-        })
-
-        peer.signal(incomingSignal);
-
-        return peer;
-    }
-
-    return (
-        <Container>
-            <StyledVideo muted ref={userVideo} autoPlay playsInline />
-            {peers.map((peer, index) => {
-                return (
-                    <Video key={index} peer={peer} />
-                );
-            })}
-        </Container>
-    );
+  return (
+    <Container>
+      <VStack pt={1}>
+        <HStack w="100%">
+          <ProfileTopPreview />
+          <Button
+            onClick={() => {
+              navigate("/home");
+            }}
+          >
+            <Text>Home</Text>
+          </Button>
+        </HStack>
+        <Box>
+          {stream && (
+            <video
+              playsInline
+              muted
+              ref={myVideo}
+              autoPlay
+              style={{ width: 300, height: 200 }}
+            />
+          )}
+          {!callEnded && (
+            <video
+              muted
+              playsInline
+              ref={userVideo}
+              autoPlay
+              style={{ width: 300, height: 200 }}
+            />
+          )}
+        </Box>
+      </VStack>
+    </Container>
+  );
 };
 
 export default Room;
