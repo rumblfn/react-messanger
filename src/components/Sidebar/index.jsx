@@ -1,8 +1,6 @@
-import {
-  useDisclosure,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, useDisclosure, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
 import { Confirmations } from "./confirmations";
@@ -13,6 +11,7 @@ import { SearchInput } from "./searchInput";
 import { StatusMsg } from "./StatusField";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const { removeConfirmationAfterDecline } = useActions();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,6 +41,11 @@ const Sidebar = () => {
 
   return (
     <VStack py="0.5rem">
+      <Box w="100%" pl={2} pr={2}>
+        <Button bg="blue.100" onClick={() => navigate("/live")} w="100%">
+          Go to Live
+        </Button>
+      </Box>
       <ProfileTopPreview />
       <SearchInput setSuccess={setSuccess} setErrorMsg={setErrorMsg} />
       <StatusMsg success={success} errorMsg={errorMsg} />

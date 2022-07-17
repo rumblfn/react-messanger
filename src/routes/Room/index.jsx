@@ -1,96 +1,204 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { ProfileTopPreview } from "../../components/Sidebar/profileTopPreview";
-import { Box, Button, Container, HStack, Text, VStack } from "@chakra-ui/react";
+import { CopyIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  Container,
+  HStack,
+  Input,
+  Spacer,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
-import Peer from "peerjs";
-import socket from "../../socket";
 import { useContext } from "react";
-import { VoiceContext } from "../../VoiceContext";
 import { useRef } from "react";
+import { useState } from "react";
+import SimplePeer from "simple-peer";
+import { AccountContext } from "../../components/AccountContext";
+import BottomBar from "../../components/Chat/BottomBar";
+import { ProfileTopPreview } from "../../components/Sidebar/profileTopPreview";
+import socket from "../../socket";
 
 const Room = () => {
-  const navigate = useNavigate();
-  const { roomID } = useParams();
-  const { userPeer: userPeerId } = useContext(VoiceContext);
-
-  let peerRef = useRef();
-  const connRef = useRef();
+  const [me, setMe] = useState("");
+  const [stream, setStream] = useState();
+  const [receivingCall, setReceivingCall] = useState(false);
+  const [caller, setCaller] = useState("");
+  const [callerSignal, setCallerSignal] = useState();
+  const [callAccepted, setCallAccepted] = useState(false);
+  const [idToCall, setIdToCall] = useState("");
+  const [callEnded, setCallEnded] = useState(false);
+  const { user } = useContext(AccountContext);
+  const selfUsername = user.username;
+  const [name, setName] = useState("");
 
   const myVideo = useRef();
   const userVideo = useRef();
-
-  const [stream, setStream] = useState();
-
-  const [callEnded, setCallEnded] = useState(false);
+  const connectionRef = useRef();
 
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         setStream(stream);
-        try {
-          myVideo.current.srcObject = stream;
-        } catch {}
+        myVideo.current.srcObject = stream;
       });
 
-    peerRef.current = new Peer();
+    socket.emit("me");
 
-    peerRef.current.on("open", (id) => {
-      socket.emit("send peer id", { roomID, id });
+    socket.on("me", (id) => {
+      setMe(id);
     });
 
-    peerRef.current.on("call", (call) => {
-      call.answer(stream);
+    socket.on("callUser", (data) => {
+      setReceivingCall(true);
+      setCaller(data.from);
+      setName(data.name);
+      setCallerSignal(data.signal);
     });
   }, []);
 
-  useEffect(() => {
-    if (peerRef.current && userPeerId && stream) {
-      connRef.current = peerRef.current.connect(userPeerId);
-      var call = peerRef.current.call(userPeerId, stream);
+  const callUser = (id) => {
+    const peer = new SimplePeer({
+      initiator: true,
+      trickle: false,
+      stream: stream,
+    });
 
-      call.on("stream", (stream) => {
-        userVideo.current.srcObject = stream;
+    peer.on("signal", (data) => {
+      socket.emit("callUser", {
+        userToCall: id,
+        signalData: data,
+        from: me,
+        name: selfUsername,
       });
-    }
-  }, [userPeerId, stream]);
+    });
+
+    peer.on("stream", (stream) => {
+      userVideo.current.srcObject = stream;
+    });
+
+    socket.on("callAccepted", (signal) => {
+      setCallAccepted(true);
+      peer.signal(signal);
+    });
+
+    connectionRef.current = peer;
+  };
+
+  const answerCall = () => {
+    setCallAccepted(true);
+    const peer = new SimplePeer({
+      initiator: false,
+      trickle: false,
+      stream: stream,
+    });
+
+    peer.on("signal", (data) => {
+      socket.emit("answerCall", {
+        signal: data,
+        to: caller,
+      });
+    });
+
+    peer.on("stream", (stream) => {
+      userVideo.current.srcObject = stream;
+    });
+
+    peer.signal(callerSignal);
+    connectionRef.current = peer;
+  };
+
+  const leaveCall = () => {
+    setCallEnded(true);
+    connectionRef.current.destroy();
+  };
 
   return (
-    <Container>
-      <VStack pt={1}>
-        <HStack w="100%">
-          <ProfileTopPreview />
-          <Button
-            onClick={() => {
-              navigate("/home");
-            }}
-          >
-            <Text>Home</Text>
-          </Button>
-        </HStack>
-        <Box>
+    <VStack py="0.5rem" w="100%" maxW="1440px" m="auto" h="100vh">
+      <ProfileTopPreview />
+      <VStack w="100%" h="100%" pl={2} pr={2}>
+        <HStack w="100%" mt={4}>
+          <Spacer />
           {stream && (
-            <video
-              playsInline
-              muted
-              ref={myVideo}
-              autoPlay
-              style={{ width: 300, height: 200 }}
-            />
+            <div style={{ width: "50%", borderRadius: 8, overflow: "hidden" }}>
+              <video
+                playsInline
+                muted
+                ref={myVideo}
+                autoPlay
+                style={{ width: "100%" }}
+              />
+            </div>
           )}
-          {!callEnded && (
-            <video
-              muted
-              playsInline
-              ref={userVideo}
-              autoPlay
-              style={{ width: 300, height: 200 }}
-            />
+          {callAccepted && !callEnded && (
+            <div style={{ width: "50%", borderRadius: 8, overflow: "hidden" }}>
+              <video
+                muted
+                playsInline
+                ref={userVideo}
+                autoPlay
+                style={{ width: "100%" }}
+              />
+            </div>
           )}
-        </Box>
+          <Spacer />
+        </HStack>
+        <BottomBar/>
+        <Spacer />
+        <Container>
+          <HStack mt={10} mb={1}>
+            <Text
+              w="100%"
+              bg="gray.100"
+              p="0.5rem 1rem"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                borderRadius: 12,
+              }}
+            >
+              <span>
+                Your ID: <b>{me}</b>
+              </span>
+            </Text>
+            <Button onClick={() => navigator.clipboard.writeText(me)} bg="green.300" p={0}>
+              <CopyIcon />
+            </Button>
+          </HStack>
+        </Container>
+        <Container>
+          <HStack mb={2}>
+            <Input
+              placeholder="paste yout friend id here"
+              onChange={(e) => setIdToCall(e.target.value)}
+              value={idToCall}
+            />
+            {callAccepted && !callEnded ? (
+              <Button bg="red.300" onClick={leaveCall}>
+                End Call
+              </Button>
+            ) : (
+              <Button bg="green.200" onClick={() => callUser(idToCall)}>
+                Call User
+              </Button>
+            )}
+            {idToCall}
+          </HStack>
+        </Container>
+        <Container>
+          {receivingCall && !callAccepted && (
+            <HStack>
+              <Text>
+                <b>{name}</b> is calling ...{" "}
+              </Text>
+              <Spacer />
+              <Button bg="purple.300" p="0.25rem 0.65rem" onClick={answerCall}>Answer</Button>
+            </HStack>
+          )}
+        </Container>
       </VStack>
-    </Container>
+    </VStack>
   );
 };
 

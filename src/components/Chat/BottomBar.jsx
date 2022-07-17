@@ -4,52 +4,41 @@ import {
   faMicrophone,
   faMicrophoneSlash,
   faPhoneSlash,
-  faTurnDown,
   faVideo,
   faVideoSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-const BottomBar = ({
-  goToBack,
-  toggleCameraAudio,
-  userVideoAudio,
-  clickScreenSharing,
-  screenShare,
-}) => {
+const BottomBar = () => {
   return (
-    <HStack>
+    <HStack pt={2}>
       <Button
         data-switch="video"
-        color={!userVideoAudio.video && "red.500"}
+        color={!true && "red.500"}
         p={0}
-        onClick={toggleCameraAudio}
       >
         <FontAwesomeIcon
           data-switch="video"
-          onClick={toggleCameraAudio}
-          icon={userVideoAudio.video ? faVideo : faVideoSlash}
+          icon={true ? faVideo : faVideoSlash}
         />
       </Button>
       <Button
         data-switch="audio"
-        color={!userVideoAudio.audio && "red.500"}
+        color={!true && "red.500"}
         p={0}
-        onClick={toggleCameraAudio}
       >
         <FontAwesomeIcon
-          icon={userVideoAudio.audio ? faMicrophone : faMicrophoneSlash}
+          icon={true ? faMicrophone : faMicrophoneSlash}
         />
       </Button>
       <Button
-        color={screenShare && "red.500"}
+        color={true && "red.500"}
         p={0}
-        onClick={clickScreenSharing}
       >
         <FontAwesomeIcon icon={faDesktop} />
       </Button>
-      <Button color="red.500" p={0} onClick={goToBack}>
+      <Button color="red.500" p={0}>
         <FontAwesomeIcon icon={faPhoneSlash} />
       </Button>
     </HStack>

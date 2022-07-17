@@ -8,13 +8,10 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useContext } from "react";
 import { useTimeToDay } from "../../hooks/useTimeToDay";
-import { VoiceContext } from "../../VoiceContext";
 
 export const UserDescTop = ({ user }) => {
   const formattedDate = useTimeToDay(user.lastActiveDay);
-  const {calUser} = useContext(VoiceContext)
 
   return (
     <HStack w="100%" p="0.5rem 1rem 0">
@@ -40,7 +37,7 @@ export const UserDescTop = ({ user }) => {
         )}
       </VStack>
       <Box>
-        {<Button onClick={() => calUser(user)}>
+        {<Button onClick={() => console.log(user)}>
             <PhoneIcon fontSize="md" />
         </Button>}
       </Box>
