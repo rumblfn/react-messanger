@@ -13,6 +13,7 @@ import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
 import { Confirmations } from "./confirmations";
 import { FriendList } from "./FriendList";
+import { JoinRoomField } from "./JoinRoomField";
 import { ConfirmationModal } from "./Modal";
 import { ProfileTopPreview } from "./profileTopPreview";
 import { SearchInput } from "./searchInput";
@@ -28,8 +29,6 @@ const Sidebar = () => {
 
   const [success, setSuccess] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-
-  const [roomName, setRoomName] = useState();
 
   const cleanMessages = () => {
     setSuccess("");
@@ -52,19 +51,7 @@ const Sidebar = () => {
   return (
     <VStack py="0.5rem">
       <ProfileTopPreview />
-      <Heading size="md" w="100%" pl={4}>
-        Enter room name
-      </Heading>
-      <HStack w="100%" pl={2} pr={2}>
-        <Input
-          placeholder="create or join room"
-          value={roomName}
-          onChange={(e) => setRoomName(e.target.value)}
-        />
-        <Button pl={6} pr={6} bg="blue.200" onClick={() => navigate("/live")}>
-          Join Room
-        </Button>
-      </HStack>
+      <JoinRoomField />
       <Box w="100%" pl={2} pr={2}>
         <Button bg="blue.100" onClick={() => navigate("/live")} w="100%">
           Go to Live

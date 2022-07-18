@@ -75,6 +75,7 @@ const LiveRoom = () => {
     });
 
     peer.on("stream", (stream) => {
+      console.log(stream)
       userVideo.current.srcObject = stream;
     });
 
