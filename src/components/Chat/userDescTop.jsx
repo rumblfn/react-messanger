@@ -36,11 +36,11 @@ export const UserDescTop = ({ user }) => {
           </Text>
         )}
       </VStack>
-      <Box>
+      {/* <Box>
         {<Button onClick={() => console.log(user)}>
             <PhoneIcon fontSize="md" />
         </Button>}
-      </Box>
+      </Box> */}
     </HStack>
   );
 };

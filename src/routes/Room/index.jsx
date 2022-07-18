@@ -19,7 +19,7 @@ import BottomBar from "../../components/Chat/BottomBar";
 import { ProfileTopPreview } from "../../components/Sidebar/profileTopPreview";
 import socket from "../../socket";
 
-const Room = () => {
+const LiveRoom = () => {
   const [me, setMe] = useState("");
   const [stream, setStream] = useState();
   const [receivingCall, setReceivingCall] = useState(false);
@@ -202,4 +202,4 @@ const Room = () => {
   );
 };
 
-export default Room;
+export default LiveRoom;

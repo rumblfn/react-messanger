@@ -1,4 +1,12 @@
-import { Box, Button, useDisclosure, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Input,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
@@ -21,6 +29,8 @@ const Sidebar = () => {
   const [success, setSuccess] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const [roomName, setRoomName] = useState();
+
   const cleanMessages = () => {
     setSuccess("");
     setErrorMsg("");
@@ -41,12 +51,25 @@ const Sidebar = () => {
 
   return (
     <VStack py="0.5rem">
+      <ProfileTopPreview />
+      <Heading size="md" w="100%" pl={4}>
+        Enter room name
+      </Heading>
+      <HStack w="100%" pl={2} pr={2}>
+        <Input
+          placeholder="create or join room"
+          value={roomName}
+          onChange={(e) => setRoomName(e.target.value)}
+        />
+        <Button pl={6} pr={6} bg="blue.200" onClick={() => navigate("/live")}>
+          Join Room
+        </Button>
+      </HStack>
       <Box w="100%" pl={2} pr={2}>
         <Button bg="blue.100" onClick={() => navigate("/live")} w="100%">
           Go to Live
         </Button>
       </Box>
-      <ProfileTopPreview />
       <SearchInput setSuccess={setSuccess} setErrorMsg={setErrorMsg} />
       <StatusMsg success={success} errorMsg={errorMsg} />
       <Confirmations
