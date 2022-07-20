@@ -50,6 +50,7 @@ const Chat = ({ user }) => {
             key={`chat:${friend?.userid}`}
             w="100%"
             h='100%'
+            overflowY="scroll"
           >
             <div ref={bottomDiv} />
             {chat &&
