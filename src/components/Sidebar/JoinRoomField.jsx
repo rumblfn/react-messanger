@@ -17,12 +17,12 @@ export const JoinRoomField = () => {
       setErr(true);
       setErrMsg('Enter Room Name');
     } else {
-      window.open(`${process.env.REACT_APP_VIDEO_HOST_URL}/${user.username}/${roomName}`, "_blank")
+      window.open(`${process.env.REACT_APP_VIDEO_HOST_URL}/${roomName}`, "_blank")
     }
   };
 
   return (
-    <VStack>
+    <VStack w="100%">
       <Heading size="md" w="100%" pl={4}>
         Enter room name
       </Heading>
