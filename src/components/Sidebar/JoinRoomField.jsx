@@ -1,37 +1,24 @@
 import { Button, Heading, HStack, Input, Text, VStack } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import socket from "../../socket";
+import { useContext } from "react";
+import { useRef } from "react";
+import { useState } from "react";
+import { AccountContext } from "../AccountContext";
 
 export const JoinRoomField = () => {
-  const navigate = useNavigate();
-  const [roomName, setRoomName] = useState('');
-  const [err, setErr] = useState();
-  const [errMsg, setErrMsg] = useState("");
-
-  useEffect(() => {
-    socket.on("FE-error-user-exist", ({ error, username, roomName }) => {
-      if (!error) {
-        navigate(`/room/${roomName}`);
-      } else {
-        setErr(error);
-        setErrMsg("User already connected");
-      }
-    });
-  }, [navigate]);
+  const roomRef = useRef();
+  const [err, setErr] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
+  const {user} = useContext(AccountContext)
 
   const clickJoin = () => {
-    if (roomName) {
-      socket.emit("BE-check-user", { roomId: roomName });
-    } else {
-      setErr(true);
-      setErrMsg("Enter Room Name");
-    }
-  };
+    const roomName = roomRef.current.value;
 
-  const clearErrors = () => {
-    setErr(false);
-    setErrMsg("");
+    if (!roomName) {
+      setErr(true);
+      setErrMsg('Enter Room Name');
+    } else {
+      window.open(`${process.env.REACT_APP_VIDEO_HOST_URL}/${user.username}/${roomName}`, "_blank")
+    }
   };
 
   return (
@@ -42,11 +29,7 @@ export const JoinRoomField = () => {
       <HStack w="100%" pl={2} pr={2}>
         <Input
           placeholder="create or join room"
-          value={roomName}
-          onChange={(e) => {
-            clearErrors();
-            setRoomName(e.target.value);
-          }}
+          ref={roomRef}
         />
         <Button pl={6} pr={6} bg="blue.200" onClick={clickJoin}>
           Join Room

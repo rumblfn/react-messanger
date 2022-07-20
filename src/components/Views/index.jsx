@@ -6,7 +6,6 @@ import SignUp from "../../routes/Auth/SignUp";
 import Dashboard from "../../routes/Dashboard";
 import Home from "../../routes/Home";
 import LiveRoom from "../../routes/Room";
-import { Room } from "../../routes/RoomFull";
 import { AccountContext } from "../AccountContext";
 import { LoadingPage } from "./LoadingPage";
 
@@ -22,7 +21,6 @@ export const Views = () => {
         <Route path="/home/*" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/live" element={<LiveRoom/>} />
-        <Route path="/room/:roomId" element={<Room/>} />
       </Route>
       <Route path="*" element={<Login />} />
     </Routes>
