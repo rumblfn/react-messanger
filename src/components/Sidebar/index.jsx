@@ -52,11 +52,6 @@ const Sidebar = () => {
     <VStack py="0.5rem" minW='325px'>
       <ProfileTopPreview />
       <JoinRoomField />
-      {/* <Box w="100%" pl={2} pr={2}>
-        <Button bg="blue.100" onClick={() => navigate("/live")} w="100%">
-          Go to Live
-        </Button>
-      </Box> */}
       <SearchInput setSuccess={setSuccess} setErrorMsg={setErrorMsg} />
       <StatusMsg success={success} errorMsg={errorMsg} />
       <Confirmations
