@@ -49,7 +49,7 @@ const Sidebar = () => {
   };
 
   return (
-    <VStack py="0.5rem">
+    <VStack py="0.5rem" minW='325px'>
       <ProfileTopPreview />
       <JoinRoomField />
       {/* <Box w="100%" pl={2} pr={2}>

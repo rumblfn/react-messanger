@@ -39,7 +39,7 @@ const Chat = ({ user }) => {
   }, [chat?.messages, userid, readMessages]);
 
   return friendList.length > 0 ? (
-    <VStack pt="0" h="100%" justify="end">
+    <VStack minW='325px' pt="0" h="100%" justify="end">
       {user && <TopUserInfo user={user} />}
       <Divider p={0} />
       <TabPanels h="100%" overflowY="scroll">
@@ -49,6 +49,7 @@ const Chat = ({ user }) => {
             as={TabPanel}
             key={`chat:${friend?.userid}`}
             w="100%"
+            h='100%'
           >
             <div ref={bottomDiv} />
             {chat &&

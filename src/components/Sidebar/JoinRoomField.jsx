@@ -31,7 +31,7 @@ export const JoinRoomField = () => {
           placeholder="create or join room"
           ref={roomRef}
         />
-        <Button pl={6} pr={6} bg="blue.200" onClick={clickJoin}>
+        <Button style={{overflow: 'hidden'}} pl={6} pr={6} bg="blue.200" onClick={clickJoin}>
           Join Room
         </Button>
       </HStack>
