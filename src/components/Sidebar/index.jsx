@@ -1,14 +1,8 @@
 import {
-  Box,
-  Button,
-  Heading,
-  HStack,
-  Input,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
 import { Confirmations } from "./confirmations";
@@ -20,7 +14,6 @@ import { SearchInput } from "./searchInput";
 import { StatusMsg } from "./StatusField";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
   const { removeConfirmationAfterDecline } = useActions();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
