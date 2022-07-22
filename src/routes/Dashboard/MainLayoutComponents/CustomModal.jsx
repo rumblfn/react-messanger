@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import * as Yup from "yup";
 import TextField from "../../Auth/TextField";
+import * as Yup from "yup";
 
 export const NewPasswordModal = ({ isOpen, onClose }) => {
   const [error, setError] = useState("");
@@ -37,7 +37,7 @@ export const NewPasswordModal = ({ isOpen, onClose }) => {
           onSubmit={(values, actions) => {
             const vals = { ...values };
             actions.resetForm();
-            setError('')
+            setError("");
 
             fetch(`${process.env.REACT_APP_HOST_URL}/auth/change-password`, {
               method: "POST",

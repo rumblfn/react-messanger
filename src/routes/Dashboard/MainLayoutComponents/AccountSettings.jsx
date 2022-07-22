@@ -6,16 +6,14 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { useContext } from "react";
 import { AccountContext } from "../../../components/AccountContext";
-import { NewPasswordModal } from "./Modal";
+import { NewPasswordModal } from "./CustomModal";
+import { Email } from "./Email";
 
 export const AccountSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user } = useContext(AccountContext);
-
-  const [email, setEmail] = useState('')
 
   return (
     <VStack alignItems="start">
@@ -24,10 +22,7 @@ export const AccountSettings = () => {
         <Heading size="md">Username</Heading>
         <Input value={user.username} disabled />
       </VStack>
-      <VStack w="100%" alignItems="start" p={2} pt={0}>
-        <Heading size="md">Email</Heading>
-        <Input onChange={e => setEmail(e.target.value)} placeholder="Email not connected" value={email} />
-      </VStack>
+      <Email currentEmail={user.email} />
       <HStack justifyContent="space-between" w="100%" p={2}>
         <Heading size="md">Password</Heading>
         <Button onClick={onOpen}>Change password</Button>
