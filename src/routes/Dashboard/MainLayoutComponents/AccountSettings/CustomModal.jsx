@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useState } from "react";
-import TextField from "../../Auth/TextField";
+import TextField from "../../../Auth/TextField";
 import * as Yup from "yup";
 
 export const NewPasswordModal = ({ isOpen, onClose }) => {

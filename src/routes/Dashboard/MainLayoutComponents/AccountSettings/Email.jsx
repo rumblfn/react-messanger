@@ -1,6 +1,5 @@
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Button,
   Heading,
   HStack,
@@ -11,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useState } from "react";
-import { AccountContext } from "../../../components/AccountContext";
+import { AccountContext } from "../../../../components/AccountContext";
 
 export const Email = ({ currentEmail }) => {
   const [emailErr, setEmailErr] = useState("");
@@ -138,7 +137,7 @@ export const Email = ({ currentEmail }) => {
       <HStack w="100%">
         <Input
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email not connected"
+          placeholder={currentEmail ? "Your email here.." : "Email not connected"}
           value={email}
         />
         <Button

@@ -7,7 +7,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useContext } from "react";
-import { AccountContext } from "../../../components/AccountContext";
+import { AccountContext } from "../../../../components/AccountContext";
 import { NewPasswordModal } from "./CustomModal";
 import { Email } from "./Email";
 
@@ -17,7 +17,9 @@ export const AccountSettings = () => {
 
   return (
     <VStack alignItems="start">
-      <Heading size="lg">My Account</Heading>
+      <Heading borderBottom="4px solid black" size="lg">
+        My Account
+      </Heading>
       <VStack w="100%" alignItems="start" p={2} pb={1}>
         <Heading size="md">Username</Heading>
         <Input value={user.username} disabled />

@@ -1,5 +1,7 @@
-import { Heading, TabPanel, TabPanels } from "@chakra-ui/react";
-import { AccountSettings } from "./MainLayoutComponents/AccountSettings";
+import { TabPanel, TabPanels } from "@chakra-ui/react";
+import { AccountSettings } from "./MainLayoutComponents/AccountSettings/AccountSettings";
+import { UserAccounts } from "./MainLayoutComponents/UserAccounts";
+import { UserProfile } from "./MainLayoutComponents/UserProfile";
 
 export const MainLayout = () => {
   return (
@@ -8,10 +10,10 @@ export const MainLayout = () => {
         <AccountSettings />
       </TabPanel>
       <TabPanel w="100%" h="100%">
-        <Heading size='lg'>User Profile</Heading>
+        <UserProfile />
       </TabPanel>
       <TabPanel w="100%" h="100%">
-        <Heading size='lg'>User Accounts</Heading>
+        <UserAccounts />
       </TabPanel>
     </TabPanels>
   );

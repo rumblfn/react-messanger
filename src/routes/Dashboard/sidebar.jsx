@@ -21,7 +21,7 @@ export const Sidebar = ({ index, setIndex }) => {
       </Tab>
       <Tab w="100%">
         <Text align="start" w="100%">
-          User Accounts
+          Your Accounts
         </Text>
         <Spacer />
         <FontAwesomeIcon icon={faUsers} />
