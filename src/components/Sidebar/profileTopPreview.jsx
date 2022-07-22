@@ -1,12 +1,19 @@
 import { SettingsIcon } from "@chakra-ui/icons";
-import { Avatar, Box, Button, Heading, Spacer } from "@chakra-ui/react";
+import { Avatar, Box, Button, Heading, Image, Spacer } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AccountContext } from "../AccountContext";
+import styles from './style.module.css'
 
 export const ProfileTopPreview = () => {
   const navigate = useNavigate();
   const { user } = useContext(AccountContext);
+
+  const avatarSrc = user?.avatar
+    ? user.avatar?.startsWith("data")
+      ? user.avatar
+      : `${process.env.REACT_APP_HOST_URL}/images/avatars/${user.avatar}`
+    : user.avatar;
 
   return (
     <Box
@@ -18,10 +25,19 @@ export const ProfileTopPreview = () => {
       gap={2}
     >
       <Box display="flex" alignItems="center" gap={2}>
-        <Avatar
-          name={user.username}
-          // src="https://bit.ly/dan-abramov"
-        />
+        {avatarSrc ? (
+          <Image
+            className={styles['avatar-image']}
+            style={{
+              width: 66,
+              aspectRatio: "1 / 1",
+            }}
+            crossOrigin="anonymous"
+            src={avatarSrc}
+          />
+        ) : (
+          <Avatar name={user.username} src={avatarSrc} />
+        )}
         <Heading fontSize="md" wordBreak="break-all">
           {user.username}
         </Heading>

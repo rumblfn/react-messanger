@@ -6,9 +6,11 @@ import { UploadBannerModal } from "./UploadBannerModal";
 export const Banner = ({ banner }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const bannerSrc = (banner && banner?.startsWith("data"))
-    ? banner
-    : `${process.env.REACT_APP_HOST_URL}/images/banners/${banner}`;
+  const bannerSrc = banner
+    ? banner?.startsWith("data")
+      ? banner
+      : `${process.env.REACT_APP_HOST_URL}/images/banners/${banner}`
+    : banner;
 
   return (
     <Box
@@ -36,7 +38,11 @@ export const Banner = ({ banner }) => {
       <div onClick={onOpen} className={styles["edit-icon"]}>
         <EditIcon />
       </div>
-      <UploadBannerModal currentBanner={bannerSrc} isOpen={isOpen} onClose={onClose} />
+      <UploadBannerModal
+        currentBanner={bannerSrc}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </Box>
   );
 };

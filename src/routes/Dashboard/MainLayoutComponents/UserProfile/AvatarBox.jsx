@@ -24,9 +24,11 @@ export const AvatarBox = ({ username, avatar }) => {
     ? "88px"
     : "66px";
 
-  const avatarSrc = (avatar && avatar?.startsWith("data"))
-    ? avatar
-    : `${process.env.REACT_APP_HOST_URL}/images/avatars/${avatar}`;
+  const avatarSrc = avatar
+    ? avatar?.startsWith("data")
+      ? avatar
+      : `${process.env.REACT_APP_HOST_URL}/images/avatars/${avatar}`
+    : avatar;
 
   return (
     <HStack
@@ -62,7 +64,11 @@ export const AvatarBox = ({ username, avatar }) => {
       >
         {username.length > 10 ? username.slice(0, 9) + ".." : username}
       </Heading>
-      <UploadAvatarModal currentAvatar={avatarSrc} isOpen={isOpen} onClose={onClose} />
+      <UploadAvatarModal
+        currentAvatar={avatarSrc}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </HStack>
   );
 };
