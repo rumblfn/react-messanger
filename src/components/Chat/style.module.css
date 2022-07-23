@@ -69,3 +69,14 @@
 .video-box:hover i {
     display: block;
 }
+
+.avatar-image {
+    cursor: pointer;
+    object-fit: cover;
+    clip-path: circle();
+    transition: filter 0.22s;
+}
+
+.avatar-image:hover {
+    filter: brightness(70%);
+}

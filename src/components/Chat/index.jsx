@@ -41,7 +41,6 @@ const Chat = ({ user }) => {
   return friendList.length > 0 ? (
     <VStack minW='325px' pt="0" h="100%" justify="end">
       {user && <TopUserInfo user={user} />}
-      <Divider p={0} />
       <TabPanels h="100%" overflowY="scroll">
         {friendList.map((friend) => (
           <VStack

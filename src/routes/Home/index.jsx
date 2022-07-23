@@ -13,7 +13,7 @@ export default function Home() {
       <Box borderRight="1px solid gray" h="100vh">
         <Sidebar />
       </Box>
-      <Box h="100vh" w="100%">
+      <Box h="100vh" w="100%" style={{marginLeft: 0}}>
         <Chat user={friendList[friendIndex]} />
       </Box>
     </HStack>

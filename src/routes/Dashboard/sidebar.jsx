@@ -1,4 +1,4 @@
-import { HStack, Spacer, Tab, TabList, Text, VStack } from "@chakra-ui/react";
+import { Spacer, Tab, TabList, Text, VStack } from "@chakra-ui/react";
 import { faIdCard, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -14,14 +14,14 @@ export const Sidebar = ({ index, setIndex }) => {
       </Tab>
       <Tab w="100%">
         <Text align="start" w="100%">
-          User Profile
+          Profile
         </Text>
         <Spacer />
         <FontAwesomeIcon icon={faIdCard} />
       </Tab>
       <Tab w="100%">
         <Text align="start" w="100%">
-          Your Accounts
+          Accounts
         </Text>
         <Spacer />
         <FontAwesomeIcon icon={faUsers} />

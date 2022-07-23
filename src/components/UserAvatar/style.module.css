@@ -1,0 +1,41 @@
+.banner-box:hover .edit-icon {
+    opacity: 1;
+}
+
+.edit-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 2%;
+    top: 5%;
+    background-color: whitesmoke;
+    padding: 6px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-box {
+    transform: translateY(-50%);
+}
+
+.avatar {
+    transition: filter 0.22s;
+}
+
+.avatar:hover {
+    filter: brightness(70%);
+}
+
+.avatar-image {
+    cursor: pointer;
+    object-fit: cover;
+    clip-path: circle();
+    transition: filter 0.22s;
+}
+
+.avatar-image:hover {
+    filter: brightness(70%);
+}
