@@ -10,6 +10,9 @@ export const ADD_CONFIRMATION = 'ADD_CONFIRMATION'
 export const REMOVE_CONFIRMATION = 'REMOVE_CONFIRMATION'
 export const READ_CHANNEL_MESSAGES = 'READ_CHANNEL_MESSAGES'
 export const SET_UNREAD_MESSAGES = 'SET_UNREAD_MESSAGES'
+export const CHANGE_FRIENDS_AVATAR = 'CHANGE_FRIENDS_AVATAR'
+export const CHANGE_FRIENDS_BANNER = 'CHANGE_FRIENDS_BANNER'
+export const CHANGE_FRIENDS_ABOUT = 'CHANGE_FRIENDS_ABOUT'
 
 export const setFriendListAction = (payload) => ({
     type: SET_FRIEND_LIST, payload
@@ -25,6 +28,18 @@ export const addMessageAction = (payload) => ({
 
 export const changeFriendStatusAction = (payload) => ({
     type: CHANGE_FRIENDS_STATUS, payload
+})
+
+export const changeFriendAvatarAction = (payload) => ({
+    type: CHANGE_FRIENDS_AVATAR, payload
+})
+
+export const changeFriendBannerAction = (payload) => ({
+    type: CHANGE_FRIENDS_BANNER, payload
+})
+
+export const changeFriendAboutAction = (payload) => ({
+    type: CHANGE_FRIENDS_ABOUT, payload
 })
 
 export const setFriendIndexAction = (payload) => ({

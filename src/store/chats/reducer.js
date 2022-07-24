@@ -1,4 +1,4 @@
-import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, READ_CHANNEL_MESSAGES, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES, SET_UNREAD_MESSAGES } from "./actions"
+import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_ABOUT, CHANGE_FRIENDS_AVATAR, CHANGE_FRIENDS_BANNER, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, READ_CHANNEL_MESSAGES, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES, SET_UNREAD_MESSAGES } from "./actions"
 
 const initialState = {
     friendList: [],
@@ -93,6 +93,39 @@ export const chatsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 friendList
+            }
+        case CHANGE_FRIENDS_AVATAR:
+            const friendListALL = JSON.parse(JSON.stringify(state.friendList)).map((friend) => {
+                if (friend.username === action.payload.username) {
+                    friend.avatar = action.payload.filename;
+                }
+                return friend;
+            })
+            return {
+                ...state,
+                friendList: friendListALL
+            }
+        case CHANGE_FRIENDS_BANNER:
+            const friendListBanner = JSON.parse(JSON.stringify(state.friendList)).map((friend) => {
+                if (friend.username === action.payload.username) {
+                    friend.banner = action.payload.filename;
+                }
+                return friend;
+            })
+            return {
+                ...state,
+                friendList: friendListBanner
+            }
+        case CHANGE_FRIENDS_ABOUT:
+            const friendListAbout = JSON.parse(JSON.stringify(state.friendList)).map((friend) => {
+                if (friend.username === action.payload.username) {
+                    friend.description = action.payload.about;
+                }
+                return friend;
+            })
+            return {
+                ...state,
+                friendList: friendListAbout
             }
         case SET_CONFIRMATIONS:
             return {

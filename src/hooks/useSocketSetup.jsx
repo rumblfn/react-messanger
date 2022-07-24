@@ -18,7 +18,10 @@ const useSocketSetup = (playMessageSound) => {
     setConfirmations,
     addConfirmation,
     removeConfirmationAfterDecline,
-    setUnreadMessages
+    setUnreadMessages,
+    changeFriendAvatar,
+    changeFriendBanner,
+    changeFriendAbout,
   } = useActions();
 
   useEffect(() => {
@@ -39,7 +42,9 @@ const useSocketSetup = (playMessageSound) => {
       }
     });
 
-    socket.on("unreadMessages", (unreadMessages) => setUnreadMessages(unreadMessages))
+    socket.on("unreadMessages", (unreadMessages) =>
+      setUnreadMessages(unreadMessages)
+    );
 
     socket.on("remove_confirmation", (username) => {
       removeConfirmationAfterDecline(username);
@@ -48,7 +53,7 @@ const useSocketSetup = (playMessageSound) => {
     socket.on("add_chat", (friend) => {
       if (lastAddedChat !== friend.userid) {
         lastAddedChat = friend.userid;
-        friend.connected = true
+        friend.connected = true;
         addFriend(friend);
       }
     });
@@ -57,13 +62,13 @@ const useSocketSetup = (playMessageSound) => {
       if (lastMessageId !== id) {
         lastMessageId = id;
         playMessageSound.play();
-        addMessage({message, userid: message.from});
+        addMessage({ message, userid: message.from });
       }
     });
 
     socket.on("chatMessages", (userid, messages) => {
-      setMessages({userid, messages})
-    })
+      setMessages({ userid, messages });
+    });
 
     socket.on("connected", (status, username) => {
       changeFriendStatus({ status, username });
@@ -71,6 +76,27 @@ const useSocketSetup = (playMessageSound) => {
 
     socket.on("connect_error", () => {
       setUser({ loggedIn: false });
+    });
+
+    socket.on("avatar-changed", (filename, username) => {
+      changeFriendAvatar({
+        filename,
+        username,
+      });
+    });
+
+    socket.on("banner-changed", (filename, username) => {
+      changeFriendBanner({
+        filename,
+        username,
+      });
+    });
+
+    socket.on("about-changed", (about, username) => {
+      changeFriendAbout({
+        about,
+        username,
+      });
     });
 
     return () => {
@@ -96,7 +122,10 @@ const useSocketSetup = (playMessageSound) => {
     addConfirmation,
     removeConfirmationAfterDecline,
     setConfirmations,
-    setUnreadMessages
+    setUnreadMessages,
+    changeFriendAbout,
+    changeFriendAvatar,
+    changeFriendBanner,
   ]); // remove subs, make clearly
 };
 

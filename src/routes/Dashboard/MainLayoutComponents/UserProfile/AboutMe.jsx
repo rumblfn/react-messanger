@@ -1,9 +1,10 @@
 import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, Heading, HStack, Spacer } from "@chakra-ui/react";
+import { Box, Heading, HStack, Spacer, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { AccountContext } from "../../../../components/AccountContext";
+import socket from "../../../../socket";
 
 export const AboutMeBox = ({ text }) => {
   const [editable, setEditable] = useState(false);
@@ -27,7 +28,15 @@ export const AboutMeBox = ({ text }) => {
 
     const about = textRef.current.innerText;
 
+    if (about.length > 255) {
+      setError("Max length 255")
+      textRef.current.innerText = text;
+      setEditable(false);
+      return
+    }
+
     if (about === text) {
+      reset()
       return;
     }
 
@@ -44,6 +53,7 @@ export const AboutMeBox = ({ text }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
+          socket.emit('about-changed', data.about)
           setUser((user) => ({
             ...user,
             description: data.about,
@@ -73,6 +83,7 @@ export const AboutMeBox = ({ text }) => {
           <EditIcon onClick={editOn} cursor="pointer" />
         )}
       </HStack>
+      {error && <Text color='red.600' fontWeight={600}>{error}</Text>}
       <Box
         ref={textRef}
         w="100%"

@@ -80,3 +80,17 @@
 .avatar-image:hover {
     filter: brightness(70%);
 }
+
+.drag-and-drop-box {
+    opacity: 1;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

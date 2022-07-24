@@ -2,6 +2,9 @@ import {
     addConfirmationAction,
     addFriendAction,
     addMessageAction,
+    changeFriendAboutAction,
+    changeFriendAvatarAction,
+    changeFriendBannerAction,
     changeFriendStatusAction,
     clearChatsAction,
     readMessagesAction,
@@ -106,6 +109,36 @@ export const changeFriendStatus = (payload) => {
             dispatch(changeFriendStatusAction(payload))
         } catch {
             throw Error("some errors in changeFriendStatus")
+        }
+    }
+}
+
+export const changeFriendAvatar = (payload) => {
+    return async dispatch => {
+        try {
+            dispatch(changeFriendAvatarAction(payload))
+        } catch {
+            throw Error("some errors in changeFriendAvatar")
+        }
+    }
+}
+
+export const changeFriendBanner = (payload) => {
+    return async dispatch => {
+        try {
+            dispatch(changeFriendBannerAction(payload))
+        } catch {
+            throw Error("some errors in changeFriendAvatar")
+        }
+    }
+}
+
+export const changeFriendAbout = (payload) => {
+    return async dispatch => {
+        try {
+            dispatch(changeFriendAboutAction(payload))
+        } catch {
+            throw Error("some errors in changeFriendAvatar")
         }
     }
 }

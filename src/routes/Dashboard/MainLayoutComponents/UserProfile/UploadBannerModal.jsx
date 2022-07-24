@@ -18,6 +18,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
 import { AccountContext } from "../../../../components/AccountContext";
+import socket from "../../../../socket";
 import { UpdateImageFromFile, validateFile } from "./common";
 
 export const UploadBannerModal = ({currentBanner, isOpen, onClose }) => {
@@ -45,6 +46,7 @@ export const UploadBannerModal = ({currentBanner, isOpen, onClose }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
+          socket.emit('banner-changed', data.path)
           setUser(user => ({
             ...user, banner: image
           }))

@@ -2,8 +2,8 @@ import { Box, Image } from "@chakra-ui/react";
 
 export const Banner = ({ banner }) => {
   if (!banner) {
-    return <Box w='100%' position='relative' h='50px'/>
-  };
+    return <Box w="100%" position="relative" h="50px" />;
+  }
 
   return (
     <Box
@@ -17,7 +17,11 @@ export const Banner = ({ banner }) => {
       borderBottomRadius="2px"
       minW="300px"
       overflow="hidden"
-      style={{ aspectRatio: "3 / 1", marginLeft: "auto", marginRight: "auto" }}
+      style={{
+        aspectRatio: "3 / 1",
+        marginLeft: "auto",
+        marginRight: "auto"
+      }}
     >
       <Image
         w="100%"

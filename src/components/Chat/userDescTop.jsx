@@ -56,7 +56,7 @@ export const UserDescTop = ({ user }) => {
           </VStack>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel pb={0} style={{ height: user?.banner ? 300 : 130 }}>
+        <AccordionPanel pt={4} pb={0} style={{ maxHeight: user?.banner ? 300 : 130 }}>
           <Box>
             <Banner banner={user?.banner} />
             <AvatarBox avatar={user?.avatar} username={user?.username || ""} />

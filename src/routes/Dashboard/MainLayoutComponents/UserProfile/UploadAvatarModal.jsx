@@ -19,6 +19,7 @@ import { useEffect, useRef, useState } from "react";
 import { AccountContext } from "../../../../components/AccountContext";
 import { UpdateImageFromFile, validateFile } from "./common";
 import styles from "./style.module.css";
+import socket from '../../../../socket'
 
 export const UploadAvatarModal = ({ currentAvatar, isOpen, onClose }) => {
   const [image, setImage] = useState(currentAvatar);
@@ -45,6 +46,7 @@ export const UploadAvatarModal = ({ currentAvatar, isOpen, onClose }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
+          socket.emit('avatar-changed', data.path)
           setUser((user) => ({
             ...user,
             avatar: image,
