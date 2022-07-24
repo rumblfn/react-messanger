@@ -1,4 +1,11 @@
-import { Box, TabPanel, TabPanels, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  TabPanel,
+  TabPanels,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -11,8 +18,10 @@ import { OneMessage } from "./OneMessage";
 import { TopUserInfo } from "./UserInfo";
 import styles from "./style.module.css";
 import { ModalSendFiles } from "./ModalSendFiles";
+import { DragAndDropFiles } from "../DragAndDropFiles";
 
 const Chat = ({ user }) => {
+  const [files, setFiles] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [drag, setDrag] = useState(false);
   const userid = user?.userid;
@@ -49,13 +58,15 @@ const Chat = ({ user }) => {
   };
 
   const onDropHandler = (e) => {
-    e.preventDefault()
-    let files = [...e.dataTransfer.files]
-    console.log(files)
+    e.preventDefault();
+    let files = [...e.dataTransfer.files].map(file => ({
+      file, loaded: 0
+    }))
+    setFiles(files);
 
-    onOpen()
-    setDrag(false)
-  }
+    onOpen();
+    setDrag(false);
+  };
 
   return friendList.length > 0 ? (
     <VStack minW="325px" pt="0" h="100%" justify="end">
@@ -90,37 +101,19 @@ const Chat = ({ user }) => {
           </VStack>
         ))}
         {drag && (
-          <Box
-            onDrop={e => onDropHandler(e)}
-            onDragStart={(e) => dragStartHandler(e)}
-            onDragLeave={(e) => dragLeaveHandler(e)}
-            onDragOver={(e) => dragStartHandler(e)}
-            position="absolute"
-            left="0"
-            top="0"
-            w="100%"
-            h="100%"
-            p="1rem"
-            style={{ backgroundColor: "white" }}
-          >
-            <Box
-              className={styles["drag-and-drop-box"]}
-              alignItems="center"
-              borderRadius={12}
-              w="100%"
-              h="100%"
-              border="3px dashed gray"
-              display="flex"
-              justifyContent="center"
-            >
-              <Text color="gray.600" fontWeight={500}>
-                Drop file, to load it
-              </Text>
-            </Box>
-          </Box>
+          <DragAndDropFiles
+            onDropHandler={onDropHandler}
+            dragLeaveHandler={dragLeaveHandler}
+            dragStartHandler={dragStartHandler}
+          />
         )}
       </TabPanels>
-      <ModalSendFiles isOpen={isOpen} onClose={onClose} />
+      <ModalSendFiles
+        setFiles={setFiles}
+        files={files}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
       {user?.userid && <ChatBox user={user} />}
     </VStack>
   ) : (

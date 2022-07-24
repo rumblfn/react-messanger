@@ -368,3 +368,109 @@ src/store/dashboard/selectors.js, code is 1, comment is 0, blank is 0.
 src/store/index.js, code is 16, comment is 7, blank is 4.
 src/theme.js, code is 27, comment is 0, blank is 3.
 ===============================================================================
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2022-07-24 08:03:15
+count workspace : /Users/samilvaliahmetov/education/programming/local-github/react-messanger
+total files : 82
+total code lines : 35364
+total comment lines : 45
+total blank lines : 318
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .js|            555|             10|             91|    1.6|
+   |           .jsx|           2275|              4|            176|    6.4|
+   |           .css|            160|              0|             26|   0.45|
+   |          .json|          32309|              0|              5|     91|
+   |               |             20|              3|              5|  0.057|
+   |            .md|             22|              4|             15|  0.062|
+   |          .html|             20|             23|              0|  0.057|
+   |           .txt|              3|              1|              0| 0.0085|
+   -------------------------------------------------------------------------
+.env, code is 2, comment is 2, blank is 0.
+.gitignore, code is 18, comment is 1, blank is 5.
+package-lock.json, code is 32224, comment is 0, blank is 2.
+package.json, code is 60, comment is 0, blank is 3.
+public/favicon.ico, it is a binary file.
+public/index.html, code is 20, comment is 23, blank is 0.
+public/logo192.png, it is a binary file.
+public/logo512.png, it is a binary file.
+public/manifest.json, code is 25, comment is 0, blank is 0.
+public/robots.txt, code is 3, comment is 1, blank is 0.
+public/sounds/message-sound.mp3, it is a binary file.
+public/sounds/mixkit-gaming-lock-2848.wav, it is a binary file.
+README.md, code is 21, comment is 4, blank is 15.
+README.old.md, code is 1, comment is 0, blank is 0.
+src/App.js, code is 11, comment is 0, blank is 3.
+src/components/AccountContext/index.jsx, code is 37, comment is 0, blank is 5.
+src/components/Chat/BottomBar.jsx, code is 46, comment is 0, blank is 2.
+src/components/Chat/ChatBox.jsx, code is 44, comment is 0, blank is 5.
+src/components/Chat/EmptyChat.jsx, code is 18, comment is 0, blank is 1.
+src/components/Chat/index.jsx, code is 119, comment is 0, blank is 12.
+src/components/Chat/ModalSendFiles.jsx, code is 30, comment is 0, blank is 2.
+src/components/Chat/OneMessage.jsx, code is 52, comment is 0, blank is 4.
+src/components/Chat/style.module.css, code is 82, comment is 0, blank is 14.
+src/components/Chat/userDescTop.jsx, code is 74, comment is 0, blank is 2.
+src/components/Chat/UserInfo.jsx, code is 10, comment is 0, blank is 3.
+src/components/ColorModeToggler/index.jsx, code is 11, comment is 0, blank is 3.
+src/components/Dialog/index.jsx, code is 25, comment is 0, blank is 3.
+src/components/Sidebar/confirmations.jsx, code is 87, comment is 0, blank is 2.
+src/components/Sidebar/FriendList.jsx, code is 44, comment is 0, blank is 2.
+src/components/Sidebar/index.jsx, code is 58, comment is 0, blank is 10.
+src/components/Sidebar/JoinRoomField.jsx, code is 41, comment is 0, blank is 4.
+src/components/Sidebar/Modal.jsx, code is 53, comment is 0, blank is 2.
+src/components/Sidebar/profileTopPreview.jsx, code is 48, comment is 0, blank is 3.
+src/components/Sidebar/searchInput.jsx, code is 39, comment is 0, blank is 5.
+src/components/Sidebar/StatusField.jsx, code is 29, comment is 0, blank is 1.
+src/components/Sidebar/style.module.css, code is 8, comment is 0, blank is 0.
+src/components/UserAvatar/index.jsx, code is 50, comment is 0, blank is 3.
+src/components/UserAvatar/style.module.css, code is 35, comment is 0, blank is 6.
+src/components/UserBanner/index.jsx, code is 34, comment is 0, blank is 2.
+src/components/UserDescription/index.jsx, code is 19, comment is 0, blank is 1.
+src/components/Views/index.jsx, code is 26, comment is 0, blank is 2.
+src/components/Views/LoadingPage.jsx, code is 16, comment is 0, blank is 1.
+src/hocs/PrivateRoutes.jsx, code is 12, comment is 0, blank is 3.
+src/hooks/useActions.js, code is 7, comment is 0, blank is 1.
+src/hooks/useDraggable.js, code is 33, comment is 0, blank is 9.
+src/hooks/useSocketSetup.jsx, code is 114, comment is 1, blank is 18.
+src/hooks/useTimeToDay.jsx, code is 17, comment is 0, blank is 7.
+src/index.js, code is 26, comment is 3, blank is 3.
+src/routes/Auth/Login.jsx, code is 91, comment is 0, blank is 5.
+src/routes/Auth/SignUp.jsx, code is 102, comment is 0, blank is 5.
+src/routes/Auth/TextField.jsx, code is 16, comment is 0, blank is 2.
+src/routes/Dashboard/index.jsx, code is 27, comment is 3, blank is 3.
+src/routes/Dashboard/main.jsx, code is 19, comment is 0, blank is 1.
+src/routes/Dashboard/MainLayoutComponents/AccountSettings/AccountSettings.jsx, code is 33, comment is 0, blank is 2.
+src/routes/Dashboard/MainLayoutComponents/AccountSettings/CustomModal.jsx, code is 106, comment is 0, blank is 3.
+src/routes/Dashboard/MainLayoutComponents/AccountSettings/Email.jsx, code is 159, comment is 0, blank is 11.
+src/routes/Dashboard/MainLayoutComponents/UserAccounts/index.jsx, code is 7, comment is 0, blank is 1.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/AboutMe.jsx, code is 95, comment is 0, blank is 9.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/AvatarBox.jsx, code is 69, comment is 0, blank is 5.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/banner.jsx, code is 45, comment is 0, blank is 3.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/common.js, code is 21, comment is 0, blank is 1.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/index.jsx, code is 17, comment is 0, blank is 2.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/style.module.css, code is 35, comment is 0, blank is 6.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/UploadAvatarModal.jsx, code is 116, comment is 0, blank is 5.
+src/routes/Dashboard/MainLayoutComponents/UserProfile/UploadBannerModal.jsx, code is 123, comment is 0, blank is 5.
+src/routes/Dashboard/sidebar.jsx, code is 31, comment is 0, blank is 1.
+src/routes/Dashboard/topPanel.jsx, code is 47, comment is 0, blank is 3.
+src/routes/Home/index.jsx, code is 19, comment is 0, blank is 2.
+src/socket.js, code is 6, comment is 0, blank is 2.
+src/store/action-creators/chats.js, code is 151, comment is 0, blank is 36.
+src/store/action-creators/dashboard.js, code is 13, comment is 0, blank is 3.
+src/store/action-creators/index.js, code is 1, comment is 0, blank is 0.
+src/store/chats/actions.js, code is 60, comment is 0, blank is 15.
+src/store/chats/index.js, code is 3, comment is 0, blank is 0.
+src/store/chats/reducer.js, code is 146, comment is 0, blank is 7.
+src/store/chats/selectors.js, code is 5, comment is 0, blank is 0.
+src/store/dashboard/actions.js, code is 12, comment is 0, blank is 3.
+src/store/dashboard/index.js, code is 3, comment is 0, blank is 0.
+src/store/dashboard/reducer.js, code is 13, comment is 0, blank is 1.
+src/store/dashboard/selectors.js, code is 1, comment is 0, blank is 0.
+src/store/index.js, code is 16, comment is 7, blank is 4.
+src/theme.js, code is 27, comment is 0, blank is 3.
+===============================================================================
