@@ -31,15 +31,15 @@ const ChatBox = ({user}) => {
         actions.resetForm();
       }}
     >
-      <HStack as={Form} w="100%" pb="0.8rem" px="1rem">
+      <HStack as={Form} w="100%" pb="0.8rem" px="1rem" pr='1.6rem'>
         <Input
           as={Field}
           name="message"
           placeholder="Type message here.."
-          size="lg"
+          size="md"
           autoComplete="off"
         />
-        <Button type="submit" size="lg" colorScheme="teal">
+        <Button type="submit" size="md" colorScheme="teal">
           Send
         </Button>
       </HStack>

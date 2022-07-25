@@ -24,8 +24,8 @@ export const UserDescTop = ({ user }) => {
   return (
     <Accordion allowToggle w="100%">
       <AccordionItem>
-        <AccordionButton>
-          <VStack w="100%">
+        <AccordionButton p='0.3rem 0.5rem'>
+          <VStack w="100%" spacing={0}>
             <HStack alignItems="center" w="100%">
               {user?.avatar ? (
                 <Image
@@ -44,19 +44,24 @@ export const UserDescTop = ({ user }) => {
                 {user?.username || ""}
               </Heading>
             </HStack>
-            {user?.connected ? (
-              <Text fontSize="xs" pl="0.15rem" color="green.500" w="100%">
-                Online
-              </Text>
-            ) : (
-              <Text fontSize="xs" color="gray.500" w="100%" textAlign="start">
-                last seen {formattedDate} at {user?.formattedTime}
-              </Text>
-            )}
+            <Text
+              fontSize="xs"
+              pl="0.15rem"
+              color={user?.connected ? "green.500" : "gray.500"}
+              w="100%" textAlign='start'
+            >
+              {user?.connected
+                ? "Online"
+                : `last seen ${formattedDate} at ${user?.formattedTime}`}
+            </Text>
           </VStack>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel pt={4} pb={0} style={{ maxHeight: user?.banner ? 300 : 130 }}>
+        <AccordionPanel
+          pt={4}
+          pb={0}
+          style={{ maxHeight: user?.banner ? 300 : 130 }}
+        >
           <Box>
             <Banner banner={user?.banner} />
             <AvatarBox avatar={user?.avatar} username={user?.username || ""} />

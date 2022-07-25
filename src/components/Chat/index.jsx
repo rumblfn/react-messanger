@@ -1,8 +1,6 @@
 import {
-  Box,
   TabPanel,
   TabPanels,
-  Text,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
@@ -14,11 +12,10 @@ import socket from "../../socket";
 import { getFriendList, getMessages } from "../../store/chats/selectors";
 import ChatBox from "./ChatBox";
 import { EmptyChat } from "./EmptyChat";
-import { OneMessage } from "./OneMessage";
 import { TopUserInfo } from "./UserInfo";
-import styles from "./style.module.css";
 import { ModalSendFiles } from "./ModalSendFiles";
 import { DragAndDropFiles } from "../DragAndDropFiles";
+import { Message } from "./Message";
 
 const Chat = ({ user }) => {
   const [files, setFiles] = useState([]);
@@ -72,14 +69,14 @@ const Chat = ({ user }) => {
   };
 
   return friendList.length > 0 ? (
-    <VStack minW="325px" pt="0" h="100%" justify="end">
+    <VStack minW="325px" pt="0" h="100%" justify="end" spacing={0}>
       {user && <TopUserInfo user={user} />}
       <TabPanels
         onDragStart={(e) => dragStartHandler(e)}
         onDragLeave={(e) => dragLeaveHandler(e)}
         onDragOver={(e) => dragStartHandler(e)}
         h="100%"
-        overflowY="hidden"
+        overflow="hidden"
         position="relative"
       >
         {friendList.map((friend) => (
@@ -92,10 +89,9 @@ const Chat = ({ user }) => {
             overflowY="scroll"
           >
             <div ref={bottomDiv} />
-            {chat &&
-              chat.messages &&
+            {chat?.messages &&
               chat.messages.map((message, idx) => (
-                <OneMessage
+                <Message
                   friend={friend}
                   message={message}
                   key={`msg:${friend.userid}.${idx}`}
