@@ -16,12 +16,25 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { nanoid } from "nanoid";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useActions } from "../../hooks/useActions";
+import socket from "../../socket";
 import { DragAndDropFiles } from "../DragAndDropFiles";
 
-export const ModalSendFiles = ({ files, isOpen, onClose, setFiles }) => {
+export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
+  const { addMessage } = useActions();
+
   const [send, setSend] = useState(false);
   const [drag, setDrag] = useState(false);
+
+  useEffect(() => {
+    if (!files.length) {
+      setSend(false);
+      onClose();
+    }
+  }, [files]);
 
   const dragStartHandler = (e) => {
     e.preventDefault();
@@ -62,19 +75,44 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles }) => {
     formData.append("file", file);
 
     axios
-      .post(`${process.env.REACT_APP_HOST_URL}/media/uploadFile`, formData, {
-        withCredentials: true,
-        onUploadProgress: (data) => {
-          const loaded = parseInt((data.loaded / data.total) * 100);
+      .post(
+        `${process.env.REACT_APP_HOST_URL}/media/uploadFile/${user?.userid}`,
+        formData,
+        {
+          withCredentials: true,
+          onUploadProgress: (data) => {
+            const loaded = parseInt((data.loaded / data.total) * 100);
+            setFiles((prev) => [
+              ...prev.slice(0, index),
+              { ...prev[index], loaded },
+              ...prev.slice(index + 1, prev.length),
+            ]);
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.status === "success") {
+          const { path, fileType } = res.data;
+
           setFiles((prev) => [
             ...prev.slice(0, index),
-            { ...prev[index], loaded },
             ...prev.slice(index + 1, prev.length),
           ]);
-        },
-      })
-      .then((success) => {
-        console.log(success);
+
+          console.log(path, fileType);
+          const message = {
+            username: user.username,
+            connected: user?.connected,
+            to: user?.userid,
+            from: null,
+            content: path,
+            timestamp: new Date().getTime(),
+            type: fileType,
+          };
+
+          socket.emit("dm", message, nanoid(8));
+          addMessage({ message, userid: message.to });
+        }
       })
       .catch((error) => {
         console.log(error);

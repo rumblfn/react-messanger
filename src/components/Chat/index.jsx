@@ -48,8 +48,10 @@ const Chat = ({ user }) => {
   }, [chat?.messages, userid, readMessages]);
 
   const dragStartHandler = (e) => {
-    e.preventDefault();
-    setDrag(true);
+    if (userid) {
+      e.preventDefault();
+      setDrag(true);
+    }
   };
 
   const dragLeaveHandler = (e) => {
@@ -59,9 +61,10 @@ const Chat = ({ user }) => {
 
   const onDropHandler = (e) => {
     e.preventDefault();
-    let files = [...e.dataTransfer.files].map(file => ({
-      file, loaded: 0
-    }))
+    let files = [...e.dataTransfer.files].map((file) => ({
+      file,
+      loaded: 0,
+    }));
     setFiles(files);
 
     onOpen();
@@ -76,7 +79,7 @@ const Chat = ({ user }) => {
         onDragLeave={(e) => dragLeaveHandler(e)}
         onDragOver={(e) => dragStartHandler(e)}
         h="100%"
-        overflowY="scroll"
+        overflowY="hidden"
         position="relative"
       >
         {friendList.map((friend) => (
@@ -108,12 +111,15 @@ const Chat = ({ user }) => {
           />
         )}
       </TabPanels>
-      <ModalSendFiles
-        setFiles={setFiles}
-        files={files}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
+      {userid && (
+        <ModalSendFiles
+          user={user}
+          setFiles={setFiles}
+          files={files}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
+      )}
       {user?.userid && <ChatBox user={user} />}
     </VStack>
   ) : (

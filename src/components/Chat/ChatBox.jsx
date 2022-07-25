@@ -21,7 +21,8 @@ const ChatBox = ({user}) => {
             to: user?.userid,
             from: null,
             content: values.message,
-            timestamp: new Date().getTime()
+            timestamp: new Date().getTime(),
+            type: 'MESSAGE'
         }
 
         socket.emit("dm", message, nanoid(8))
@@ -30,7 +31,7 @@ const ChatBox = ({user}) => {
         actions.resetForm();
       }}
     >
-      <HStack as={Form} w="100%" pb="1.4rem" px="1.4rem">
+      <HStack as={Form} w="100%" pb="0.8rem" px="1rem">
         <Input
           as={Field}
           name="message"

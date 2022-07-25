@@ -9,7 +9,7 @@ export default function Home() {
   const friendList = useSelector(getFriendList);
 
   return (
-    <HStack h="100vh" as={Tabs} index={friendIndex}>
+    <HStack overflowY='hidden' h="100vh" as={Tabs} index={friendIndex}>
       <Box borderRight="1px solid gray" h="100vh">
         <Sidebar />
       </Box>
