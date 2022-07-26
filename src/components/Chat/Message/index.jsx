@@ -36,6 +36,8 @@ export const Message = ({ friend, message }) => {
         />
       );
     case "VIDEO":
+      TimeParams.left = message.to === friend.userid ? "-56px" : "";
+      TimeParams.right = message.to === friend.userid ? "" : "-42px";
       return (
         <VideoBox
           filename={message?.content}

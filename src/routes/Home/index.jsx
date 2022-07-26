@@ -9,11 +9,11 @@ export default function Home() {
   const friendList = useSelector(getFriendList);
 
   return (
-    <HStack overflowY='hidden' h="100vh" as={Tabs} index={friendIndex}>
+    <HStack overflowY="hidden" h="100vh" as={Tabs} index={friendIndex}>
       <Box borderRight="1px solid gray" h="100vh">
         <Sidebar />
       </Box>
-      <Box h="100vh" w="100%" style={{marginLeft: 0}}>
+      <Box h="100vh" w="100%" style={{ marginLeft: 0 }}>
         <Chat user={friendList[friendIndex]} />
       </Box>
     </HStack>

@@ -36,6 +36,11 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
     }
   }, [files]);
 
+  const handleClose = () => {
+    setSend(false);
+    onClose();
+  };
+
   const dragStartHandler = (e) => {
     e.preventDefault();
     setDrag(true);
@@ -63,18 +68,18 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
     ]);
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     setSend(true);
     for (let idx in files) {
-      startUploadFile(files[idx].file, idx);
+      await startUploadFile(files[idx].file, idx);
     }
   };
 
-  const startUploadFile = (file, index) => {
+  const startUploadFile = async (file, index) => {
     let formData = new FormData();
     formData.append("file", file);
 
-    axios
+    await axios
       .post(
         `${process.env.REACT_APP_HOST_URL}/media/uploadFile/${user?.userid}`,
         formData,
@@ -99,7 +104,6 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
             ...prev.slice(index + 1, prev.length),
           ]);
 
-          console.log(path, fileType);
           const message = {
             username: user.username,
             connected: user?.connected,
@@ -115,12 +119,15 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        setFiles((prev) => [
+          ...prev.slice(0, index),
+          ...prev.slice(index + 1, prev.length),
+        ]);
       });
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent
         overflow="hidden"
@@ -130,10 +137,10 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
         position="relative"
       >
         <ModalHeader>Send file</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton onClick={handleClose} />
         <ModalBody>
           <VStack>
-            {files.map((file, index) => (
+            {files.map((file, index) => ( file.file?.name &&
               <HStack w="100%" key={index}>
                 <Heading wordBreak="break-all" size="xs">
                   {file.file.name}
@@ -156,7 +163,7 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
           </VStack>
         </ModalBody>
         <ModalFooter>
-          <Button mr={3} onClick={onClose} variant="ghost">
+          <Button mr={3} onClick={handleClose} variant="ghost">
             Cancel
           </Button>
           <Button onClick={handleSend} colorScheme="messenger" disabled={send}>

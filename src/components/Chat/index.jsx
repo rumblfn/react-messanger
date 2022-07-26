@@ -1,9 +1,4 @@
-import {
-  TabPanel,
-  TabPanels,
-  useDisclosure,
-  VStack,
-} from "@chakra-ui/react";
+import { TabPanel, TabPanels, useDisclosure, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -14,13 +9,11 @@ import ChatBox from "./ChatBox";
 import { EmptyChat } from "./EmptyChat";
 import { TopUserInfo } from "./UserInfo";
 import { ModalSendFiles } from "./ModalSendFiles";
-import { DragAndDropFiles } from "../DragAndDropFiles";
 import { Message } from "./Message";
 
 const Chat = ({ user }) => {
   const [files, setFiles] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [drag, setDrag] = useState(false);
   const userid = user?.userid;
 
   const { readMessages } = useActions();
@@ -44,41 +37,10 @@ const Chat = ({ user }) => {
     socket.emit("readMessages", userid);
   }, [chat?.messages, userid, readMessages]);
 
-  const dragStartHandler = (e) => {
-    if (userid) {
-      e.preventDefault();
-      setDrag(true);
-    }
-  };
-
-  const dragLeaveHandler = (e) => {
-    e.preventDefault();
-    setDrag(false);
-  };
-
-  const onDropHandler = (e) => {
-    e.preventDefault();
-    let files = [...e.dataTransfer.files].map((file) => ({
-      file,
-      loaded: 0,
-    }));
-    setFiles(files);
-
-    onOpen();
-    setDrag(false);
-  };
-
   return friendList.length > 0 ? (
     <VStack minW="325px" pt="0" h="100%" justify="end" spacing={0}>
       {user && <TopUserInfo user={user} />}
-      <TabPanels
-        onDragStart={(e) => dragStartHandler(e)}
-        onDragLeave={(e) => dragLeaveHandler(e)}
-        onDragOver={(e) => dragStartHandler(e)}
-        h="100%"
-        overflow="hidden"
-        position="relative"
-      >
+      <TabPanels h="100%" overflow="hidden" position="relative">
         {friendList.map((friend) => (
           <VStack
             flexDirection="column-reverse"
@@ -99,13 +61,6 @@ const Chat = ({ user }) => {
               ))}
           </VStack>
         ))}
-        {drag && (
-          <DragAndDropFiles
-            onDropHandler={onDropHandler}
-            dragLeaveHandler={dragLeaveHandler}
-            dragStartHandler={dragStartHandler}
-          />
-        )}
       </TabPanels>
       {userid && (
         <ModalSendFiles
@@ -116,7 +71,9 @@ const Chat = ({ user }) => {
           onClose={onClose}
         />
       )}
-      {user?.userid && <ChatBox user={user} />}
+      {user?.userid && (
+        <ChatBox setFiles={setFiles} onOpen={onOpen} user={user} />
+      )}
     </VStack>
   ) : (
     <EmptyChat />
