@@ -43,7 +43,7 @@ const ChatBox = ({ user, setFiles, onOpen }) => {
         actions.resetForm();
       }}
     >
-      <HStack as={Form} w="100%" pb="0.8rem" px="1rem" pr="1.6rem">
+      <HStack as={Form} w="90%" maxW='1600px' pb="0.8rem" px="1rem" pr="1.6rem">
         <input
           ref={(input) => (fileRef = input)}
           style={{ display: "none" }}

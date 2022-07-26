@@ -9,6 +9,7 @@ export const ImageBox = ({ filename, margins, TimeParams }) => {
         m={margins}
         borderRadius="10px"
         maxW="70%"
+        maxH='60vh'
         crossOrigin="anonymous"
         src={`${process.env.REACT_APP_HOST_URL}/media/getFile/${filename}`}
       />

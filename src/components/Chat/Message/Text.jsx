@@ -9,11 +9,11 @@ export const TextBox = ({ margins, bgColor, text, TimeParams }) => {
       pos="relative"
       maxW="70%"
       m={margins}
-      fontSize="sm"
+      fontSize="md"
       bg={bgColor}
       color="gray.900"
       borderRadius="10px"
-      p="0.25rem 0.5rem"
+      p="0.3rem 0.75rem"
     >
       {text}
       <MessageTime TimeParams={TimeParams} />

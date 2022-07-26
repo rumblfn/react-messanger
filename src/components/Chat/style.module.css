@@ -80,3 +80,13 @@
 .avatar-image:hover {
     filter: brightness(70%);
 }
+
+
+.chat::-webkit-scrollbar {
+    display: none;
+}
+
+.chat {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
