@@ -1,17 +1,24 @@
 import { Box, Image } from "@chakra-ui/react";
+import { useContext } from "react";
+import { ExpandFile } from "../../ToExpandFile";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
 
 export const ImageBox = ({ filename, margins, TimeParams }) => {
+  const {setFilename} = useContext(ExpandFile)
+
+  const fullFilename = `${process.env.REACT_APP_HOST_URL}/media/getFile/${filename}`
+
   return (
     <Box w="100%" className={styles.message}>
-      <Image
+      <Image onClick={() => setFilename(fullFilename)}
+        className={styles.image}
         m={margins}
         borderRadius="10px"
         maxW="70%"
         maxH='60vh'
         crossOrigin="anonymous"
-        src={`${process.env.REACT_APP_HOST_URL}/media/getFile/${filename}`}
+        src={fullFilename}
       />
       <MessageTime TimeParams={TimeParams} />
     </Box>

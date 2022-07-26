@@ -13,3 +13,7 @@
 .message {
     position: relative;
 }
+
+.image {
+    cursor: pointer;
+}

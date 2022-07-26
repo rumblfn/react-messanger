@@ -1,4 +1,6 @@
 import { Howl } from "howler";
+import { ExpandFilename } from "./components/ExpandFile";
+import ExpandContext from "./components/ToExpandFile";
 import Views from "./components/Views";
 import useSocketSetup from "./hooks/useSocketSetup";
 
@@ -8,7 +10,10 @@ function App() {
   })
   useSocketSetup(messageSound);
 
-  return <Views />
+  return <ExpandContext>
+    <Views />
+    <ExpandFilename />
+  </ExpandContext>
 }
 
 export default App;

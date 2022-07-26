@@ -1,0 +1,42 @@
+.image-box {
+    position: absolute;
+    z-index: 11;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: 0.3s apperience-image-box ease;
+}
+
+.image {
+    position: relative;
+    max-width: 85vw;
+    max-height: 85vh;
+    transform: scale(1);
+    animation: 0.3s apperience-image ease;
+    opacity: 1;
+}
+
+@keyframes apperience-image {
+    from {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes apperience-image-box {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
