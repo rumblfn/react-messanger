@@ -22,6 +22,13 @@ import { useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
 import { DragAndDropFiles } from "../DragAndDropFiles";
+import imageCompression from 'browser-image-compression';
+
+const options = {
+  maxSizeMB: 1,
+  maxWidthOrHeight: 1920,
+  useWebWorker: true
+}
 
 export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
   const { addMessage } = useActions();
@@ -71,7 +78,15 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
   const handleSend = async () => {
     setSend(true);
     for (let idx in files) {
-      await startUploadFile(files[idx].file, idx);
+      let currentFile = files[idx].file
+      if (currentFile.type.startsWith('image/')) {
+        try {
+          currentFile = await imageCompression(currentFile, options)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      await startUploadFile(currentFile, idx);
     }
   };
 

@@ -14,6 +14,7 @@ const ChatBox = ({ user, setFiles, onOpen }) => {
 
   const handleFile = (e) => {
     const file = fileRef.files[0];
+
     setFiles([{
       file, loaded: 0
     }])
