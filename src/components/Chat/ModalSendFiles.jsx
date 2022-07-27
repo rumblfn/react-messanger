@@ -79,7 +79,7 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
     setSend(true);
     for (let idx in files) {
       let currentFile = files[idx].file
-      if (currentFile.type.startsWith('image/')) {
+      if (currentFile.type.startsWith('image/') && currentFile.type !== 'image/gif') {
         try {
           currentFile = await imageCompression(currentFile, options)
         } catch (error) {

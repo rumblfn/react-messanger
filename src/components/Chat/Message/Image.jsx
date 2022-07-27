@@ -12,7 +12,7 @@ export const ImageBox = ({ filename, margins, TimeParams }) => {
   return (
     <Box w="100%" className={styles.message}>
       <Image onClick={() => setFilename(fullFilename)}
-        className={styles.image}
+        className={styles.image} loading="lazy"
         m={margins}
         borderRadius="10px"
         maxW="70%"

@@ -51,6 +51,7 @@ const useSocketSetup = (playMessageSound) => {
     });
 
     socket.on("add_chat", (friend) => {
+      console.log(friend)
       if (lastAddedChat !== friend.userid) {
         lastAddedChat = friend.userid;
         friend.connected = true;

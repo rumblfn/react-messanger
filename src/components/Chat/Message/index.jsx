@@ -1,3 +1,4 @@
+
 import { TimeDateMiddle } from "./Date";
 import { SimpleFile } from "./File";
 import { ImageBox } from "./Image";
@@ -22,6 +23,12 @@ export const Message = ({ friend, message }) => {
     right: rightPositioning,
   };
 
+  const handleContextMenu = e => {
+    console.log(e)
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
   switch (message?.type) {
     case "time":
       return <TimeDateMiddle time={message?.time} />;
@@ -29,7 +36,7 @@ export const Message = ({ friend, message }) => {
       TimeParams.left = message.to === friend.userid ? "0px" : "";
       TimeParams.right = message.to === friend.userid ? "" : "0px";
       return (
-        <ImageBox
+        <ImageBox handleContextMenu={handleContextMenu}
           filename={message?.content}
           margins={messageMargins}
           TimeParams={TimeParams}
@@ -39,7 +46,7 @@ export const Message = ({ friend, message }) => {
       TimeParams.left = message.to === friend.userid ? "-56px" : "";
       TimeParams.right = message.to === friend.userid ? "" : "-42px";
       return (
-        <VideoBox
+        <VideoBox handleContextMenu={handleContextMenu}
           filename={message?.content}
           margins={messageMargins}
           TimeParams={TimeParams}
@@ -50,7 +57,7 @@ export const Message = ({ friend, message }) => {
       TimeParams.left = message.to === friend.userid ? "-56px" : "";
       TimeParams.right = message.to === friend.userid ? "" : "-42px";
       return (
-        <SimpleFile
+        <SimpleFile handleContextMenu={handleContextMenu}
           filename={message?.content}
           margins={messageMargins}
           TimeParams={TimeParams}
@@ -59,7 +66,7 @@ export const Message = ({ friend, message }) => {
       );
     case "MESSAGE":
       return (
-        <TextBox
+        <TextBox handleContextMenu={handleContextMenu}
           text={message.content}
           margins={messageMargins}
           bgColor={bgColor}
