@@ -2,11 +2,17 @@ import { Text } from "@chakra-ui/react";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
 
-export const TextBox = ({ margins, bgColor, text, TimeParams }) => {
+export const TextBox = ({
+  margins,
+  bgColor,
+  text,
+  TimeParams
+}) => {
   return (
     <Text
       className={styles.message}
       pos="relative"
+      w='fit-content'
       maxW="70%"
       m={margins}
       fontSize="md"

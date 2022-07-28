@@ -8,8 +8,8 @@ import { VideoBox } from "./Video";
 export const Message = ({ friend, message }) => {
   const messageMargins =
     message.to === friend.userid
-      ? "0.5rem 0 0 auto !important"
-      : "0.5rem auto 0 0 !important";
+      ? "0 0 0 auto !important"
+      : "0 auto 0 0 !important";
 
   const bgColor = message.to === friend.userid ? "blue.100" : "gray.100";
 
@@ -23,20 +23,14 @@ export const Message = ({ friend, message }) => {
     right: rightPositioning,
   };
 
-  const handleContextMenu = e => {
-    console.log(e)
-    e.preventDefault()
-    e.stopPropagation()
-  }
-
   switch (message?.type) {
     case "time":
-      return <TimeDateMiddle time={message?.time} />;
+      return <TimeDateMiddle time={message?.time}/>;
     case "IMAGE":
       TimeParams.left = message.to === friend.userid ? "0px" : "";
       TimeParams.right = message.to === friend.userid ? "" : "0px";
       return (
-        <ImageBox handleContextMenu={handleContextMenu}
+        <ImageBox
           filename={message?.content}
           margins={messageMargins}
           TimeParams={TimeParams}
@@ -46,7 +40,7 @@ export const Message = ({ friend, message }) => {
       TimeParams.left = message.to === friend.userid ? "-56px" : "";
       TimeParams.right = message.to === friend.userid ? "" : "-42px";
       return (
-        <VideoBox handleContextMenu={handleContextMenu}
+        <VideoBox
           filename={message?.content}
           margins={messageMargins}
           TimeParams={TimeParams}
@@ -57,7 +51,7 @@ export const Message = ({ friend, message }) => {
       TimeParams.left = message.to === friend.userid ? "-56px" : "";
       TimeParams.right = message.to === friend.userid ? "" : "-42px";
       return (
-        <SimpleFile handleContextMenu={handleContextMenu}
+        <SimpleFile
           filename={message?.content}
           margins={messageMargins}
           TimeParams={TimeParams}
@@ -66,7 +60,7 @@ export const Message = ({ friend, message }) => {
       );
     case "MESSAGE":
       return (
-        <TextBox handleContextMenu={handleContextMenu}
+        <TextBox
           text={message.content}
           margins={messageMargins}
           bgColor={bgColor}

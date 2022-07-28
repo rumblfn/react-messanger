@@ -2,7 +2,6 @@ import { DownloadIcon } from "@chakra-ui/icons";
 import { Box, HStack, Spacer, Text } from "@chakra-ui/react";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Player } from "video-react";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
 

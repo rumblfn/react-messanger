@@ -6,13 +6,14 @@ export const TimeDateMiddle = ({ time }) => {
 
   return (
     <Text
-      m={2}
+      m='0.5rem auto'
       fontSize="xs"
       bg="blue.50"
       color="gray.900"
       borderRadius="10px"
       p="0.25rem 0.5rem"
       textAlign="center"
+      w='fit-content'
     >
       {formattedDate}
     </Text>
