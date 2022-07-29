@@ -7,7 +7,7 @@ import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
 import { Confirmations } from "./confirmations";
 import { FriendList } from "./FriendList";
-import { JoinRoomField } from "./JoinRoomField";
+// import { JoinRoomField } from "./JoinRoomField";
 import { ConfirmationModal } from "./Modal";
 import { ProfileTopPreview } from "./profileTopPreview";
 import { SearchInput } from "./searchInput";
@@ -44,7 +44,7 @@ const Sidebar = () => {
   return (
     <VStack py="0.5rem" minW='325px'>
       <ProfileTopPreview />
-      <JoinRoomField />
+      {/* <JoinRoomField /> */}
       <SearchInput setSuccess={setSuccess} setErrorMsg={setErrorMsg} />
       <StatusMsg success={success} errorMsg={errorMsg} />
       <Confirmations

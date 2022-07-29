@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import { AccountContext } from "../../../../components/AccountContext";
 import socket from "../../../../socket";
+import React from "react";
 
 export const AboutMeBox = ({ text }) => {
   const [editable, setEditable] = useState(false);

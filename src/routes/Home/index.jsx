@@ -6,6 +6,7 @@ import { MessageView } from "../../components/MessageView";
 import Sidebar from "../../components/Sidebar";
 import { ExpandFile } from "../../components/ToExpandFile";
 import { getFriendIndex, getFriendList } from "../../store/chats/selectors";
+import React from "react";
 
 export default function Home() {
   const friendIndex = useSelector(getFriendIndex);

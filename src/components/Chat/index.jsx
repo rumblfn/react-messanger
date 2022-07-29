@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   TabPanel,
@@ -34,7 +35,12 @@ const Chat = ({ user }) => {
   const friendList = useSelector(getFriendList);
   const chat = useSelector(getMessages)[userid];
 
-  const { msgBg, handleContextMenu, handleScroll, handleScrollMessageBg } = useContext(ExpandFile);
+  const {
+    msgBg,
+    handleContextMenu,
+    handleScroll,
+    handleScrollMessageBg,
+  } = useContext(ExpandFile);
 
   useEffect(() => {
     if (!chat?.firstLoading) {
@@ -49,85 +55,87 @@ const Chat = ({ user }) => {
 
   const handleChatBoxReplyClick = () => {
     messageRef.current?.scrollIntoView({ behavior: "smooth" });
-    handleScrollMessageBg()
+    handleScrollMessageBg();
   };
 
-  return friendList.length > 0 ? (
-    <VStack minW="325px" pt="0" h="100%" justify="end" spacing={0}>
-      {user && <TopUserInfo user={user} />}
-      <TabPanels h="100%" overflow="hidden" position="relative">
-        {friendList.map((friend) => (
-          <VStack
-            onScroll={handleScroll}
-            className={styles.chat}
-            p={0}
-            pt={2}
-            pb={2}
-            flexDirection="column-reverse"
-            as={TabPanel}
-            key={`chat:${friend?.userid}`}
-            h="100%"
-            gap="12px"
-            spacing="0"
-            overflowY="scroll"
-          >
-            {chat?.messages &&
-              chat.messages.map((message, idx) => {
-                if (message.type === "time") {
+  if (friendList.length > 0) {
+    return (
+      <VStack minW="325px" pt="0" h="100%" justify="end" spacing={0}>
+        {user && <TopUserInfo user={user} />}
+        <TabPanels h="100%" overflow="hidden" position="relative">
+          {friendList.map((friend) => (
+            <VStack
+              onScroll={handleScroll}
+              className={styles.chat}
+              p={0}
+              pt={2}
+              pb={2}
+              flexDirection="column-reverse"
+              as={TabPanel}
+              key={`chat:${friend?.userid}`}
+              h="100%"
+              gap="12px"
+              spacing="0"
+              overflowY="scroll"
+            >
+              {chat?.messages &&
+                chat.messages.map((message, idx) => {
+                  if (message.type === "time") {
+                    return (
+                      <Message
+                        key={`msg:${friend.userid}.${idx}`}
+                        friend={friend}
+                        message={message}
+                      />
+                    );
+                  }
                   return (
-                    <Message
+                    <Box
+                      ref={
+                        message?.timestamp === msgBg?.messageToReply?.timestamp
+                          ? messageRef
+                          : null
+                      }
                       key={`msg:${friend.userid}.${idx}`}
-                      friend={friend}
-                      message={message}
-                    />
-                  );
-                }
-                return (
-                  <Box
-                    ref={
-                      message?.timestamp === msgBg?.messageToReply?.timestamp
-                        ? messageRef
-                        : null
-                    }
-                    key={`msg:${friend.userid}.${idx}`}
-                    style={{
-                      backgroundColor:
-                        message.timestamp === msgBg.msgTimestamp && msgBg.color,
-                      transition: "all 0.22s",
-                    }}
-                    onContextMenu={(e) => handleContextMenu(e, message)}
-                    w="100%"
-                  >
-                    <Box w={tablet ? "95%" : "80%"} m="0 auto" maxW="1440px">
-                      <Message friend={friend} message={message} />
+                      style={{
+                        backgroundColor:
+                          message.timestamp === msgBg.msgTimestamp &&
+                          msgBg.color,
+                        transition: "all 0.22s",
+                      }}
+                      onContextMenu={(e) => handleContextMenu(e, message)}
+                      w="100%"
+                    >
+                      <Box w={tablet ? "95%" : "80%"} m="0 auto" maxW="1440px">
+                        <Message friend={friend} message={message} />
+                      </Box>
                     </Box>
-                  </Box>
-                );
-              })}
-          </VStack>
-        ))}
-      </TabPanels>
-      {userid && (
-        <ModalSendFiles
-          user={user}
-          setFiles={setFiles}
-          files={files}
-          isOpen={isOpen}
-          onClose={onClose}
-        />
-      )}
-      {user?.userid && (
-        <ChatBox
-          handleChatBoxReplyClick={handleChatBoxReplyClick}
-          setFiles={setFiles}
-          onOpen={onOpen}
-          user={user}
-        />
-      )}
-    </VStack>
-  ) : (
-    <EmptyChat />
-  );
+                  );
+                })}
+            </VStack>
+          ))}
+        </TabPanels>
+        {userid && (
+          <ModalSendFiles
+            user={user}
+            setFiles={setFiles}
+            files={files}
+            isOpen={isOpen}
+            onClose={onClose}
+          />
+        )}
+        {user?.userid && (
+          <ChatBox
+            handleChatBoxReplyClick={handleChatBoxReplyClick}
+            setFiles={setFiles}
+            onOpen={onOpen}
+            user={user}
+          />
+        )}
+      </VStack>
+    );
+  }
+  return <EmptyChat />;
 };
 
 export default Chat;

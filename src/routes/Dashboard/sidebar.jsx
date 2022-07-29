@@ -1,6 +1,7 @@
 import { Spacer, Tab, TabList, Text, VStack } from "@chakra-ui/react";
-import { faIdCard, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faIdCard, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 
 export const Sidebar = ({ index, setIndex }) => {
   return (

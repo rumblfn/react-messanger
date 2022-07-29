@@ -11,6 +11,7 @@ import {
 import { useContext } from "react";
 import { useState } from "react";
 import { AccountContext } from "../../../../components/AccountContext";
+import React from "react";
 
 export const Email = ({ currentEmail }) => {
   const [emailErr, setEmailErr] = useState("");

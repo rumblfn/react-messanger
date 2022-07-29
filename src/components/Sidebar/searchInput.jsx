@@ -3,6 +3,7 @@ import { Button, HStack, Input } from "@chakra-ui/react";
 import { useRef } from "react";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
+import React from "react";
 
 export const SearchInput = ({ setSuccess, setErrorMsg }) => {
   const friendInputRef = useRef();

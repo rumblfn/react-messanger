@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { AccountContext } from "../../../../components/AccountContext";
 import { NewPasswordModal } from "./CustomModal";
 import { Email } from "./Email";
+import React from "react";
 
 export const AccountSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

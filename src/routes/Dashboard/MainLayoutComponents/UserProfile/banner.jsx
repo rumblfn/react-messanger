@@ -2,15 +2,19 @@ import { EditIcon } from "@chakra-ui/icons";
 import { Box, Image, useDisclosure } from "@chakra-ui/react";
 import styles from "./style.module.css";
 import { UploadBannerModal } from "./UploadBannerModal";
+import React from "react";
 
 export const Banner = ({ banner }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  let bannerSrc;
 
-  const bannerSrc = banner
-    ? banner?.startsWith("data")
-      ? banner
-      : `${process.env.REACT_APP_HOST_URL}/images/banners/${banner}`
-    : banner;
+  if (banner) {
+    if (banner.startsWith('data')) {
+      bannerSrc = banner
+    } else {
+      bannerSrc = `${process.env.REACT_APP_HOST_URL}/images/banners/${banner}`
+    }
+  }
 
   return (
     <Box
@@ -36,7 +40,7 @@ export const Banner = ({ banner }) => {
         />
       )}
       <div onClick={onOpen} className={styles["edit-icon"]}>
-        <EditIcon />
+        <EditIcon color='black' />
       </div>
       <UploadBannerModal
         currentBanner={bannerSrc}

@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import styles from "./style.module.css";
 import { UploadAvatarModal } from "./UploadAvatarModal";
+import React from "react";
 
 export const AvatarBox = ({ username, avatar }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

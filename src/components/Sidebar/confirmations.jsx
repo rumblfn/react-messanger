@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { getConfirmations } from "../../store/chats/selectors";
+import React from "react";
 
 export const Confirmations = ({
   setFriend,

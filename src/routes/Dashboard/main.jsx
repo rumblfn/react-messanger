@@ -2,6 +2,7 @@ import { TabPanel, TabPanels } from "@chakra-ui/react";
 import { AccountSettings } from "./MainLayoutComponents/AccountSettings/AccountSettings";
 import { UserAccounts } from "./MainLayoutComponents/UserAccounts";
 import { UserProfile } from "./MainLayoutComponents/UserProfile";
+import React from "react";
 
 export const MainLayout = () => {
   return (

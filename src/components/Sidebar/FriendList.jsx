@@ -14,6 +14,7 @@ import {
   getFriendList,
   getUnreadMessages,
 } from "../../store/chats/selectors";
+import React from "react";
 
 export const FriendList = () => {
   const { setFriendIndex } = useActions();

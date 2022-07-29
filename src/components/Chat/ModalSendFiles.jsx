@@ -41,6 +41,7 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
       setSend(false);
       onClose();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files]);
 
   const handleClose = () => {

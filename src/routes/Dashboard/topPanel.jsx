@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AccountContext } from "../../components/AccountContext";
 import ToggleColorMode from "../../components/ColorModeToggler";
 import { useActions } from "../../hooks/useActions";
+import React from "react";
 
 export const TopPanel = () => {
   const { setUser } = useContext(AccountContext);

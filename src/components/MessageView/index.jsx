@@ -1,9 +1,10 @@
-import { Heading, HStack, Text, useColorMode, VStack } from "@chakra-ui/react";
+import { Heading, HStack, useColorMode, VStack } from "@chakra-ui/react";
 import { faReply, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { ExpandFile } from "../ToExpandFile";
 import styles from "./style.module.css";
+import React from "react";
 
 export const MessageView = ({ clientX, clientY }) => {
   const { colorMode } = useColorMode();

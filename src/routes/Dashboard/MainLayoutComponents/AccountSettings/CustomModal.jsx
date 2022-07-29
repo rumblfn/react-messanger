@@ -13,6 +13,7 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import TextField from "../../../Auth/TextField";
 import * as Yup from "yup";
+import React from "react";
 
 export const NewPasswordModal = ({ isOpen, onClose }) => {
   const [error, setError] = useState("");

@@ -3,12 +3,12 @@ import { useContext } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { AccountContext } from "../AccountContext";
+import React from "react";
 
 export const JoinRoomField = () => {
   const roomRef = useRef();
   const [err, setErr] = useState(false);
   const [errMsg, setErrMsg] = useState('');
-  const {user} = useContext(AccountContext)
 
   const clickJoin = () => {
     const roomName = roomRef.current.value;

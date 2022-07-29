@@ -3,6 +3,7 @@ import { ExpandFilename } from "./components/ExpandFile";
 import ExpandContext from "./components/ToExpandFile";
 import Views from "./components/Views";
 import useSocketSetup from "./hooks/useSocketSetup";
+import React from "react";
 
 function App() {
   let messageSound = new Howl({

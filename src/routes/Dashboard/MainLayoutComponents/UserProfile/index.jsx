@@ -4,6 +4,7 @@ import { AccountContext } from "../../../../components/AccountContext";
 import { AboutMeBox } from "./AboutMe";
 import { AvatarBox } from "./AvatarBox";
 import { Banner } from "./banner";
+import React from "react";
 
 export const UserProfile = () => {
   const { user } = useContext(AccountContext);

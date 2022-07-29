@@ -20,6 +20,7 @@ import { useRef, useState } from "react";
 import { AccountContext } from "../../../../components/AccountContext";
 import socket from "../../../../socket";
 import { UpdateImageFromFile, validateFile } from "./common";
+import React from "react";
 
 export const UploadBannerModal = ({currentBanner, isOpen, onClose }) => {
   const { setUser } = useContext(AccountContext);
