@@ -3,6 +3,7 @@ import {
   TabPanel,
   TabPanels,
   useDisclosure,
+  useMediaQuery,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -19,8 +20,12 @@ import { Message } from "./Message";
 import styles from "./style.module.css";
 import { useContext } from "react";
 import { ExpandFile } from "../ToExpandFile";
+import { useRef } from "react";
 
 const Chat = ({ user }) => {
+  const messageRef = useRef();
+  const [tablet] = useMediaQuery("(max-width: 1040px)");
+
   const [files, setFiles] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const userid = user?.userid;
@@ -29,7 +34,7 @@ const Chat = ({ user }) => {
   const friendList = useSelector(getFriendList);
   const chat = useSelector(getMessages)[userid];
 
-  const {msgBg, handleContextMenu} = useContext(ExpandFile)
+  const { msgBg, handleContextMenu, handleScroll, handleScrollMessageBg } = useContext(ExpandFile);
 
   useEffect(() => {
     if (!chat?.firstLoading) {
@@ -42,20 +47,28 @@ const Chat = ({ user }) => {
     socket.emit("readMessages", userid);
   }, [chat?.messages, userid, readMessages]);
 
+  const handleChatBoxReplyClick = () => {
+    messageRef.current?.scrollIntoView({ behavior: "smooth" });
+    handleScrollMessageBg()
+  };
+
   return friendList.length > 0 ? (
     <VStack minW="325px" pt="0" h="100%" justify="end" spacing={0}>
       {user && <TopUserInfo user={user} />}
       <TabPanels h="100%" overflow="hidden" position="relative">
         {friendList.map((friend) => (
           <VStack
+            onScroll={handleScroll}
             className={styles.chat}
             p={0}
+            pt={2}
             pb={2}
             flexDirection="column-reverse"
             as={TabPanel}
             key={`chat:${friend?.userid}`}
             h="100%"
-            spacing="0.5rem"
+            gap="12px"
+            spacing="0"
             overflowY="scroll"
           >
             {chat?.messages &&
@@ -71,15 +84,21 @@ const Chat = ({ user }) => {
                 }
                 return (
                   <Box
+                    ref={
+                      message?.timestamp === msgBg?.messageToReply?.timestamp
+                        ? messageRef
+                        : null
+                    }
+                    key={`msg:${friend.userid}.${idx}`}
                     style={{
-                      backgroundColor: message.timestamp === msgBg.msgTimestamp && msgBg.color,
+                      backgroundColor:
+                        message.timestamp === msgBg.msgTimestamp && msgBg.color,
                       transition: "all 0.22s",
                     }}
-                    onContextMenu={e => handleContextMenu(e, message.timestamp)}
+                    onContextMenu={(e) => handleContextMenu(e, message)}
                     w="100%"
-                    key={`msg:${friend.userid}.${idx}`}
                   >
-                    <Box w="80%" m="0 auto" maxW="1440px">
+                    <Box w={tablet ? "95%" : "80%"} m="0 auto" maxW="1440px">
                       <Message friend={friend} message={message} />
                     </Box>
                   </Box>
@@ -98,7 +117,12 @@ const Chat = ({ user }) => {
         />
       )}
       {user?.userid && (
-        <ChatBox setFiles={setFiles} onOpen={onOpen} user={user} />
+        <ChatBox
+          handleChatBoxReplyClick={handleChatBoxReplyClick}
+          setFiles={setFiles}
+          onOpen={onOpen}
+          user={user}
+        />
       )}
     </VStack>
   ) : (

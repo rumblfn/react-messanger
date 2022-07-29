@@ -7,7 +7,7 @@ import styles from "./style.module.css";
 
 export const SimpleFile = ({ margins, filename, TimeParams, bgColor }) => {
   return (
-    <HStack
+    <HStack color='var(--main-app-dark-bg-color)'
       className={styles.message}
       backgroundColor={bgColor}
       p="0.3rem 0.7rem"

@@ -19,13 +19,13 @@ export const Sidebar = ({ index, setIndex }) => {
         <Spacer />
         <FontAwesomeIcon icon={faIdCard} />
       </Tab>
-      <Tab w="100%">
+      {/* <Tab w="100%">
         <Text align="start" w="100%">
           Accounts
         </Text>
         <Spacer />
         <FontAwesomeIcon icon={faUsers} />
-      </Tab>
+      </Tab> */}
       <Spacer />
     </VStack>
   );

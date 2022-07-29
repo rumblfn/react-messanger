@@ -1,0 +1,26 @@
+.main {
+    position: absolute;
+    z-index: 100;
+    padding: 0.25rem;
+    border-radius: 10px;
+    background-color: white;
+    opacity: 1;
+    animation-duration: 0.3s;
+    animation-name: aperience;
+    transition: all 0.22s ease;
+    cursor: pointer;
+}
+
+.item {
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    transition: background-color 0.22s;
+}
+
+@keyframes aperience {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}

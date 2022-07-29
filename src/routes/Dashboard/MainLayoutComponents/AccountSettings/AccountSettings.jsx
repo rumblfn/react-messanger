@@ -3,6 +3,7 @@ import {
   Heading,
   HStack,
   Input,
+  useColorMode,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
@@ -13,11 +14,12 @@ import { Email } from "./Email";
 
 export const AccountSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {colorMode} = useColorMode
   const { user } = useContext(AccountContext);
 
   return (
     <VStack alignItems="start">
-      <Heading borderBottom="4px solid black" size="lg">
+      <Heading borderBottom={`4px solid ${colorMode === 'light' ? 'black' : 'white'}`} size="lg">
         My Account
       </Heading>
       <VStack w="100%" alignItems="start" p={2} pb={1}>

@@ -1,4 +1,6 @@
-import { extendTheme } from "@chakra-ui/react";
+import {
+    extendTheme
+} from "@chakra-ui/react";
 
 const theme = {
     config: {
@@ -17,12 +19,12 @@ const theme = {
                   sans-serif`,
                 WebkitFontSmoothing: 'antialiased',
                 MozOsxFontSmoothing: 'grayscale',
-                backgroundColor: props.colorMode === 'dark' ? 'black' : 'white'
+                backgroundColor: props.colorMode === 'dark' ? 'var(--main-app-dark-bg-color)' : 'var(--main-app-light-bg-color)'
             },
-              
+
             code: {
                 fontFamily: "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace"
-            }      
+            }
         })
     }
 }

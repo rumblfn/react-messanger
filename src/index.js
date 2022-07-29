@@ -7,6 +7,7 @@ import theme from './theme';
 import store from './store';
 import { Provider } from 'react-redux';
 import UserContext from './components/AccountContext';
+import './style.css';
 // import { persistStore } from 'redux-persist';
 // import { PersistGate } from 'redux-persist/integration/react';
 
@@ -21,7 +22,7 @@ root.render(
         <Provider store={store}>
           {/* <PersistGate persistor={persistor}> */}
             <UserContext>
-              <App />
+            <App />
             </UserContext>
           {/* </PersistGate> */}
         </Provider>
