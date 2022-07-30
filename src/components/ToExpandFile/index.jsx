@@ -5,6 +5,7 @@ export const ExpandFile = createContext();
 
 const ExpandContext = ({ children }) => {
   const [filename, setFilename] = useState("");
+  const [messageToDelete, setMessaeToDelete] = useState()
   const [msgBg, setMsgBg] = useState({
     msgTimestamp: null,
     color: null,
@@ -12,7 +13,9 @@ const ExpandContext = ({ children }) => {
 
   const handleLeftClick = (e) => {
     setMsgBg(prev => ({
-      messageToReply: prev.messageToReply
+      messageToReply: prev?.messageToReply,
+      replyTimestamp: prev?.replyTimestamp,
+      replyColor: "rgba(180, 170, 255, 0.25)"
     }));
   };
 
@@ -32,7 +35,9 @@ const ExpandContext = ({ children }) => {
     setMsgBg(prev => ({
       msgTimestamp: prev?.messageToReply?.timestamp,
       messageToReply: prev.messageToReply,
+      replyTimestamp: prev?.replyTimestamp,
       color: "rgba(200, 220, 255, 0.25)",
+      replyColor: "rgba(180, 170, 255, 0.25)"
     }));
     e.preventDefault();
   }
@@ -48,6 +53,13 @@ const ExpandContext = ({ children }) => {
     }
   }
 
+  const handleMessageToDelete = (e) => {
+    const {message} = msgBg
+    if (message) {
+      setMessaeToDelete(message)
+    }
+  }
+
   const handleScrollMessageBg = (e) => {
     setMsgBg(prev => ({
       ...prev,
@@ -57,9 +69,16 @@ const ExpandContext = ({ children }) => {
     e.preventDefault();
   }
 
+  const handleScrollToReply = (timestamp) => {
+    setMsgBg(prev => ({
+      ...prev,
+      replyTimestamp: timestamp,
+      replyColor: "rgba(180, 170, 255, 0.25)"
+    }));
+  }
+
   const handleRemoveReply = (e) => {
     setMsgBg({})
-    e.stopPropagation()
   }
 
   return (
@@ -73,7 +92,9 @@ const ExpandContext = ({ children }) => {
         handleReplyMessage,
         handleRemoveReply,
         handleScroll,
-        handleScrollMessageBg
+        handleScrollMessageBg,
+        handleScrollToReply,
+        messageToDelete, setMessaeToDelete, handleMessageToDelete
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_ABOUT, CHANGE_FRIENDS_AVATAR, CHANGE_FRIENDS_BANNER, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, READ_CHANNEL_MESSAGES, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES, SET_UNREAD_MESSAGES } from "./actions"
+import { ADD_CONFIRMATION, ADD_FRIEND, ADD_MESSAGE, CHANGE_FRIENDS_ABOUT, CHANGE_FRIENDS_AVATAR, CHANGE_FRIENDS_BANNER, CHANGE_FRIENDS_STATUS, CLEAR_CHATS, DELETE_MESSAGE, READ_CHANNEL_MESSAGES, REMOVE_CONFIRMATION, SET_CONFIRMATIONS, SET_FRIEND_INDEX, SET_FRIEND_LIST, SET_MESSAGES, SET_UNREAD_MESSAGES } from "./actions"
 
 const initialState = {
     friendList: [],
@@ -32,6 +32,7 @@ export const chatsReducer = (state = initialState, action) => {
                     ...state.messages,
                     [action.payload.userid]: {
                         firstLoading: true,
+                        newmessageindex: action.payload.lastindex,
                         messages: action.payload.messages
                     }
                 }
@@ -43,12 +44,27 @@ export const chatsReducer = (state = initialState, action) => {
                     ...state.messages,
                     [action.payload.userid]: {
                         firstLoading: state.messages[action.payload.userid]?.firstLoading || false,
-                        messages: [action.payload.message, ...(state.messages[action.payload.userid]?.messages || [])]
+                        messages: [action.payload.message, ...(state.messages[action.payload.userid]?.messages || [])],
+                        newmessageindex: state.messages[action.payload.userid]?.newmessageindex + 1
                     }
                 },
                 unreadMessages: {
                     ...state.unreadMessages,
                     [action.payload.message.from]: (state.unreadMessages[action.payload.message.from] || 0) + 1
+                }
+            }
+        case DELETE_MESSAGE:
+            let messages = [...state.messages[action.payload.userid]?.messages].filter(msg => msg.index !== action.payload.index)
+
+            return {
+                ...state,
+                messages: {
+                    ...state.messages,
+                    [action.payload.userid]: {
+                        messages,
+                        firstLoading: state.messages[action.payload.userid]?.firstLoading || false,
+                        newmessageindex: state.messages[action.payload.userid]?.newmessageindex
+                    }
                 }
             }
         case SET_UNREAD_MESSAGES:

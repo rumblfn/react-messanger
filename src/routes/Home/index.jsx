@@ -1,4 +1,4 @@
-import { Box, HStack, Tabs } from "@chakra-ui/react";
+import { Box, HStack, Tabs, useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import Chat from "../../components/Chat";
@@ -7,12 +7,16 @@ import Sidebar from "../../components/Sidebar";
 import { ExpandFile } from "../../components/ToExpandFile";
 import { getFriendIndex, getFriendList } from "../../store/chats/selectors";
 import React from "react";
+import { DeleteMessage } from "./ModalDeleteMessage";
 
 export default function Home() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const friendIndex = useSelector(getFriendIndex);
   const friendList = useSelector(getFriendList);
 
-  const { handleLeftClick, msgBg } = useContext(ExpandFile);
+  const { handleLeftClick, msgBg, messageToDelete } =
+    useContext(ExpandFile);
 
   const { clientX, clientY } = msgBg;
 
@@ -31,8 +35,19 @@ export default function Home() {
         <Chat user={friendList[friendIndex]} />
       </Box>
       {clientX && clientY && (
-        <MessageView clientX={clientX} clientY={clientY} />
+        <MessageView
+          onOpen={onOpen}
+          clientX={clientX}
+          clientY={clientY}
+        />
       )}
+      <DeleteMessage
+        messageToDelete={messageToDelete}
+        onClose={onClose}
+        isOpen={isOpen}
+        username={friendList[friendIndex]?.username}
+        userid={friendList[friendIndex]?.userid}
+      />
     </HStack>
   );
 }

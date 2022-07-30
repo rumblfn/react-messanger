@@ -25,6 +25,7 @@ import { useRef } from "react";
 
 const Chat = ({ user }) => {
   const messageRef = useRef();
+  const replyRef = useRef()
   const [tablet] = useMediaQuery("(max-width: 1040px)");
 
   const [files, setFiles] = useState([]);
@@ -54,7 +55,7 @@ const Chat = ({ user }) => {
   }, [chat?.messages, userid, readMessages]);
 
   const handleChatBoxReplyClick = () => {
-    messageRef.current?.scrollIntoView({ behavior: "smooth" });
+    messageRef.current?.scrollIntoView({behavior: "smooth" });
     handleScrollMessageBg();
   };
 
@@ -94,13 +95,14 @@ const Chat = ({ user }) => {
                       ref={
                         message?.timestamp === msgBg?.messageToReply?.timestamp
                           ? messageRef
-                          : null
+                          : message?.timestamp === msgBg?.replyTimestamp ? replyRef : null
                       }
                       key={`msg:${friend.userid}.${idx}`}
                       style={{
                         backgroundColor:
-                          message.timestamp === msgBg.msgTimestamp &&
-                          msgBg.color,
+                          message.timestamp === msgBg.msgTimestamp ?
+                          msgBg.color
+                          : message?.timestamp === msgBg?.replyTimestamp && msgBg?.replyColor,
                         transition: "all 0.22s",
                       }}
                       onContextMenu={(e) => handleContextMenu(e, message)}
@@ -125,7 +127,7 @@ const Chat = ({ user }) => {
           />
         )}
         {user?.userid && (
-          <ChatBox
+          <ChatBox newmessageindex={chat?.newmessageindex}
             handleChatBoxReplyClick={handleChatBoxReplyClick}
             setFiles={setFiles}
             onOpen={onOpen}

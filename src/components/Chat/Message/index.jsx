@@ -1,7 +1,7 @@
-
 import { TimeDateMiddle } from "./Date";
 import { SimpleFile } from "./File";
 import { ImageBox } from "./Image";
+import { Reply } from "./Reply";
 import { TextBox } from "./Text";
 import { VideoBox } from "./Video";
 
@@ -25,7 +25,7 @@ export const Message = ({ friend, message }) => {
 
   switch (message?.type) {
     case "time":
-      return <TimeDateMiddle time={message?.time}/>;
+      return <TimeDateMiddle time={message?.time} />;
     case "IMAGE":
       TimeParams.left = message.to === friend.userid ? "0px" : "";
       TimeParams.right = message.to === friend.userid ? "" : "0px";
@@ -62,6 +62,15 @@ export const Message = ({ friend, message }) => {
       return (
         <TextBox
           text={message.content}
+          margins={messageMargins}
+          bgColor={bgColor}
+          TimeParams={TimeParams}
+        />
+      );
+    case "REPLY":
+      return (
+        <Reply
+          message={message}
           margins={messageMargins}
           bgColor={bgColor}
           TimeParams={TimeParams}

@@ -22,6 +22,7 @@ const useSocketSetup = (playMessageSound) => {
     changeFriendAvatar,
     changeFriendBanner,
     changeFriendAbout,
+    deleteMessage
   } = useActions();
 
   useEffect(() => {
@@ -51,7 +52,6 @@ const useSocketSetup = (playMessageSound) => {
     });
 
     socket.on("add_chat", (friend) => {
-      console.log(friend)
       if (lastAddedChat !== friend.userid) {
         lastAddedChat = friend.userid;
         friend.connected = true;
@@ -67,8 +67,12 @@ const useSocketSetup = (playMessageSound) => {
       }
     });
 
-    socket.on("chatMessages", (userid, messages) => {
-      setMessages({ userid, messages });
+    socket.on("delete-message", (index, userid) => {
+      deleteMessage({index, userid})
+    })
+
+    socket.on("chatMessages", (userid, messages, lastindex) => {
+      setMessages({ userid, messages, lastindex });
     });
 
     socket.on("connected", (status, username) => {

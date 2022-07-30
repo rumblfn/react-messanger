@@ -7,6 +7,7 @@ import {
     changeFriendBannerAction,
     changeFriendStatusAction,
     clearChatsAction,
+    deleteMessageAction,
     readMessagesAction,
     removeConfirmation,
     setConfirmationsAction,
@@ -56,6 +57,9 @@ export const setMessages = (payload) => {
         let lastDay = new Date(0)
 
         for (let message of payload.messages) {
+            
+            if (!message) continue
+
             const date = new Date(+message.timestamp)
             let today = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
@@ -81,8 +85,14 @@ export const setMessages = (payload) => {
 
             message.formattedTime = formattedTime
             messages.unshift(message)
+
+            if (message.type.startsWith('REPLY')) {
+                let reply = message.type.split(':')
+                message.type = reply.shift()
+                message.reply = reply
+            }
         }
-        dispatch(setMessagesAction({messages, userid: payload.userid}))
+        dispatch(setMessagesAction({messages, userid: payload.userid, lastindex: payload.lastindex}))
     }
 }
 
@@ -99,7 +109,23 @@ export const addMessage = (payload) => {
 
         message.formattedTime = formattedTime
 
+        if (message.type.startsWith('REPLY')) {
+            let reply = message.type.split(':')
+            message.type = reply.shift()
+            message.reply = reply
+        }
+
         dispatch(addMessageAction({message, userid: payload.userid}))
+    }
+}
+
+export const deleteMessage = (payload) => {
+    return async dispatch => {
+        try {
+            dispatch(deleteMessageAction(payload))
+        } catch {
+            throw Error("some errors in changeFriendStatus")
+        }
     }
 }
 

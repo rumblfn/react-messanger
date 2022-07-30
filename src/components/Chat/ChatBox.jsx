@@ -1,5 +1,13 @@
 import { AttachmentIcon, CloseIcon } from "@chakra-ui/icons";
-import { Button, Heading, HStack, Input, Text, useMediaQuery, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  HStack,
+  Input,
+  Text,
+  useMediaQuery,
+  VStack,
+} from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { nanoid } from "nanoid";
 import { useContext } from "react";
@@ -10,7 +18,7 @@ import socket from "../../socket";
 import { AccountContext } from "../AccountContext";
 import { ExpandFile } from "../ToExpandFile";
 
-const ChatBox = ({ user, setFiles, onOpen, handleChatBoxReplyClick }) => {
+const ChatBox = ({ user, setFiles, onOpen, handleChatBoxReplyClick, newmessageindex }) => {
   const [tablet] = useMediaQuery("(max-width: 1040px)");
   const { user: currentUser } = useContext(AccountContext);
   let fileRef = useRef();
@@ -18,8 +26,8 @@ const ChatBox = ({ user, setFiles, onOpen, handleChatBoxReplyClick }) => {
   const messageToReply = msgBg?.messageToReply;
   let messageToReplyUsername = user.username;
 
-  if (messageToReply?.from === currentUser?.userid && messageToReply?.from) {
-    messageToReplyUsername = currentUser.username;
+  if (messageToReply?.from === currentUser?.userid) {
+    messageToReplyUsername = currentUser?.username
   }
 
   const { addMessage } = useActions();
@@ -44,15 +52,21 @@ const ChatBox = ({ user, setFiles, onOpen, handleChatBoxReplyClick }) => {
       })}
       onSubmit={(values, actions) => {
         const message = {
+          index: newmessageindex,
           username: user.username,
           connected: user?.connected,
           to: user?.userid,
           from: null,
           content: values.message,
           timestamp: new Date().getTime(),
-          type: "MESSAGE",
+          type: messageToReply
+            ? `REPLY:${messageToReplyUsername}:${messageToReply.content.slice(0, 100).split('.')[0]}:${
+                messageToReply.timestamp
+              }`
+            : "MESSAGE",
         };
 
+        handleRemoveReply()
         socket.emit("dm", message, nanoid(8));
         addMessage({ message, userid: message.to });
 
@@ -62,12 +76,23 @@ const ChatBox = ({ user, setFiles, onOpen, handleChatBoxReplyClick }) => {
       <VStack w={tablet ? "100%" : "90%"} maxW="1600px" p="0.6rem" pt={0}>
         {messageToReply && (
           <HStack p={1} w="100%">
-            <CloseIcon onClick={handleRemoveReply} color='blue.500' cursor='pointer' />
-            <Heading color='blue.500' size='xs'>
+            <CloseIcon
+              onClick={handleRemoveReply}
+              color="blue.500"
+              cursor="pointer"
+            />
+            <Heading color="blue.500" size="xs">
               {messageToReplyUsername}
             </Heading>
-            <Text onClick={handleChatBoxReplyClick} p={0} size='xs' w='100%' wordBreak='keep-all' overflow='hidden'>
-              {messageToReply.type.toLowerCase()}
+            <Text cursor='pointer'
+              onClick={handleChatBoxReplyClick}
+              p={0}
+              size="xs"
+              w="100%"
+              wordBreak="keep-all"
+              overflow="hidden"
+            >
+              {messageToReply.content.slice(0, 100)}
             </Text>
           </HStack>
         )}

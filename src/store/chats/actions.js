@@ -13,6 +13,7 @@ export const SET_UNREAD_MESSAGES = 'SET_UNREAD_MESSAGES'
 export const CHANGE_FRIENDS_AVATAR = 'CHANGE_FRIENDS_AVATAR'
 export const CHANGE_FRIENDS_BANNER = 'CHANGE_FRIENDS_BANNER'
 export const CHANGE_FRIENDS_ABOUT = 'CHANGE_FRIENDS_ABOUT'
+export const DELETE_MESSAGE = 'DELETE_MESSAGE'
 
 export const setFriendListAction = (payload) => ({
     type: SET_FRIEND_LIST, payload
@@ -72,4 +73,8 @@ export const readMessagesAction = (payload) => ({
 
 export const setUnreadMessagesAction = (payload) => ({
     type: SET_UNREAD_MESSAGES, payload
+})
+
+export const deleteMessageAction = payload => ({
+    type: DELETE_MESSAGE, payload
 })

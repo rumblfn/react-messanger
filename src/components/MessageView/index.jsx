@@ -6,9 +6,9 @@ import { ExpandFile } from "../ToExpandFile";
 import styles from "./style.module.css";
 import React from "react";
 
-export const MessageView = ({ clientX, clientY }) => {
+export const MessageView = ({ clientX, clientY, onOpen }) => {
   const { colorMode } = useColorMode();
-  const {handleReplyMessage} = useContext(ExpandFile)
+  const {handleReplyMessage, handleMessageToDelete} = useContext(ExpandFile)
 
   let translateX = '0%'
   let translateY = '0%'
@@ -50,7 +50,10 @@ export const MessageView = ({ clientX, clientY }) => {
         <FontAwesomeIcon icon={faReply} />
         <Heading size="xs">Reply</Heading>
       </HStack>
-      <HStack
+      <HStack onClick={() => {
+        handleMessageToDelete()
+        onOpen()
+      }}
         _hover={{
           backgroundColor:
             colorMode === "light" ? "whitesmoke" : "var(--hover-bg-color-1)",
