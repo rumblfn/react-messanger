@@ -52,6 +52,7 @@ export default function SignUp() {
             return res.json();
           })
           .then((data) => {
+            console.log(data)
             if (!data || !data.loggedIn) {
               setError(data.status)
               return

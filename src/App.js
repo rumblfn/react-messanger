@@ -9,7 +9,7 @@ function App() {
   let messageSound = new Howl({
     src: ['/sounds/message-sound.mp3']
   })
-  // useSocketSetup(messageSound);
+  useSocketSetup(messageSound);
 
   return <ExpandContext>
     <Views />

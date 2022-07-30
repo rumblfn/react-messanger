@@ -22,7 +22,7 @@ root.render(
         <Provider store={store}>
           {/* <PersistGate persistor={persistor}> */}
             <UserContext>
-            <App />
+              <App />
             </UserContext>
           {/* </PersistGate> */}
         </Provider>

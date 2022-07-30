@@ -14,7 +14,6 @@ const UserContext = ({children}) => {
         fetch(`${process.env.REACT_APP_HOST_URL}/auth/login`, {
             credentials: "include",
         }).catch(err => {
-            console.log(err)
             setUser({loggedIn: false})
             return
         })
