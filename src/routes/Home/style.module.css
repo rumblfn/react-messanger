@@ -1,0 +1,35 @@
+.sidebar {
+    border-right: 1px solid gray;
+    height: 100%;
+    width: 30%;
+    min-width: 400px;
+}
+
+.box {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    transition: all 0.22s ease;
+}
+
+.main {
+    height: 100%;
+    margin-left: 0;
+    width: 70vw;
+}
+
+@media screen and (max-width: 888px) {
+    .box {
+        width: fit-content;
+    }
+    .main {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .sidebar {
+        width: 100vw;
+        min-width: 325px;
+    }
+}

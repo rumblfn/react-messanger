@@ -17,15 +17,23 @@ import styles from "./style.module.css";
 import { Banner } from "../UserBanner";
 import { AvatarBox } from "../UserAvatar";
 import { UserDescription } from "../UserDescription";
+import { useContext } from "react";
+import { ExpandFile } from "../ToExpandFile";
 
 export const UserDescTop = ({ user }) => {
   const formattedDate = useTimeToDay(user.lastActiveDay);
+  const { showSidebar } = useContext(ExpandFile);
 
   return (
     <Accordion allowToggle w="100%">
       <AccordionItem>
-        <AccordionButton p='0.3rem 0.5rem'>
-          <VStack w="100%" spacing={0}>
+        <AccordionButton p="0.3rem 0.5rem">
+          <VStack
+            w="100%"
+            spacing={0}
+            marginLeft={showSidebar ? "0px" : "70px"}
+            style={{ transition: "all 0.22s ease" }}
+          >
             <HStack alignItems="center" w="100%">
               {user?.avatar ? (
                 <Image
@@ -48,7 +56,8 @@ export const UserDescTop = ({ user }) => {
               fontSize="xs"
               pl="0.15rem"
               color={user?.connected ? "green.500" : "gray.500"}
-              w="100%" textAlign='start'
+              w="100%"
+              textAlign="start"
             >
               {user?.connected
                 ? "Online"

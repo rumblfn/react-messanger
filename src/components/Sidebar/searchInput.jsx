@@ -36,7 +36,12 @@ export const SearchInput = ({ setSuccess, setErrorMsg }) => {
 
   return (
     <HStack w="100%" justify="space-evenly" pl="0.5rem" pr="0.5rem">
-      <Input ref={friendInputRef} placeholder="Add friend" size="md" />
+      <Input
+        ref={friendInputRef}
+        placeholder="Add friend"
+        size="md"
+        px="0.5rem"
+      />
       <Button p={0} onClick={() => getFriend(friendInputRef.current.value)}>
         <ChatIcon />
       </Button>

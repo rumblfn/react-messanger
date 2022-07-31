@@ -3,9 +3,9 @@ import { AccountContext } from "../components/AccountContext";
 import socket from "../socket";
 import { useActions } from "./useActions";
 
-let lastMessageId = null;
-let lastAddedChat = null;
-let lastConfirmationAdded = null;
+let lastMessageId;
+let lastAddedChat;
+let lastConfirmationAdded;
 
 const useSocketSetup = (playMessageSound) => {
   const { setUser } = useContext(AccountContext);
@@ -22,7 +22,7 @@ const useSocketSetup = (playMessageSound) => {
     changeFriendAvatar,
     changeFriendBanner,
     changeFriendAbout,
-    deleteMessage
+    deleteMessage,
   } = useActions();
 
   useEffect(() => {
@@ -68,8 +68,8 @@ const useSocketSetup = (playMessageSound) => {
     });
 
     socket.on("delete-message", (index, userid) => {
-      deleteMessage({index, userid})
-    })
+      deleteMessage({ index, userid });
+    });
 
     socket.on("chatMessages", (userid, messages, lastindex) => {
       setMessages({ userid, messages, lastindex });
@@ -105,6 +105,10 @@ const useSocketSetup = (playMessageSound) => {
     });
 
     return () => {
+      socket.off("avatar-changed");
+      socket.off("banner-changed");
+      socket.off("about-changed");
+      socket.off("delete-message");
       socket.off("connect_error");
       socket.off("connected");
       socket.off("friends");
@@ -131,6 +135,7 @@ const useSocketSetup = (playMessageSound) => {
     changeFriendAbout,
     changeFriendAvatar,
     changeFriendBanner,
+    deleteMessage,
   ]); // remove subs, make clearly
 };
 

@@ -1,7 +1,4 @@
-import {
-  useDisclosure,
-  VStack,
-} from "@chakra-ui/react";
+import { useColorMode, useDisclosure, VStack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
@@ -14,6 +11,7 @@ import { SearchInput } from "./searchInput";
 import { StatusMsg } from "./StatusField";
 
 const Sidebar = () => {
+  const { colorMode } = useColorMode();
   const { removeConfirmationAfterDecline } = useActions();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,7 +40,15 @@ const Sidebar = () => {
   };
 
   return (
-    <VStack py="0.5rem" minW='325px'>
+    <VStack
+      py="0.5rem"
+      bg={
+        colorMode === "light"
+          ? "var(--main-app-light-bg-color)"
+          : "var(--main-app-dark-bg-color)"
+      }
+      h="100%"
+    >
       <ProfileTopPreview />
       {/* <JoinRoomField /> */}
       <SearchInput setSuccess={setSuccess} setErrorMsg={setErrorMsg} />

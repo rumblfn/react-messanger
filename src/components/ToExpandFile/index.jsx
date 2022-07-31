@@ -4,6 +4,7 @@ import { createContext, useState } from "react";
 export const ExpandFile = createContext();
 
 const ExpandContext = ({ children }) => {
+  const [showSidebar, setShowSidebar] = useState(true)
   const [filename, setFilename] = useState("");
   const [messageToDelete, setMessaeToDelete] = useState()
   const [msgBg, setMsgBg] = useState({
@@ -81,6 +82,10 @@ const ExpandContext = ({ children }) => {
     setMsgBg({})
   }
 
+  const toggleSidebar = () => {
+    setShowSidebar(prev => !prev)
+  }
+
   return (
     <ExpandFile.Provider
       value={{
@@ -94,7 +99,8 @@ const ExpandContext = ({ children }) => {
         handleScroll,
         handleScrollMessageBg,
         handleScrollToReply,
-        messageToDelete, setMessaeToDelete, handleMessageToDelete
+        messageToDelete, setMessaeToDelete, handleMessageToDelete,
+        toggleSidebar, showSidebar
       }}
     >
       {children}

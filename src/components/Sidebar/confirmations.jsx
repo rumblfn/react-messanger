@@ -7,8 +7,10 @@ import {
   AccordionPanel,
   Box,
   Button,
+  HStack,
   Spacer,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { getConfirmations } from "../../store/chats/selectors";
@@ -23,17 +25,15 @@ export const Confirmations = ({
   const awaitingConfirmation = useSelector(getConfirmations);
 
   return (
-    <Accordion m={1} allowToggle w="100%">
+    <Accordion allowToggle w="100%">
       <AccordionItem>
         <h2>
-          <AccordionButton>
+          <AccordionButton p="0.25rem 0.6rem">
             <Box flex="1" textAlign="left" fontWeight={600}>
-              Awaiting confirmations{" "}
-              {awaitingConfirmation.length
-                ? ` - ${awaitingConfirmation.length}`
-                : ""}
+              Awaiting confirmations
             </Box>
             <AccordionIcon />
+            <Text fontWeight={500}>{awaitingConfirmation.length}</Text>
           </AccordionButton>
         </h2>
         {awaitingConfirmation.length ? (
@@ -44,37 +44,41 @@ export const Confirmations = ({
                 onOpen();
               }}
               key={user.userid}
+              pt={0}
+              px={3}
               pb={2}
             >
-              <Box display="flex" alignItems="center" gap={2}>
+              <VStack w='100%' alignItems='start' spacing={0}>
                 <Text wordBreak="break-all" fontSize="md" fontWeight={500}>
                   {user.username}
                 </Text>
-                <Text fontSize="sm">{user.type}</Text>
-                <Spacer />
-                {user.type === "outgoing" && (
+                <HStack w='100%'>
+                  <Text fontSize="sm">{user.type}</Text>
+                  <Spacer />
+                  {user.type === "outgoing" && (
+                    <Button
+                      size="sm"
+                      p={0}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        acceptConfirmation(user);
+                      }}
+                    >
+                      <CheckIcon />
+                    </Button>
+                  )}
                   <Button
                     size="sm"
                     p={0}
                     onClick={(e) => {
                       e.stopPropagation();
-                      acceptConfirmation(user);
+                      declineConfirmation(user);
                     }}
                   >
-                    <CheckIcon />
+                    <CloseIcon />
                   </Button>
-                )}
-                <Button
-                  size="sm"
-                  p={0}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    declineConfirmation(user);
-                  }}
-                >
-                  <CloseIcon />
-                </Button>
-              </Box>
+                </HStack>
+              </VStack>
             </AccordionPanel>
           ))
         ) : (
