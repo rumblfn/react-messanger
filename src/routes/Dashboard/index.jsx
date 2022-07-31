@@ -5,6 +5,7 @@ import React from "react";
 import { MainLayout } from "./main";
 import { Sidebar } from "./sidebar";
 import { TopPanel } from "./topPanel";
+import styles from './style.module.css'
 
 const Dashboard = () => {
   // const dashboardInformation = useSelector(getDashboard);
@@ -13,18 +14,16 @@ const Dashboard = () => {
     <Container minH="100vh" maxW="1280px" p={3}>
       <VStack h="100%">
         <TopPanel />
-        <HStack
+        <Box
+          className={styles.box}
           w="100%"
           h="100%"
           as={Tabs}
           variant="enclosed"
-          alignItems="start"
         >
-          <Box w="350px" h="100%">
-            <Sidebar />
-          </Box>
+          <Sidebar />
           <MainLayout />
-        </HStack>
+        </Box>
       </VStack>
     </Container>
   );

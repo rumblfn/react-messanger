@@ -1,0 +1,23 @@
+.box {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    width: 30%;
+}
+
+@media screen and (max-width: 1440px) {
+    .sidebar {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .box {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%
+    }
+}
