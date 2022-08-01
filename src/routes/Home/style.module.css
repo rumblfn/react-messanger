@@ -31,5 +31,6 @@
     .sidebar {
         width: 100vw;
         min-width: 325px;
+        border-right: 0px;
     }
 }
