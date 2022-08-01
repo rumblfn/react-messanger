@@ -28,7 +28,7 @@ export const Confirmations = ({
     <Accordion allowToggle w="100%">
       <AccordionItem>
         <h2>
-          <AccordionButton p="0.25rem 0.6rem">
+          <AccordionButton>
             <Box flex="1" textAlign="left" fontWeight={600}>
               Awaiting confirmations
             </Box>
