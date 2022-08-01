@@ -19,7 +19,7 @@ const theme = {
                   sans-serif`,
                 WebkitFontSmoothing: 'antialiased',
                 MozOsxFontSmoothing: 'grayscale',
-                backgroundColor: props.colorMode === 'dark' ? 'var(--main-app-dark-bg-color)' : 'var(--main-app-light-bg-color)'
+                backgroundColor: props.colorMode === 'dark' ? 'var(--main-app-dark-bg-color)' : 'var(--main-app-light-bg-color)',
             },
 
             code: {

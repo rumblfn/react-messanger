@@ -64,7 +64,7 @@ export const ProfileTopPreview = () => {
         top={showSidebar ? '0px' : '-8px'}
         p={0}
         style={{transition: 'all 0.22s ease'}}
-        variant="outline"
+        variant="none"
       >
         <ArrowBackIcon />
       </Button>

@@ -30,7 +30,7 @@ export const AccountSettings = () => {
       <Email currentEmail={user.email} />
       <HStack justifyContent="space-between" w="100%" p={2}>
         <Heading size="md">Password</Heading>
-        <Button onClick={onOpen}>Change password</Button>
+        <Button onClick={onOpen}>Change</Button>
       </HStack>
       <NewPasswordModal isOpen={isOpen} onClose={onClose} />
     </VStack>

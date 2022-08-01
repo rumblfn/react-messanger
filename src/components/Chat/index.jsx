@@ -61,23 +61,17 @@ const Chat = ({ user }) => {
 
   if (friendList.length > 0) {
     return (
-      <VStack minW="325px" pt="0" h="100%" justify="end" spacing={0}>
+      <VStack minW="325px" pt="0" pb={4} px={2} h="100%" justify="end" spacing={0}>
         {user && <TopUserInfo user={user} />}
         <TabPanels h="100%" overflow="hidden" position="relative">
           {friendList.map((friend) => (
             <VStack
               onScroll={handleScroll}
               className={styles.chat}
-              p={0}
-              pt={2}
-              pb={2}
+              spacing={0}
               flexDirection="column-reverse"
               as={TabPanel}
               key={`chat:${friend?.userid}`}
-              h="100%"
-              gap="12px"
-              spacing="0"
-              overflowY="scroll"
             >
               {chat?.messages &&
                 chat.messages.map((message, idx) => {

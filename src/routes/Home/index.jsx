@@ -23,7 +23,8 @@ export default function Home() {
   const { clientX, clientY } = msgBg;
 
   return (
-    <HStack spacing={0}
+    <Box overflow='hidden'>
+      <HStack spacing={0}
       className={styles.box}
       onClick={handleLeftClick}
       as={Tabs}
@@ -52,5 +53,6 @@ export default function Home() {
         userid={friendList[friendIndex]?.userid}
       />
     </HStack>
+    </Box>
   );
 }

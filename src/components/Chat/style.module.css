@@ -89,4 +89,9 @@
 .chat {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    gap: 12px;
 }
