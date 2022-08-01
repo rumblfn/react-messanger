@@ -68,10 +68,10 @@ const Chat = ({ user }) => {
             <VStack
               onScroll={handleScroll}
               className={styles.chat}
-              spacing={0}
               flexDirection="column-reverse"
               as={TabPanel}
               key={`chat:${friend?.userid}`}
+              spacing={0}
             >
               {chat?.messages &&
                 chat.messages.map((message, idx) => {

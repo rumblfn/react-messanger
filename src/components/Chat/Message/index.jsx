@@ -8,8 +8,8 @@ import { VideoBox } from "./Video";
 export const Message = ({ friend, message }) => {
   const messageMargins =
     message.to === friend.userid
-      ? "0 0 0 auto !important"
-      : "0 auto 0 0 !important";
+      ? "0.5rem 0 0 auto !important"
+      : "0.5rem auto 0 0 !important";
 
   const bgColor = message.to === friend.userid ? "blue.100" : "gray.100";
 
