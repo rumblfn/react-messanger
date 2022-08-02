@@ -1,12 +1,17 @@
 import { Spacer, Tab, TabList, Text, VStack } from "@chakra-ui/react";
 import { faIdCard, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from './style.module.css'
+import styles from "./style.module.css";
 import React from "react";
 
 export const Sidebar = ({ index, setIndex }) => {
   return (
-    <VStack as={TabList} className={styles.sidebar} p="0.5rem" style={{borderBottom: 0}}>
+    <VStack
+      as={TabList}
+      className={styles.sidebar}
+      p="0.5rem"
+      style={{ borderBottom: 0 }}
+    >
       <Tab w="100%">
         <Text align="start" w="100%">
           My Account

@@ -6,7 +6,7 @@ import React from "react";
 
 export const MainLayout = () => {
   return (
-    <TabPanels h="100%">
+    <TabPanels h="100%" w="100%">
       <TabPanel w="100%" h="100%">
         <AccountSettings />
       </TabPanel>

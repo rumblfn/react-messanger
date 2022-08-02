@@ -1,8 +1,6 @@
 import { Button, Heading, HStack, Input, Text, VStack } from "@chakra-ui/react";
-import { useContext } from "react";
 import { useRef } from "react";
 import { useState } from "react";
-import { AccountContext } from "../AccountContext";
 import React from "react";
 
 export const JoinRoomField = () => {
@@ -11,7 +9,7 @@ export const JoinRoomField = () => {
   const [errMsg, setErrMsg] = useState('');
 
   const clickJoin = () => {
-    const roomName = roomRef.current.value;
+    const roomName = roomRef.current?.value;
 
     if (!roomName) {
       setErr(true);
@@ -23,7 +21,7 @@ export const JoinRoomField = () => {
 
   return (
     <VStack w="100%">
-      <Heading size="md" w="100%" pl={4}>
+      <Heading size="xs" w="100%" pl={4}>
         Enter room name
       </Heading>
       <HStack w="100%" pl={2} pr={2}>

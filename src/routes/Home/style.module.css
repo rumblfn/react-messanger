@@ -3,6 +3,7 @@
     height: 100%;
     width: 30%;
     min-width: 400px;
+    max-width: 600px;
 }
 
 .box {
@@ -15,7 +16,7 @@
 .main {
     height: 100%;
     margin-left: 0;
-    width: 70vw;
+    width: 100%;
 }
 
 @media screen and (max-width: 888px) {
