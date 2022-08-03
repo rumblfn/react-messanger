@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
 
-export const VideoBox = ({ margins, filename, TimeParams, bgColor }) => {
-  const fullFilename = `${process.env.REACT_APP_HOST_URL}/media/getFile/${filename}`;
+export const VideoBox = ({filename, margins, TimeParams, bgColor, src }) => {
+  const fullFilename = `${process.env.REACT_APP_HOST_URL}/media/getFile/${src}`;
 
-  if (filename.endsWith(".mp4")) {
+  if (src.endsWith(".mp4")) {
     return (
       <Box m={margins} maxW="70%" maxH="60vh" className={styles.message}>
         <Box borderRadius="10px" overflow="hidden">

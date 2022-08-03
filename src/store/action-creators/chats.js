@@ -51,6 +51,30 @@ export const addFriend = (payload) => {
     }
 }
 
+const handleMessage = (date, message) => {
+    let hours = date.getHours();
+    let minutes = "0" + date.getMinutes();
+
+    let formattedTime = hours + ":" + minutes.substr(-2);
+
+    message.formattedTime = formattedTime
+
+    if (message.type.startsWith('REPLY')) {
+        let reply = message.type.split(':')
+        message.type = reply.shift()
+        message.reply = reply
+    }
+
+    if (message.type !== 'MESSAGE' && message.type !== 'REPLY') {
+        const splitContent = message.content.split(' ')
+
+        if (splitContent.length === 2) {
+            message.src = splitContent[0]
+            message.fileName = splitContent.slice(1).join(' ')
+        }
+    }
+}
+
 export const setMessages = (payload) => {
     return async (dispatch) => {
         const messages = []
@@ -78,19 +102,8 @@ export const setMessages = (payload) => {
                 })
             }
 
-            let hours = date.getHours();
-            let minutes = "0" + date.getMinutes();
-
-            let formattedTime = hours + ":" + minutes.substr(-2);
-
-            message.formattedTime = formattedTime
+            handleMessage(date, message)
             messages.unshift(message)
-
-            if (message.type.startsWith('REPLY')) {
-                let reply = message.type.split(':')
-                message.type = reply.shift()
-                message.reply = reply
-            }
         }
         dispatch(setMessagesAction({messages, userid: payload.userid, lastindex: payload.lastindex}))
     }
@@ -101,19 +114,7 @@ export const addMessage = (payload) => {
         const message = payload.message
 
         const date = new Date(+message.timestamp)
-
-        let hours = date.getHours();
-        let minutes = "0" + date.getMinutes();
-
-        let formattedTime = hours + ":" + minutes.substr(-2);
-
-        message.formattedTime = formattedTime
-
-        if (message.type.startsWith('REPLY')) {
-            let reply = message.type.split(':')
-            message.type = reply.shift()
-            message.reply = reply
-        }
+        handleMessage(date, message)
 
         dispatch(addMessageAction({message, userid: payload.userid}))
     }

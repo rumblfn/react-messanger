@@ -113,7 +113,9 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
       )
       .then((res) => {
         if (res.data.status === "success") {
-          const { path, fileType } = res.data;
+          const { filePath, fileName, fileType } = res.data;
+          console.log(fileName)
+          console.log(fileType)
 
           setFiles((prev) => [
             ...prev.slice(0, index),
@@ -122,10 +124,9 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
 
           const message = {
             username: user.username,
-            connected: user?.connected,
             to: user?.userid,
             from: null,
-            content: path,
+            content: `${filePath} ${fileName}`,
             timestamp: new Date().getTime(),
             type: fileType,
           };

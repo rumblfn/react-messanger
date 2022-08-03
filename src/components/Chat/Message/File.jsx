@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
 
-export const SimpleFile = ({ margins, filename, TimeParams, bgColor }) => {
+export const SimpleFile = ({ margins, filename, TimeParams, bgColor, src }) => {
   return (
     <HStack color='var(--main-app-dark-bg-color)'
       className={styles.message}
@@ -23,7 +23,7 @@ export const SimpleFile = ({ margins, filename, TimeParams, bgColor }) => {
       <DownloadIcon
         onClick={() =>
           window.open(
-            `${process.env.REACT_APP_HOST_URL}/media/getFile/${filename}`,
+            `${process.env.REACT_APP_HOST_URL}/media/getFile/${src}`,
             "_blank"
           )
         }

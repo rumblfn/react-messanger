@@ -4,10 +4,10 @@ import { ExpandFile } from "../../ToExpandFile";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
 
-export const ImageBox = ({ filename, margins, TimeParams }) => {
+export const ImageBox = ({ margins, TimeParams, src }) => {
   const {setFilename} = useContext(ExpandFile)
 
-  const fullFilename = `${process.env.REACT_APP_HOST_URL}/media/getFile/${filename}`
+  const fullFilename = `${process.env.REACT_APP_HOST_URL}/media/getFile/${src}`
 
   return (
     <Box w="100%" className={styles.message}>

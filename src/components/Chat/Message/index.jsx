@@ -4,6 +4,7 @@ import { ImageBox } from "./Image";
 import { Reply } from "./Reply";
 import { TextBox } from "./Text";
 import { VideoBox } from "./Video";
+import {AudioBox} from "./Audio";
 
 export const Message = ({ friend, message }) => {
   const messageMargins =
@@ -31,7 +32,7 @@ export const Message = ({ friend, message }) => {
       TimeParams.right = message.to === friend.userid ? "" : "0px";
       return (
         <ImageBox
-          filename={message?.content}
+          src={message.src || message.content}
           margins={messageMargins}
           TimeParams={TimeParams}
         />
@@ -41,7 +42,8 @@ export const Message = ({ friend, message }) => {
       TimeParams.right = message.to === friend.userid ? "" : "-42px";
       return (
         <VideoBox
-          filename={message?.content}
+          filename={message.fileName || message.content}
+          src={message.src || message.content}
           margins={messageMargins}
           TimeParams={TimeParams}
           bgColor={bgColor}
@@ -52,12 +54,25 @@ export const Message = ({ friend, message }) => {
       TimeParams.right = message.to === friend.userid ? "" : "-42px";
       return (
         <SimpleFile
-          filename={message?.content}
+          filename={message.fileName || message.content}
+          src={message.src || message.content}
           margins={messageMargins}
           TimeParams={TimeParams}
           bgColor={bgColor}
         />
       );
+    case "AUDIO":
+      TimeParams.left = message.to === friend.userid ? "-56px" : "";
+      TimeParams.right = message.to === friend.userid ? "" : "-42px";
+      return (
+          <AudioBox
+              filename={message.fileName || message.content}
+              src={message.src || message.content}
+              margins={messageMargins}
+              TimeParams={TimeParams}
+              bgColor={bgColor}
+          />
+      )
     case "MESSAGE":
       return (
         <TextBox
