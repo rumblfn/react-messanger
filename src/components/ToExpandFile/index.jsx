@@ -21,6 +21,7 @@ const ExpandContext = ({ children }) => {
   };
 
   const handleContextMenu = (e, message) => {
+    console.log(e)
     setMsgBg(prev => ({
       messageToReply: prev.messageToReply,
       msgTimestamp: message.timestamp,

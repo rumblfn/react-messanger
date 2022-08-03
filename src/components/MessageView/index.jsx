@@ -6,7 +6,7 @@ import { ExpandFile } from "../ToExpandFile";
 import styles from "./style.module.css";
 import React from "react";
 
-export const MessageView = ({ clientX, clientY, onOpen }) => {
+export const MessageView = ({ clientX, clientY, onOpen, pageRef, showSidebar }) => {
   const { colorMode } = useColorMode();
   const {handleReplyMessage, handleMessageToDelete} = useContext(ExpandFile)
 
@@ -29,7 +29,7 @@ export const MessageView = ({ clientX, clientY, onOpen }) => {
           : "var(--bg-color-1)"
       }
       className={styles.main}
-      left={clientX}
+      left={showSidebar ? clientX : clientX + (pageRef?.current?.scrollWidth - window.innerWidth)}
       top={clientY}
       style={{transform: `translate(${translateX}, ${translateY}) scale(0.7)`}}
       boxShadow="md"

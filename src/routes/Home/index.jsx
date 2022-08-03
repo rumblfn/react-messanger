@@ -1,5 +1,5 @@
 import { Box, HStack, Tabs, useDisclosure, useMediaQuery } from "@chakra-ui/react";
-import { useContext } from "react";
+import {useContext, useRef} from "react";
 import { useSelector } from "react-redux";
 import Chat from "../../components/Chat";
 import { MessageView } from "../../components/MessageView";
@@ -13,6 +13,7 @@ import styles from './style.module.css'
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [phone] = useMediaQuery('(max-width: 550px)')
+  const pageRef = useRef()
 
   const friendIndex = useSelector(getFriendIndex);
   const friendList = useSelector(getFriendList);
@@ -23,15 +24,15 @@ export default function Home() {
   const { clientX, clientY } = msgBg;
 
   return (
-    <Box overflow='hidden'>
+    <Box overflow='hidden' ref={pageRef}>
       <HStack spacing={0}
-      className={styles.box}
-      onClick={handleLeftClick}
-      as={Tabs}
-      index={friendIndex}
-      position='relative'
-      left={showSidebar ? '0px' : phone ? '-100%' : '-400px'}
-    >
+        className={styles.box}
+        onClick={handleLeftClick}
+        as={Tabs}
+        index={friendIndex}
+        position='relative'
+        left={showSidebar ? '0px' : phone ? '-100%' : '-400px'}
+      >
       <Box className={styles.sidebar}>
         <Sidebar />
       </Box>
@@ -40,6 +41,8 @@ export default function Home() {
       </Box>
       {clientX && clientY && (
         <MessageView
+          showSidebar={showSidebar}
+          pageRef={pageRef}
           onOpen={onOpen}
           clientX={clientX}
           clientY={clientY}
