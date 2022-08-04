@@ -68,7 +68,7 @@ const handleMessage = (date, message) => {
     if (message.type !== 'MESSAGE' && message.type !== 'REPLY') {
         const splitContent = message.content.split(' ')
 
-        if (splitContent.length === 2) {
+        if (splitContent.length >= 2) {
             message.src = splitContent[0]
             message.fileName = splitContent.slice(1).join(' ')
         }

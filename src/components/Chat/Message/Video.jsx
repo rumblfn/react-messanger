@@ -1,9 +1,8 @@
-import { DownloadIcon } from "@chakra-ui/icons";
-import { Box, HStack, Spacer, Text } from "@chakra-ui/react";
-import { faFilm } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box } from "@chakra-ui/react";
+import {faFilm} from "@fortawesome/free-solid-svg-icons";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
+import {SimpleFile} from "./File";
 
 export const VideoBox = ({filename, margins, TimeParams, bgColor, src }) => {
   const fullFilename = `${process.env.REACT_APP_HOST_URL}/media/getFile/${src}`;
@@ -26,24 +25,13 @@ export const VideoBox = ({filename, margins, TimeParams, bgColor, src }) => {
   }
 
   return (
-    <HStack
-      className={styles.message}
-      backgroundColor={bgColor}
-      p="0.3rem 0.7rem"
-      borderRadius="10px"
-      maxW="70%"
-      m={margins}
-    >
-      <FontAwesomeIcon icon={faFilm} />
-      <Text fontSize="sm" wordBreak="break-all">
-        {filename}
-      </Text>
-      <Spacer />
-      <DownloadIcon
-        onClick={() => window.open(fullFilename, "_blank")}
-        cursor="pointer"
-      />
-      <MessageTime TimeParams={TimeParams} />
-    </HStack>
+    <SimpleFile
+      icon={faFilm}
+      filename={filename}
+      margins={margins}
+      TimeParams={TimeParams}
+      bgColor={bgColor}
+      src={src}
+    />
   );
 };

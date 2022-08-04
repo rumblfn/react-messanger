@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MessageTime } from "./MessageTime";
 import styles from "./style.module.css";
 
-export const SimpleFile = ({ margins, filename, TimeParams, bgColor, src }) => {
+export const SimpleFile = ({ margins, filename, TimeParams, bgColor, src, icon }) => {
+
   return (
     <HStack color='var(--main-app-dark-bg-color)'
       className={styles.message}
@@ -13,9 +14,10 @@ export const SimpleFile = ({ margins, filename, TimeParams, bgColor, src }) => {
       p="0.3rem 0.7rem"
       borderRadius="10px"
       maxW="70%"
+      w='fit-content'
       m={margins}
     >
-      <FontAwesomeIcon icon={faFileAlt} />
+      <FontAwesomeIcon icon={icon || faFileAlt} />
       <Text fontSize="sm" wordBreak="break-all">
         {filename}
       </Text>
