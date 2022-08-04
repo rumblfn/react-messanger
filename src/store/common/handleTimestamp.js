@@ -1,5 +1,5 @@
-export const handleTimestamp = () => {
-  const date = new Date()
+export const handleTimestamp = (timestamp) => {
+  const date = new Date(timestamp)
 
   let day = "0" + date.getDate();
   let month = "0" + (date.getMonth() + 1);

@@ -23,17 +23,7 @@ export const setFriendList = (payload) => {
         const friendList = []
 
         for (let friend of payload) {
-            const date = new Date(+friend.lastActiveTime)
-
-            let day = "0" + date.getDate();
-            let month = "0" + (date.getMonth() + 1);
-            let year = date.getFullYear();
-
-            const dateStr = `${day.substr(-2)}.${month.substr(-2)}.${year}`;
-
-            let hours = date.getHours();
-            let minutes = "0" + date.getMinutes();
-            let formattedTime = hours + ":" + minutes.substr(-2);
+            const {formattedTime, dateStr} = handleTimestamp(+friend.lastActiveTime)
 
             friend.formattedTime = formattedTime
             friend.lastActiveDay = dateStr
@@ -132,9 +122,10 @@ export const deleteMessage = (payload) => {
 }
 
 export const changeFriendStatus = (payload) => {
+    console.log(payload)
     return async (dispatch) => {
         try {
-            dispatch(changeFriendStatusAction({...payload, ...handleTimestamp()}))
+            dispatch(changeFriendStatusAction(payload))
         } catch {
             throw Error("some errors in changeFriendStatus")
         }

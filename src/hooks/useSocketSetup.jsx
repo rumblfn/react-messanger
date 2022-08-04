@@ -75,8 +75,8 @@ const useSocketSetup = (playMessageSound) => {
       setMessages({ userid, messages, lastindex });
     });
 
-    socket.on("connected", (status, username) => {
-      changeFriendStatus({ status, username });
+    socket.on("connected", (status, data) => {
+      changeFriendStatus({status, data});
     });
 
     socket.on("connect_error", () => {

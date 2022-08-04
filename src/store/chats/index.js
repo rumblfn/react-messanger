@@ -64,11 +64,12 @@ const chatsSlice = createSlice({
       state.unreadMessages[action.payload] = null
     },
     changeFriendStatusAction: (state, action) => {
+      const {username, dateStr, formattedTime} = action.payload.data
       state.friendList.forEach(friend => {
-        if (friend.username === action.payload.username) {
+        if (friend.username === username) {
           friend.connected = action.payload.status
-          friend.formattedTime = action.payload.formattedTime
-          friend.lastActiveDay = action.payload.dateStr
+          friend.formattedTime = formattedTime
+          friend.lastActiveDay = dateStr
         }
       })
     },
