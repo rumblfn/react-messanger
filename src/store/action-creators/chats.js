@@ -15,7 +15,8 @@ import {
     setFriendListAction,
     setMessagesAction,
     setUnreadMessagesAction
-} from "../chats/actions"
+} from "../chats"
+import {handleTimestamp} from "../common/handleTimestamp";
 
 export const setFriendList = (payload) => {
     return async (dispatch) => {
@@ -133,7 +134,7 @@ export const deleteMessage = (payload) => {
 export const changeFriendStatus = (payload) => {
     return async (dispatch) => {
         try {
-            dispatch(changeFriendStatusAction(payload))
+            dispatch(changeFriendStatusAction({...payload, ...handleTimestamp()}))
         } catch {
             throw Error("some errors in changeFriendStatus")
         }
