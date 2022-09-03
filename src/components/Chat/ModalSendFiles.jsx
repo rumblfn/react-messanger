@@ -114,8 +114,6 @@ export const ModalSendFiles = ({ files, isOpen, onClose, setFiles, user }) => {
       .then((res) => {
         if (res.data.status === "success") {
           const { filePath, fileName, fileType } = res.data;
-          console.log(fileName)
-          console.log(fileType)
 
           setFiles((prev) => [
             ...prev.slice(0, index),

@@ -17,6 +17,8 @@ import {
     setUnreadMessagesAction
 } from "../chats"
 import {handleTimestamp} from "../common/handleTimestamp";
+import {useSelector} from "react-redux";
+import {getFriendList} from "../chats/selectors";
 
 export const setFriendList = (payload) => {
     return async (dispatch) => {
@@ -42,7 +44,7 @@ export const addFriend = (payload) => {
     }
 }
 
-const handleMessage = (date, message) => {
+const handleMessage = (date, message, messages) => {
     let hours = date.getHours();
     let minutes = "0" + date.getMinutes();
 
@@ -54,6 +56,14 @@ const handleMessage = (date, message) => {
         let reply = message.type.split(':')
         message.type = reply.shift()
         message.reply = reply
+        if (message.messageToReply) {
+            message.reply = message.messageToReply
+        } else {
+            const messageindex = parseInt(reply[0])
+            if (messageindex || messageindex === 0) {
+                message.reply = messages.find(msg => msg.index === messageindex)
+            }
+        }
     }
 
     if (message.type !== 'MESSAGE' && message.type !== 'REPLY') {
@@ -93,7 +103,7 @@ export const setMessages = (payload) => {
                 })
             }
 
-            handleMessage(date, message)
+            handleMessage(date, message, messages)
             messages.unshift(message)
         }
         dispatch(setMessagesAction({messages, userid: payload.userid, lastindex: payload.lastindex}))
@@ -106,7 +116,6 @@ export const addMessage = (payload) => {
 
         const date = new Date(+message.timestamp)
         handleMessage(date, message)
-
         dispatch(addMessageAction({message, userid: payload.userid}))
     }
 }
@@ -122,7 +131,6 @@ export const deleteMessage = (payload) => {
 }
 
 export const changeFriendStatus = (payload) => {
-    console.log(payload)
     return async (dispatch) => {
         try {
             dispatch(changeFriendStatusAction(payload))

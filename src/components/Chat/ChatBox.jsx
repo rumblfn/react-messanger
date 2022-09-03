@@ -24,10 +24,9 @@ const ChatBox = ({ user, setFiles, onOpen, handleChatBoxReplyClick, newmessagein
   let fileRef = useRef();
   const { msgBg, handleRemoveReply } = useContext(ExpandFile);
   const messageToReply = msgBg?.messageToReply;
-  let messageToReplyUsername = user.username;
-
-  if (messageToReply?.from === currentUser?.userid) {
-    messageToReplyUsername = currentUser?.username
+  let messageToReplyUsername = currentUser?.username;
+  if (messageToReply?.to === currentUser?.userid) {
+    messageToReplyUsername = user.username
   }
 
   const { addMessage } = useActions();
@@ -59,10 +58,12 @@ const ChatBox = ({ user, setFiles, onOpen, handleChatBoxReplyClick, newmessagein
           from: null,
           content: values.message,
           timestamp: new Date().getTime(),
+          messageToReply: {
+            ...messageToReply,
+            username: messageToReplyUsername
+          },
           type: messageToReply
-            ? `REPLY:${messageToReplyUsername}:${messageToReply.content.slice(0, 100).split('.')[0]}:${
-                messageToReply.timestamp
-              }`
+            ? `REPLY:${messageToReply.index}`
             : "MESSAGE",
         };
 

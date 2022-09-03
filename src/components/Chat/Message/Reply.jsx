@@ -24,13 +24,13 @@ export const Reply = ({ margins, bgColor, message, TimeParams }) => {
           w="100%"
           cursor="pointer"
           spacing={0}
-          p="0.2rem"
+          p="0.1rem 0.5rem"
           bg="rgba(0, 0, 0, 0.1)"
           borderRadius="8px"
-          onClick={() => handleScrollToReply(reply[2])}
+          onClick={() => handleScrollToReply(reply?.timestamp)}
         >
           <Heading m={margins} color="blue.500" size="xs">
-            {reply[0]}
+            {reply.username}
           </Heading>
           <Text m={margins}
             color="black"
@@ -39,7 +39,7 @@ export const Reply = ({ margins, bgColor, message, TimeParams }) => {
             wordBreak="keep-all"
             overflow="hidden"
           >
-            {reply[1]?.slice(0, 100)}
+            {reply.content}
           </Text>
         </VStack>
       <Text m={margins} color="gray.900">
