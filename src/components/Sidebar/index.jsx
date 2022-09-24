@@ -1,4 +1,4 @@
-import { useColorMode, useDisclosure, VStack } from "@chakra-ui/react";
+import {Accordion, useColorMode, useDisclosure, VStack} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import socket from "../../socket";
@@ -53,13 +53,15 @@ const Sidebar = () => {
        <JoinRoomField />
       <SearchInput setSuccess={setSuccess} setErrorMsg={setErrorMsg} />
       <StatusMsg success={success} errorMsg={errorMsg} />
-      <Confirmations
-        setFriend={setFriend}
-        onOpen={onOpen}
-        acceptConfirmation={acceptConfirmation}
-        declineConfirmation={declineConfirmation}
-      />
-      <FriendList />
+      <Accordion allowToggle w="100%">
+        <Confirmations
+          setFriend={setFriend}
+          onOpen={onOpen}
+          acceptConfirmation={acceptConfirmation}
+          declineConfirmation={declineConfirmation}
+        />
+        <FriendList />
+      </Accordion>
       <ConfirmationModal
         isOpen={isOpen}
         onClose={onClose}
