@@ -9,12 +9,19 @@ import { ConfirmationModal } from "./Modal";
 import { ProfileTopPreview } from "./profileTopPreview";
 import { SearchInput } from "./searchInput";
 import { StatusMsg } from "./StatusField";
+import {GroupsList} from "./GroupsList";
+import {ModalCreateGroup} from "./ModalCreateGroup";
 
 const Sidebar = () => {
   const { colorMode } = useColorMode();
   const { removeConfirmationAfterDecline } = useActions();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isCreateGroupOpen,
+    onOpen: onCreateGroupOpen,
+    onClose: onCreateGroupClose
+  } = useDisclosure();
 
   const [friend, setFriend] = useState(null);
 
@@ -61,6 +68,7 @@ const Sidebar = () => {
           declineConfirmation={declineConfirmation}
         />
         <FriendList />
+        <GroupsList onOpen={onCreateGroupOpen} />
       </Accordion>
       <ConfirmationModal
         isOpen={isOpen}
@@ -68,6 +76,10 @@ const Sidebar = () => {
         friend={friend}
         acceptConfirmation={acceptConfirmation}
         declineConfirmation={declineConfirmation}
+      />
+      <ModalCreateGroup
+        isOpen={isCreateGroupOpen}
+        onClose={onCreateGroupClose}
       />
     </VStack>
   );

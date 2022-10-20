@@ -1,6 +1,5 @@
 import {CheckIcon, CloseIcon} from "@chakra-ui/icons";
 import {
-  Accordion,
   AccordionButton,
   AccordionIcon,
   AccordionItem,
@@ -17,11 +16,8 @@ import {getConfirmations} from "../../store/chats/selectors";
 import React from "react";
 
 export const Confirmations = ({
-                                setFriend,
-                                onOpen,
-                                acceptConfirmation,
-                                declineConfirmation,
-                              }) => {
+  setFriend, onOpen, acceptConfirmation, declineConfirmation,
+}) => {
   const awaitingConfirmation = useSelector(getConfirmations);
 
   return (

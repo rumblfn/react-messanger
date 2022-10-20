@@ -1,14 +1,12 @@
 import {
-  Accordion,
   AccordionButton, AccordionIcon,
-  AccordionItem, AccordionPanel, Box, Button,
+  AccordionItem, AccordionPanel, Box,
   HStack,
   Spacer,
   Tab,
   TabList,
   Tabs,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import {useSelector} from "react-redux";
 import {useActions} from "../../hooks/useActions";
