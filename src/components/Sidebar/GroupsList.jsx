@@ -2,7 +2,7 @@ import {
   AccordionButton,
   AccordionIcon,
   AccordionItem,
-  Box, Button,
+  Box,
   Text
 } from "@chakra-ui/react";
 import React from "react";
@@ -17,14 +17,13 @@ export const GroupsList = ({onOpen}) => {
         </Box>
         <AccordionIcon/>
         <Text fontWeight={500}></Text>
-        <Button p={0} ml={2}
+        <AddIcon
+          p={0} ml={2}
           onClick={e => {
             onOpen()
             e.stopPropagation()
           }}
-        >
-          <AddIcon />
-        </Button>
+        />
       </AccordionButton>
     </h2>
 
