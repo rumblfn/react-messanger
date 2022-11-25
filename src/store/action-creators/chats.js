@@ -27,10 +27,11 @@ export const setFriendList = (payload) => {
         for (let friend of payload) {
             const {formattedTime, dateStr} = handleTimestamp(+friend.lastActiveTime)
 
-            friend.formattedTime = formattedTime
-            friend.lastActiveDay = dateStr
-
-            friendList.push(friend)
+            friendList.push({
+                ...friend,
+                formattedTime,
+                lastActiveDay: dateStr
+            })
         }
 
         dispatch(setFriendListAction(friendList))

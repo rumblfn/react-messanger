@@ -8,7 +8,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay, VStack
+  ModalOverlay, Text, VStack
 } from "@chakra-ui/react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
@@ -17,6 +17,7 @@ import axios from "axios";
 import {useSelector} from "react-redux";
 import {getFriendList} from "../../store/chats/selectors";
 import styles from "../UserAvatar/style.module.css";
+import socket from "../../socket";
 
 export const ModalCreateGroup = ({
   isOpen, onClose
@@ -45,28 +46,23 @@ export const ModalCreateGroup = ({
           })}
           onSubmit={(values, actions) => {
             setLoading(true)
-            const addedFriends = new Set()
-            for (let friend_id of addedFriendIdxs) {
-              addedFriends.add(friendList[friend_id]?.userid)
-            }
-            const vals = {
-              ...values,
-              addedFriends: [...addedFriends]
-            }
             actions.resetForm()
 
-            axios.post(
-              `${process.env.REACT_APP_HOST_URL}/group/new`,
-              vals,
-              { withCredentials: true }
-            ).then(res => {
-              console.log(res)
-            }).catch(err => {
-              console.log(err)
-            }).finally(() => setLoading(false))
+            socket.emit('new_group', {
+              ...values,
+              addedFriends: [...addedFriendIdxs]
+            }, data => {
+              setLoading(false)
+              if (data.done) {
+                onClose()
+              }
+            })
           }}
         >
           <VStack as={Form}>
+            <Text as="p" color="red.500">
+              {error}
+            </Text>
             <HStack
               m="auto" justify="center" alignItems='center'
               w={{base: "96%"}} spacing="1rem"
@@ -124,9 +120,9 @@ export const ModalCreateGroup = ({
                   <Checkbox
                     onChange={e => {
                       if (e.target.checked) {
-                        setAddedFriendIdxs(prevState => [idx, ...prevState])
+                        setAddedFriendIdxs(prevState => [friend.userid, ...prevState])
                       } else {
-                        setAddedFriendIdxs(prevState => [...prevState.filter(id => id !== idx)])
+                        setAddedFriendIdxs(prevState => [...prevState.filter(id => id !== friend.userid)])
                       }
                     }}
                   />

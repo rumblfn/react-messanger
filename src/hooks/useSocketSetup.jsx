@@ -8,7 +8,7 @@ let lastAddedChat;
 let lastConfirmationAdded;
 
 const useSocketSetup = (playMessageSound) => {
-  const { setUser } = useContext(AccountContext);
+  const { setUser, user } = useContext(AccountContext);
   const {
     setFriendList,
     setMessages,
@@ -26,79 +26,82 @@ const useSocketSetup = (playMessageSound) => {
   } = useActions();
 
   useEffect(() => {
+    if (!user.loggedIn) return
     socket.connect();
 
-    socket.on("friends", (friendList) => {
-      setFriendList(friendList);
+    socket.on("friends", async friendList => {
+      await setFriendList(friendList)
+      socket.off("friends")
     });
 
-    socket.on("confirmations", (confirmations) => {
-      setConfirmations(confirmations);
+    socket.on("confirmations", async confirmations => {
+      await setConfirmations(confirmations)
+      socket.off("confirmations")
     });
 
-    socket.on("add_confirmation", (confirmation) => {
+    socket.on("add_confirmation", async confirmation => {
       if (lastConfirmationAdded !== confirmation.userid) {
-        addConfirmation(confirmation);
+        await addConfirmation(confirmation);
         lastConfirmationAdded = confirmation.userid;
       }
     });
 
-    socket.on("unreadMessages", (unreadMessages) =>
+    socket.on("unreadMessages", unreadMessages =>
       setUnreadMessages(unreadMessages)
     );
 
-    socket.on("remove_confirmation", (username) => {
-      removeConfirmationAfterDecline(username);
+    socket.on("remove_confirmation", async username => {
+      await removeConfirmationAfterDecline(username)
     });
 
-    socket.on("add_chat", (friend) => {
+    socket.on("add_chat", async friend => {
       if (lastAddedChat !== friend.userid) {
         lastAddedChat = friend.userid;
         friend.connected = true;
-        addFriend(friend);
+        await addFriend(friend)
       }
     });
 
-    socket.on("dm", (message, id) => {
+    socket.on("dm", async (message, id) => {
       if (lastMessageId !== id) {
         lastMessageId = id;
         playMessageSound.play();
-        addMessage({ message, userid: message.from });
+        await addMessage({ message, userid: message.from });
       }
     });
 
-    socket.on("delete-message", (index, userid) => {
-      deleteMessage({ index, userid });
+    socket.on("delete-message", async (index, userid) => {
+      await deleteMessage({ index, userid });
     });
 
-    socket.on("chatMessages", (userid, messages, lastindex) => {
-      setMessages({ userid, messages, lastindex });
+    socket.on("chatMessages", async (userid, messages, lastindex) => {
+      await setMessages({ userid, messages, lastindex });
     });
 
-    socket.on("connected", (status, data) => {
-      changeFriendStatus({status, data});
+    socket.on("connected", async (status, data) => {
+      await changeFriendStatus({status, data});
     });
 
     socket.on("connect_error", () => {
       setUser({ loggedIn: false });
     });
 
-    socket.on("avatar-changed", (filename, username) => {
-      changeFriendAvatar({
+    socket.on("avatar-changed", async (filename, username) => {
+      await changeFriendAvatar({
         filename,
         username,
       });
     });
 
-    socket.on("banner-changed", (filename, username) => {
-      changeFriendBanner({
+    socket.on("banner-changed", async (filename, username) => {
+      await changeFriendBanner({
         filename,
         username,
       });
     });
 
-    socket.on("about-changed", (about, username) => {
-      changeFriendAbout({
+    socket.on("about-changed", async (about, username) => {
+      await changeFriendAbout({
         about,
         username,
       });
@@ -111,16 +114,15 @@ const useSocketSetup = (playMessageSound) => {
       socket.off("delete-message");
       socket.off("connect_error");
       socket.off("connected");
-      socket.off("friends");
       socket.off("chatMessages");
       socket.off("dm");
       socket.off("add_chat");
       socket.off("remove_confirmation");
       socket.off("unreadMessages");
       socket.off("add_confirmation");
-      socket.off("confirmations");
     };
   }, [
+    user,
     setMessages,
     setUser,
     addMessage,

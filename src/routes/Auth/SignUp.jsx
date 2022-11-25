@@ -57,7 +57,6 @@ export default function SignUp() {
               return
             };
             setUser({...data})
-            navigate("/home");
           });
       }}
     >
