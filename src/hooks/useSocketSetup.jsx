@@ -34,6 +34,10 @@ const useSocketSetup = (playMessageSound) => {
       socket.off("friends")
     });
 
+    socket.on("groups", async groups => {
+      console.log(groups)
+    })
+
     socket.on("confirmations", async confirmations => {
       await setConfirmations(confirmations)
       socket.off("confirmations")
