@@ -1,0 +1,1 @@
+export const getGroupList = (state) => state.groups.groups || []

@@ -17,8 +17,6 @@ import {
     setUnreadMessagesAction
 } from "../chats"
 import {handleTimestamp} from "../common/handleTimestamp";
-import {useSelector} from "react-redux";
-import {getFriendList} from "../chats/selectors";
 
 export const setFriendList = (payload) => {
     return async (dispatch) => {

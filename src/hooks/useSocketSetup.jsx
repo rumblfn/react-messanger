@@ -23,6 +23,7 @@ const useSocketSetup = (playMessageSound) => {
     changeFriendBanner,
     changeFriendAbout,
     deleteMessage,
+    setGroupList
   } = useActions();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const useSocketSetup = (playMessageSound) => {
     });
 
     socket.on("groups", async groups => {
-      console.log(groups)
+      await setGroupList(groups)
     })
 
     socket.on("confirmations", async confirmations => {

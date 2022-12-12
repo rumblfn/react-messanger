@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { persistReducer } from "redux-persist";
 // import storage from "redux-persist/lib/storage";
 import chatsReducer from "./chats";
+import groupsReducer from "./groups"
 
 // const persistConfig = {
 //   key: "root",
@@ -12,7 +13,8 @@ import chatsReducer from "./chats";
 
 const store = configureStore({
   reducer: {
-    chats: chatsReducer
+    chats: chatsReducer,
+    groups: groupsReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
