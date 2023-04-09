@@ -9,7 +9,11 @@ const groupsSlice = createSlice({
   initialState,
   reducers: {
     setGroupListAction: (state, action) => {
-      state.groups = [...state.groups, ...action.payload]
+      state.groups = action.payload
+    },
+    addGroupAction: (state, action) => {
+      console.log(action.payload)
+      state.groups.push(action.payload)
     },
     clearGroupsAction: () => initialState
   }
@@ -17,6 +21,7 @@ const groupsSlice = createSlice({
 
 export const {
   setGroupListAction,
+  addGroupAction,
   clearGroupsAction
 } = groupsSlice.actions
 

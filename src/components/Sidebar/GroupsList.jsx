@@ -48,7 +48,7 @@ export const GroupsList = ({onOpen}) => {
                   {group?.name}
                 </Text>
                 <Spacer/>
-                <Text>{group?.unreadMessages}</Text>
+                <Text>{+group?.unreadMessages || ""}</Text>
               </Tab>
             </HStack>
           ))}

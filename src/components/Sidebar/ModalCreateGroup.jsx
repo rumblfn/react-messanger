@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {
   Avatar,
   Button, Checkbox, Heading, HStack, Image, Input,
@@ -13,11 +13,12 @@ import {
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import TextField from "../../routes/Auth/TextField";
-import axios from "axios";
 import {useSelector} from "react-redux";
 import {getFriendList} from "../../store/chats/selectors";
 import styles from "../UserAvatar/style.module.css";
 import socket from "../../socket";
+import {AccountContext} from "../AccountContext";
+import {useActions} from "../../hooks/useActions";
 
 export const ModalCreateGroup = ({
   isOpen, onClose
@@ -27,10 +28,14 @@ export const ModalCreateGroup = ({
   const [filter, setFilter] = useState('')
   const [addedFriendIdxs, setAddedFriendIdxs] = useState([])
 
-  const friendList = useSelector(getFriendList)
-  // console.log(friendList)
+  const { user } = useContext(AccountContext);
+  const friendList = useSelector(getFriendList);
+  const { addGroup } = useActions();
 
-  return <Modal isOpen={isOpen} onClose={onClose}>
+  return <Modal isOpen={isOpen} onClose={() => {
+    setAddedFriendIdxs([])
+    onClose()
+  }}>
     <ModalOverlay/>
     <ModalContent>
       <ModalHeader>Create group</ModalHeader>
@@ -50,10 +55,12 @@ export const ModalCreateGroup = ({
 
             socket.emit('new_group', {
               ...values,
-              addedFriends: [...addedFriendIdxs]
-            }, data => {
+              addedFriends: [...new Set(addedFriendIdxs), user.userid]
+            }, async data => {
               setLoading(false)
               if (data.done) {
+                await addGroup(data.group)
+                setAddedFriendIdxs([])
                 onClose()
               }
             })
@@ -97,7 +104,7 @@ export const ModalCreateGroup = ({
                       <Image
                         style={{
                           width: 44,
-                          aspectRatio: "1 / 1",
+                          aspectRatio: "1/1",
                         }}
                         className={styles["avatar-image"]}
                         crossOrigin="anonymous"

@@ -18,8 +18,7 @@ export default function Home() {
   const friendIndex = useSelector(getFriendIndex);
   const friendList = useSelector(getFriendList);
 
-  const { handleLeftClick, msgBg, messageToDelete, showSidebar } =
-    useContext(ExpandFile);
+  const { handleLeftClick, msgBg, messageToDelete, showSidebar } = useContext(ExpandFile);
 
   const { clientX, clientY } = msgBg;
 

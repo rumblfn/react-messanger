@@ -48,6 +48,7 @@ const Sidebar = () => {
 
   return (
     <VStack
+      overflowY="scroll"
       py="0.5rem"
       bg={
         colorMode === "light"

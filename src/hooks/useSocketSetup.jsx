@@ -5,29 +5,32 @@ import { useActions } from "./useActions";
 
 let lastMessageId;
 let lastAddedChat;
+let lastAddedGroup;
 let lastConfirmationAdded;
 
 const useSocketSetup = (playMessageSound) => {
   const { setUser, user } = useContext(AccountContext);
   const {
-    setFriendList,
-    setMessages,
-    addMessage,
-    changeFriendStatus,
+    addGroup,
     addFriend,
-    setConfirmations,
+    addMessage,
+    setMessages,
+    setGroupList,
+    deleteMessage,
+    setFriendList,
     addConfirmation,
-    removeConfirmationAfterDecline,
+    setConfirmations,
     setUnreadMessages,
     changeFriendAvatar,
     changeFriendBanner,
     changeFriendAbout,
-    deleteMessage,
-    setGroupList
+    changeFriendStatus,
+    removeConfirmationAfterDecline,
   } = useActions();
 
   useEffect(() => {
     if (!user.loggedIn) return
+
     socket.connect();
 
     socket.on("friends", async friendList => {
@@ -37,6 +40,7 @@ const useSocketSetup = (playMessageSound) => {
 
     socket.on("groups", async groups => {
       await setGroupList(groups)
+      socket.off("groups")
     })
 
     socket.on("confirmations", async confirmations => {
@@ -51,9 +55,10 @@ const useSocketSetup = (playMessageSound) => {
       }
     });
 
-    socket.on("unreadMessages", unreadMessages =>
+    socket.on("unreadMessages", unreadMessages => {
       setUnreadMessages(unreadMessages)
-    );
+      socket.off("unreadMessages")
+    });
 
     socket.on("remove_confirmation", async username => {
       await removeConfirmationAfterDecline(username)
@@ -66,6 +71,13 @@ const useSocketSetup = (playMessageSound) => {
         await addFriend(friend)
       }
     });
+
+    socket.on("add_group", async group => {
+      if (lastAddedGroup !== group.id) {
+        lastAddedGroup = group.id
+        await addGroup(group)
+      }
+    })
 
     socket.on("dm", async (message, id) => {
       if (lastMessageId !== id) {
@@ -113,37 +125,39 @@ const useSocketSetup = (playMessageSound) => {
     });
 
     return () => {
-      socket.off("avatar-changed");
-      socket.off("banner-changed");
-      socket.off("about-changed");
-      socket.off("delete-message");
-      socket.off("connect_error");
-      socket.off("connected");
-      socket.off("chatMessages");
       socket.off("dm");
       socket.off("add_chat");
-      socket.off("remove_confirmation");
+      socket.off("connected");
+      socket.off("chatMessages");
+      socket.off("about-changed");
+      socket.off("connect_error");
+      socket.off("avatar-changed");
+      socket.off("banner-changed");
+      socket.off("delete-message");
       socket.off("unreadMessages");
       socket.off("add_confirmation");
+      socket.off("remove_confirmation");
     };
   }, [
     user,
-    setMessages,
     setUser,
-    addMessage,
-    setFriendList,
-    changeFriendStatus,
+    addGroup,
     addFriend,
-    playMessageSound,
-    addConfirmation,
-    removeConfirmationAfterDecline,
-    setConfirmations,
-    setUnreadMessages,
-    changeFriendAbout,
-    changeFriendAvatar,
-    changeFriendBanner,
+    addMessage,
+    setMessages,
+    setGroupList,
     deleteMessage,
-  ]); // remove subs, make clearly
+    setFriendList,
+    addConfirmation,
+    setConfirmations,
+    playMessageSound,
+    changeFriendAbout,
+    setUnreadMessages,
+    changeFriendBanner,
+    changeFriendAvatar,
+    changeFriendStatus,
+    removeConfirmationAfterDecline,
+  ]); // TODO: remove subs, make clearly
 };
 
 export default useSocketSetup;
