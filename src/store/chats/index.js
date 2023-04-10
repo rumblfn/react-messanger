@@ -10,7 +10,7 @@ const defaultMessagesObject = {
 const initialState = {
   friendList: [],
   messages: {},
-  friendIndex: -1,
+  friendIndex: 0,
   confirmations: [],
   unreadMessages: {}
 }

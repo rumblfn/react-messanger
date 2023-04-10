@@ -8,10 +8,14 @@ import {
 import React from "react";
 import {AddIcon} from "@chakra-ui/icons";
 import {useSelector} from "react-redux";
-import {getGroupList} from "../../store/groups/selectors";
+import {getGroupIndex, getGroupList} from "../../store/groups/selectors";
 import {nanoid} from "nanoid";
+import {useActions} from "../../hooks/useActions";
 
 export const GroupsList = ({onOpen}) => {
+  const {setGroupIndex, setFriendIndex} = useActions()
+  const groupIndex = useSelector(getGroupIndex)
+
   const groups = useSelector(getGroupList)
   const groupsLength = groups.length
 
@@ -34,6 +38,11 @@ export const GroupsList = ({onOpen}) => {
     </h2>
     {groupsLength ?
       <Tabs
+        index={groupIndex}
+        onChange={(index) => {
+          setFriendIndex(-1)
+          setGroupIndex(index)
+        }}
         variant="soft-rounded"
         w="100%"
       >

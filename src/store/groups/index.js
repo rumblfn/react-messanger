@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-  groups: []
+  groups: [],
+  groupIndex: -1,
 }
 
 const groupsSlice = createSlice({
@@ -12,8 +13,10 @@ const groupsSlice = createSlice({
       state.groups = action.payload
     },
     addGroupAction: (state, action) => {
-      console.log(action.payload)
       state.groups.push(action.payload)
+    },
+    setGroupIndexAction: (state, action) => {
+      state.groupIndex = action.payload
     },
     clearGroupsAction: () => initialState
   }
@@ -22,6 +25,7 @@ const groupsSlice = createSlice({
 export const {
   setGroupListAction,
   addGroupAction,
+  setGroupIndexAction,
   clearGroupsAction
 } = groupsSlice.actions
 

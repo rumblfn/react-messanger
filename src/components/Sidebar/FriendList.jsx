@@ -18,7 +18,7 @@ import {
 import React from "react";
 
 export const FriendList = () => {
-  const {setFriendIndex} = useActions();
+  const {setFriendIndex, setGroupIndex} = useActions();
   const friendList = useSelector(getFriendList);
   const friendIndex = useSelector(getFriendIndex);
   const unreadMessages = useSelector(getUnreadMessages);
@@ -39,7 +39,10 @@ export const FriendList = () => {
       {friendListLength ?
         <Tabs
           index={friendIndex}
-          onChange={(index) => setFriendIndex(index)}
+          onChange={(index) => {
+            setGroupIndex(-1)
+            setFriendIndex(index)
+          }}
           variant="soft-rounded"
           w="100%"
         >
