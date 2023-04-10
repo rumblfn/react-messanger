@@ -51,9 +51,8 @@ export default function Login() {
             if (!data || !data.loggedIn) {
               setError(data.status)
               return
-            };
+            }
             setUser({...data})
-            navigate("/home");
           });
       }}
     >

@@ -17,8 +17,6 @@ import {
     setUnreadMessagesAction
 } from "../chats"
 import {handleTimestamp} from "../common/handleTimestamp";
-import {useSelector} from "react-redux";
-import {getFriendList} from "../chats/selectors";
 
 export const setFriendList = (payload) => {
     return async (dispatch) => {
@@ -27,10 +25,11 @@ export const setFriendList = (payload) => {
         for (let friend of payload) {
             const {formattedTime, dateStr} = handleTimestamp(+friend.lastActiveTime)
 
-            friend.formattedTime = formattedTime
-            friend.lastActiveDay = dateStr
-
-            friendList.push(friend)
+            friendList.push({
+                ...friend,
+                formattedTime,
+                lastActiveDay: dateStr
+            })
         }
 
         dispatch(setFriendListAction(friendList))

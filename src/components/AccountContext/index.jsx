@@ -2,13 +2,21 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 
+const paths = ['/', '/register']
 export const AccountContext = createContext()
 
 const UserContext = ({children}) => {
     const navigate = useNavigate()
     const [user, setUser] = useState({
-        loggedIn: null
+        loggedIn: null,
     })
+
+    useEffect(() => {
+        if (paths.includes(window.location.pathname) && user.loggedIn) {
+            navigate("/home")
+        }
+    }, [user]);
+
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_HOST_URL}/auth/login`, {
@@ -30,7 +38,6 @@ const UserContext = ({children}) => {
                 return
             } else {
                 setUser({ ...data })
-                navigate("/home")
             }
         })
     }, [])
